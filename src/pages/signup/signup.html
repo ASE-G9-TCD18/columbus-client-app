@@ -16,12 +16,48 @@
 	<form #signupForm="ngForm" novalidate>
 		<ion-list no-lines>
 			<ion-item>
-				<ion-label stacked color="primary">Username</ion-label>
+				<ion-label stacked color="columbusGrey">First Name</ion-label>
+				<ion-input [(ngModel)]="signup.firstname" name="firstname" type="text" #firstname="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="firstname.valid || submitted == false" color="danger" padding-left>
+				firstname is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="columbusGrey">Last Name</ion-label>
+				<ion-input [(ngModel)]="signup.lastname" name="lastname" type="text" #lastname="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="lastname.valid || submitted == false" color="danger" padding-left>
+				lastname is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="columbusGrey">Username</ion-label>
 				<ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
 				Username is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="columbusGrey">Email</ion-label>
+				<ion-input [(ngModel)]="signup.email" name="email" type="email" #email="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+				email is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="columbusGrey">Phone</ion-label>
+				<ion-input [(ngModel)]="signup.phone" name="phone" type="email" #phone="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+				email is required
 			</p>
 
 			<ion-item>
@@ -35,7 +71,7 @@
 		</ion-list>
 
 		<div padding>
-			<button ion-button (click)="onSignup(signupForm)" type="submit" block>Create</button>
+			<button color="columbusRed" ion-button (click)="onSignup(signupForm)" type="submit" block>Create</button>
 		</div>
 	</form>
 
