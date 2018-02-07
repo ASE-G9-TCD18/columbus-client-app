@@ -36,7 +36,14 @@
 
 		<ion-row responsive-sm>
 			<ion-col>
-				<button ion-button (click)="onLogin(loginForm)" type="submit" block>Login</button>
+				<button color="columbusRed" ion-button (click)="onLogin(loginForm)" type="submit" block>LOGIN</button>
+			</ion-col>
+		</ion-row>
+		<ion-row responsive-sm>
+			<ion-col>
+				<p ion-text color="columbusRed" font-size= "12px" (click)="onSignup()" align="center">
+				Not a Member? Register Now
+			</p>
 			</ion-col>
 		</ion-row>
 	</form>
