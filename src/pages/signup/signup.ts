@@ -5,9 +5,11 @@ import { NavController } from 'ionic-angular';
 
 import { UserData } from '../../providers/user-data';
 
-import { UserOptions } from '../../interfaces/user-options';
+import { UserOptionsSignup } from '../../interfaces/user-options-signup';
 
 import { TabsPage } from '../tabs-page/tabs-page';
+
+import { ConferenceData } from '../../providers/conference-data';
 
 
 @Component({
@@ -15,17 +17,34 @@ import { TabsPage } from '../tabs-page/tabs-page';
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  signup: UserOptions = { username: '', password: '' };
+  responseData: any;
+  signupData: UserOptionsSignup = {
+  "loginId" : "",
+  "password" : "",
+  "firstName" : "",
+  "lastName" : "",
+  "age": "",
+  "emailId" : "",
+  "contactNumber" : ""
+};
   submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData) {}
+  constructor(public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData ) {}
 
   onSignup(form: NgForm) {
     this.submitted = true;
-
     if (form.valid) {
-      this.userData.signup(this.signup.username);
+      
+      this.authservice.postData(this.signupData, "signup").then((result) =>{
+      this.responseData = result;
+      console.log(this.responseData);
+      this.userData.signup(this.signupData.loginId);
       this.navCtrl.push(TabsPage);
+      }, (err) => {
+
+
+      });
+      
     }
   }
 }

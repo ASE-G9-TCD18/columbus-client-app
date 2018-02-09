@@ -17,7 +17,7 @@
 		<ion-list no-lines>
 			<ion-item>
 				<ion-label stacked color="columbusGrey">First Name</ion-label>
-				<ion-input [(ngModel)]="signup.firstname" name="firstname" type="text" #firstname="ngModel" required>
+				<ion-input [(ngModel)]="signupData.firstname" name="firstname" type="text" #firstname="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="firstname.valid || submitted == false" color="danger" padding-left>
@@ -26,7 +26,7 @@
 
 			<ion-item>
 				<ion-label stacked color="columbusGrey">Last Name</ion-label>
-				<ion-input [(ngModel)]="signup.lastname" name="lastname" type="text" #lastname="ngModel" required>
+				<ion-input [(ngModel)]="signupData.lastname" name="lastname" type="text" #lastname="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="lastname.valid || submitted == false" color="danger" padding-left>
@@ -34,8 +34,17 @@
 			</p>
 
 			<ion-item>
+				<ion-label stacked color="columbusGrey">Age</ion-label>
+				<ion-input [(ngModel)]="signupData.age" name="phone" type="text" #phone="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="phone.valid || submitted == false" color="danger" padding-left>
+				email is required
+			</p>
+
+			<ion-item>
 				<ion-label stacked color="columbusGrey">Username</ion-label>
-				<ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
+				<ion-input [(ngModel)]="signupData.loginId" name="username" type="text" #username="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
@@ -44,7 +53,7 @@
 
 			<ion-item>
 				<ion-label stacked color="columbusGrey">Email</ion-label>
-				<ion-input [(ngModel)]="signup.email" name="email" type="email" #email="ngModel" required>
+				<ion-input [(ngModel)]="signupData.emailId" name="email" type="email" #email="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
@@ -53,16 +62,16 @@
 
 			<ion-item>
 				<ion-label stacked color="columbusGrey">Phone</ion-label>
-				<ion-input [(ngModel)]="signup.phone" name="phone" type="email" #phone="ngModel" required>
+				<ion-input [(ngModel)]="signupData.contactNumber" name="phone" type="text" #phone="ngModel" required>
 				</ion-input>
 			</ion-item>
-			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
-				email is required
+			<p ion-text [hidden]="phone.valid || submitted == false" color="danger" padding-left>
+				phone number is required
 			</p>
 
 			<ion-item>
-				<ion-label stacked color="primary">Password</ion-label>
-				<ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+				<ion-label stacked color="columbusGrey">Password</ion-label>
+				<ion-input [(ngModel)]="signupData.password" name="password" type="password" #password="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>

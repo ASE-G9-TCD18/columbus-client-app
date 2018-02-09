@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import { UserData } from './user-data';
 
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
+
+let apiURL = "localhost:8080/";
 
 @Injectable()
 export class ConferenceData {
@@ -151,5 +153,21 @@ export class ConferenceData {
       return data.map;
     });
   }
+
+  postData(credentials, type){
+   return new Promise((resolve, reject) =>{
+      let headers = new Headers();
+      this.http.post(apiURL+type, JSON.stringify(credentials), {headers}).subscribe(res =>{
+        resolve(res.json());
+
+      }, (err)=> {
+
+          reject(err);
+      });
+
+   });
+
+   
+   }
 
 }
