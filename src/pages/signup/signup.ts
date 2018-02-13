@@ -25,7 +25,7 @@ export class SignupPage {
   "lastName" : "",
   "age": "",
   "emailId" : "",
-  "contactNumber" : ""
+  "phone" : ""
 };
   submitted = false;
 
