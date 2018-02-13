@@ -17,10 +17,12 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { JourneyPage } from '../pages/journey/journey';
 
 import { SupportPage } from '../pages/support/support';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+
 
 export interface PageInterface {
   title: string;
@@ -49,13 +51,14 @@ export class ConferenceApp {
     { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'contacts' },
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
-    { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'information-circle' }
-
+    { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'information-circle' },
+    { title: 'Profile', name: 'TabsPage', component: TabsPage, tabComponent: ProfilePage, index: 4, icon: 'information-circle'  }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'help' },
+    { title: 'Logout', name: 'ProfilePage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
@@ -71,7 +74,7 @@ export class ConferenceApp {
     public platform: Platform,
     public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
   ) {
 
     // Check if the user has already seen the tutorial

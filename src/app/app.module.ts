@@ -29,13 +29,11 @@ import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { HomepagePage } from '../pages/homepage/homepage';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-
-
-
 
 @NgModule({
   declarations: [
@@ -55,7 +53,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     TutorialPage,
     SupportPage,
     HomepagePage,
-    JourneyPage
+    JourneyPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -76,9 +75,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
-        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' }
-
-
+        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
+        { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -101,8 +99,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     TutorialPage,
     SupportPage,
     HomepagePage,
-    JourneyPage
-
+    JourneyPage,
+    ProfilePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
