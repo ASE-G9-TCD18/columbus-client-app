@@ -25,10 +25,12 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -87,7 +91,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    ProfilePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
