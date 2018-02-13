@@ -33,7 +33,6 @@ export class SignupPage {
       emailId: "",
       contactNumber: ""
     };
-// public toNum(event): number{return +event};
   submitted = false;
 
   constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
