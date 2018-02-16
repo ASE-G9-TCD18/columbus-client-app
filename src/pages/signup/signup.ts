@@ -40,9 +40,6 @@ export class SignupPage {
       console.log(this.responseData);
       this.userData.signup(this.signupData.loginId);
       this.navCtrl.push(TabsPage);
-      }, (err) => {
-
-
       });
       
     }
