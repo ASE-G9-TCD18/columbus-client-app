@@ -35,7 +35,7 @@
 
 			<ion-item>
 				<ion-label stacked color="columbusGrey">Age</ion-label>
-				<ion-input [(ngModel)]="signupData.age" (ngModelChange)="signupData.age=toNum($event)" name="age" type="number" #age="ngModel" required>
+				<ion-input [(ngModel)]="signupData.age" name="age" type="text" #age="ngModel" required>
 				</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="phone.valid || submitted == false" color="danger" padding-left>
@@ -83,5 +83,9 @@
 			<button color="columbusRed" ion-button (click)="onSignup(signupForm)" type="submit" block>Create</button>
 		</div>
 	</form>
+
+  <p ion-text [hidden]="checkStatus()==Error" color="danger" align="center">
+    {{errresponse.message}}
+  </p>
 
 </ion-content>

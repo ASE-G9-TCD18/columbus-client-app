@@ -13,7 +13,7 @@
 	</div>
 
 	<form #loginForm="ngForm" novalidate>
-		
+
 
 		<ion-list>
 			<ion-item>
@@ -46,6 +46,9 @@
 				<p ion-text color="columbusRed" font-size= "12px" (click)="onSignup()" align="center">
 				Not a Member? Register Now
 			</p>
+        <p ion-text [hidden]="checkStatus()==Error" color="danger" align="center">
+          {{errresponse.message}}
+        </p>
 			</ion-col>
 		</ion-row>
 	</form>

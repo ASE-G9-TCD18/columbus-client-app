@@ -163,7 +163,26 @@ export class ConferenceData {
 
       }, (err)=> {
 
-          reject(err);
+          reject(err.json());
+      });
+
+   });
+
+
+   }
+
+   postDataLogin(credentials, type){
+   return new Promise((resolve, reject) =>{
+      let headers = new Headers();
+      this.http.post(apiURL+type, credentials, {headers})
+      // .map(res=>console.log("cookie: " + res.headers.get("Authorization")))
+
+      .subscribe(res =>{
+        resolve(res.headers.get("Authorization"));
+
+      }, (err)=> {
+
+          reject(err.json());
       });
 
    });

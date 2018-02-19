@@ -4,7 +4,7 @@ export interface UserOptionsSignup {
   loginId: string,
   emailId: string,
   contactNumber: string,
-  age: number,
+  age: string,
   password: string
 
 }
