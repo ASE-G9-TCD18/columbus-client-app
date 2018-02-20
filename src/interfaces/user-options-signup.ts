@@ -3,7 +3,7 @@ export interface UserOptionsSignup {
   lastName: string,
   loginId: string,
   emailId: string,
-  phone: string,
+  contactNumber: string,
   age: string,
   password: string
 

@@ -9,7 +9,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
 
-let apiURL = "localhost:8080/";
+let apiURL = "http://localhost:8080/";
+// let apiURL1 = "http://10.6.50.162/";
 
 @Injectable()
 export class ConferenceData {
@@ -157,17 +158,36 @@ export class ConferenceData {
   postData(credentials, type){
    return new Promise((resolve, reject) =>{
       let headers = new Headers();
-      this.http.post(apiURL+type, JSON.stringify(credentials), {headers}).subscribe(res =>{
+      this.http.post(apiURL+type, credentials, {headers}).subscribe(res =>{
         resolve(res.json());
 
       }, (err)=> {
 
-          reject(err);
+          reject(err.json());
       });
 
    });
 
-   
+
+   }
+
+   postDataLogin(credentials, type){
+   return new Promise((resolve, reject) =>{
+      let headers = new Headers();
+      this.http.post(apiURL+type, credentials, {headers})
+      // .map(res=>console.log("cookie: " + res.headers.get("Authorization")))
+
+      .subscribe(res =>{
+        resolve(res.headers.get("Authorization"));
+
+      }, (err)=> {
+
+          reject(err.json());
+      });
+
+   });
+
+
    }
 
 }

@@ -1,4 +1,4 @@
 export interface UserOptionsSignin {
-	username: string,
-  	password: string
+  loginId: string,
+  password: string 
 }

@@ -30,9 +30,10 @@ export class UserData {
     }
   };
 
-  login(username: string): void {
+  login(username: string, token: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
+    this.setUsertoken(token);
     this.events.publish('user:login');
   };
 
@@ -52,8 +53,17 @@ export class UserData {
     this.storage.set('username', username);
   };
 
+  setUsertoken(token: string): void {
+    this.storage.set('token', token);
+  };
+
   getUsername(): Promise<string> {
     return this.storage.get('username').then((value) => {
+      return value;
+    });
+  };
+  getUsertoken(): Promise<string> {
+    return this.storage.get('token').then((value) => {
       return value;
     });
   };
