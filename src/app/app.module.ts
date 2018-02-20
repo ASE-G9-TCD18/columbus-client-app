@@ -30,6 +30,8 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { HomepagePage } from '../pages/homepage/homepage';
 import { ProfilePage } from '../pages/profile/profile';
+import { TripPage } from '../pages/trip/trip';
+import { TripHistoryPage } from '../pages/trip-history/trip-history';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -54,7 +56,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SupportPage,
     HomepagePage,
     JourneyPage,
-    ProfilePage
+    ProfilePage,
+    TripPage,
+    TripHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
         { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
+        { component: TripPage, name: 'TripPage', segment: 'trip' },
+        { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -100,7 +106,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SupportPage,
     HomepagePage,
     JourneyPage,
-    ProfilePage
+    ProfilePage,
+    TripPage,
+    TripHistoryPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -110,8 +118,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SplashScreen,
     AuthServiceProvider,
     Geolocation
-
-
   ]
 })
 export class AppModule { }

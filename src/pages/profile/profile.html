@@ -43,16 +43,16 @@
 
   <ion-list>
     <button ion-item>
-      <ion-icon name="cafe" item-start></ion-icon>
+      <ion-icon name="cafe" item-start ></ion-icon>
       Cafe
     </button>
 
-    <button ion-item>
+    <button ion-item (click)="goToTripDetail()">
       <ion-icon name="paw" item-start></ion-icon>
       My Trip
     </button>
 
-    <button ion-item>
+    <button ion-item (click)="goToTripHistory()">
       <ion-icon name="planet" item-start></ion-icon>
       My Trip History
     </button>
