@@ -21,6 +21,7 @@ import {ConferenceData} from "../../providers/conference-data";
 export class LoginPage {
   responseData: any;
   errresponse: any = "200";
+  errMessage: any;
   // password: any;
   // encryptedPwd = Md5.hashStr(this.password);
   private login: UserOptionsSignin =
@@ -54,7 +55,8 @@ export class LoginPage {
             this.errresponse = err
             console.log(err);
             loading.dismissAll();
-            console.log("here is the error" + this.errresponse.message.toString());
+            this.errMessage = this.errresponse.message;
+            console.log("here is the error" + this.errresponse.message);
 
 
           });

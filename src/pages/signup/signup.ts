@@ -22,6 +22,7 @@ export class SignupPage {
 
   responseData: any;
   errresponse: any="200";
+  errMessage: any;
   private signupData: UserOptionsSignup =
     {
       loginId: "",
@@ -59,7 +60,9 @@ export class SignupPage {
           (err) => {
           this.errresponse = err
           console.log(err);
-            console.log("here is the error" + this.errresponse.message.toString());
+          // let errmsg = JSON.parse(this.errresponse)
+          this.errMessage = this.errresponse.errors[0].defaultMessage;
+            console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
           loading.dismissAll();
         });
 
