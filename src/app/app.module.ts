@@ -25,6 +25,7 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { HomepagePage } from '../pages/homepage/homepage';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -47,7 +48,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    HomepagePage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' }
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -87,7 +91,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    HomepagePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -96,7 +101,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
-    
+
   ]
 })
 export class AppModule { }
