@@ -1,0 +1,66 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="speaker-detail">
+  <div text-center>
+    <img src="assets/img/avatar.png"><br>
+    <p ion-text color="danger" align="center">
+    {{name}}
+    </p>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+  </div>
+<div>
+	
+
+</div>
+<ion-card>
+  <ion-card-header>
+    User Info
+  </ion-card-header>
+
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="cafe" item-start ></ion-icon>
+      Cafe
+    </button>
+
+    <button ion-item (click)="goToTripDetail()">
+      <ion-icon name="paw" item-start></ion-icon>
+      My Trip
+    </button>
+
+    <button ion-item (click)="goToTripHistory()">
+      <ion-icon name="planet" item-start></ion-icon>
+      My Trip History
+    </button>
+
+  </ion-list>
+</ion-card>
+
+</ion-content>
