@@ -13,7 +13,6 @@ import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
-import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -39,7 +38,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   declarations: [
     ConferenceApp,
     AboutPage,
-    AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
@@ -72,7 +70,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
-        { component: AccountPage, name: 'AccountPage', segment: 'account' },
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: TripPage, name: 'TripPage', segment: 'trip' },
@@ -85,7 +82,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   entryComponents: [
     ConferenceApp,
     AboutPage,
-    AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
