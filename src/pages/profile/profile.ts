@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController} from 'ionic-angular';
+import {NavController, LoadingController, AlertController} from 'ionic-angular';
 import { TripPage } from '../trip/trip';
 import { TripHistoryPage } from '../trip-history/trip-history';
 import { IonicPage } from 'ionic-angular';
@@ -23,13 +23,49 @@ import {ConferenceData} from '../../providers/conference-data';
  	errMessage: any;
  	errresponse: any="200";
  	name: string;
- 	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
+ 	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
  	}
 
 
  	goToTripDetail() { this.navCtrl.push(TripPage); }
 
  	goToTripHistory() { this.navCtrl.push(TripHistoryPage); }
+
+ 	changeUsername() {
+ 		let alert = this.alertCtrl.create({
+ 			title: 'Change Username',
+ 			buttons: [
+ 			'Cancel'
+ 			]
+ 		});
+ 		alert.addInput({
+ 			name: 'username',
+ 			value: this.name,
+ 			placeholder: 'username'
+ 		});
+ 		// alert.addButton({
+ 		// 	text: 'Ok',
+ 		// 	handler: (data: any) => {
+ 		// 		this.userData.setUsername(data.username);
+ 		// 		this.getUsername();
+ 		// 	}
+ 		// });
+
+ 		alert.present();
+ 	}
+
+ 	changePassword() {
+ 		console.log('Clicked to change password');
+ 	}
+
+ 	logout() {
+ 		this.userData.logout();
+ 		this.navCtrl.setRoot('LoginPage');
+ 	}
+
+ 	support() {
+ 		this.navCtrl.push('SupportPage');
+ 	}
 
  	ionViewDidLoad() {
  		let loading = this.loader.create({content: "Contacting Server ,please wait..."});
