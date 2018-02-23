@@ -46,6 +46,7 @@ export class UserData {
   logout(): void {
     this.storage.remove(this.HAS_LOGGED_IN);
     this.storage.remove('username');
+    this.storage.remove('token');
     this.events.publish('user:logout');
   };
 
