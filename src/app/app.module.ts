@@ -32,6 +32,10 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
+import { IonRating } from '../components/ionic2-rating/ion-rating/ion-rating';
+import { AppRate } from '@ionic-native/app-rate';
+import { Ionic2RatingModule } from 'ionic2-rating';
+
 
 
 @NgModule({
@@ -52,11 +56,13 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SupportPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    IonRating
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
@@ -105,6 +111,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    AppRate,
   ]
 })
 export class AppModule { }
