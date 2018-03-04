@@ -24,9 +24,14 @@ import { AppRate } from '@ionic-native/app-rate';
  	errMessage: any;
  	errresponse: any="200";
  	name: string;
+ 	rate: string;
  	constructor(private appRate: AppRate, public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
  	}
 
+
+ 	onModelChange(_event){
+		console.log("You rating for this trip is " + _event);
+	}
 
  	goToTripDetail() { this.navCtrl.push(TripPage); }
 
@@ -72,16 +77,6 @@ import { AppRate } from '@ionic-native/app-rate';
  		console.log("Rated :", value);
 	}
 
-	rateMe(){
-    	this.appRate.preferences.storeAppURL = {
-    		ios: '< my_app_id >',
-	    	android: 'market://details?id=< package_name >',
-    		windows: 'ms-windows-store://review/?ProductId=< Store_ID >'
-    	};
-
-    	this.appRate.promptForRating(true); 
-	}
-
  	ionViewDidLoad() {
  		let loading = this.loader.create({content: "Contacting Server ,please wait..."});
  		this.userData.getUsername().then((id)=>
@@ -96,6 +91,7 @@ import { AppRate } from '@ionic-native/app-rate';
  					(result) => {
  						this.responseData = result;
  						this.name = this.responseData["firstName"];
+ 						this.rate = this.responseData["rating"];
  					},
  					(err) => {
  						this.errresponse = err
