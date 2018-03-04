@@ -22,7 +22,6 @@ import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-// import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { JourneyPage } from '../pages/journey/journey';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -35,7 +34,9 @@ import { TripHistoryPage } from '../pages/trip-history/trip-history';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-
+import { IonRating } from '../components/ionic2-rating/ion-rating/ion-rating';
+import { AppRate } from '@ionic-native/app-rate';
+import { Ionic2RatingModule } from 'ionic2-rating';
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -56,11 +57,13 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     JourneyPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    IonRating
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
@@ -113,6 +116,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    AppRate,
     Geolocation
   ]
 })

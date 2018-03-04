@@ -5,6 +5,7 @@ import { TripHistoryPage } from '../trip-history/trip-history';
 import { IonicPage } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import {ConferenceData} from '../../providers/conference-data';
+import { AppRate } from '@ionic-native/app-rate';
 
 /**
  * Generated class for the ProfilePage page.
@@ -23,7 +24,7 @@ import {ConferenceData} from '../../providers/conference-data';
  	errMessage: any;
  	errresponse: any="200";
  	name: string;
- 	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
+ 	constructor(private appRate: AppRate, public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
  	}
 
 
@@ -66,6 +67,20 @@ import {ConferenceData} from '../../providers/conference-data';
  	support() {
  		this.navCtrl.push('SupportPage');
  	}
+
+ 	starClicked(value){
+ 		console.log("Rated :", value);
+	}
+
+	rateMe(){
+    	this.appRate.preferences.storeAppURL = {
+    		ios: '< my_app_id >',
+	    	android: 'market://details?id=< package_name >',
+    		windows: 'ms-windows-store://review/?ProductId=< Store_ID >'
+    	};
+
+    	this.appRate.promptForRating(true); 
+	}
 
  	ionViewDidLoad() {
  		let loading = this.loader.create({content: "Contacting Server ,please wait..."});
