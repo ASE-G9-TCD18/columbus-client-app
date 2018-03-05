@@ -22,9 +22,11 @@ import {ConferenceData} from '../../providers/conference-data';
  	responseData: any;
  	errMessage: any;
  	errresponse: any="200";
+
  	name: string;
  	rate: string;
  	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
+
  	}
 
 
@@ -89,8 +91,10 @@ import {ConferenceData} from '../../providers/conference-data';
  				.then(
  					(result) => {
  						this.responseData = result;
+
  						this.name = this.responseData["firstName"];
  						this.rate = this.responseData["userRating"];
+
  					},
  					(err) => {
  						this.errresponse = err

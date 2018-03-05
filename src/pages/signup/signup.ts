@@ -7,7 +7,7 @@ import {UserData} from '../../providers/user-data';
 
 import {UserOptionsSignup} from '../../interfaces/user-options-signup';
 
-import {TabsPage} from '../tabs-page/tabs-page';
+import {LoginPage} from '../login/login';
 
 import {ConferenceData} from '../../providers/conference-data';
 
@@ -54,9 +54,9 @@ export class SignupPage {
           (result) => {
           this.responseData = result;
           console.log(this.responseData);
-          this.userData.signup(this.signupData.loginId);
+          //this.userData.signup(this.signupData.loginId);
           loading.dismissAll();
-          this.navCtrl.push(TabsPage);
+          this.navCtrl.push(LoginPage);
         },
           (err) => {
           this.errresponse = err
