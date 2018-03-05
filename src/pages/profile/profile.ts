@@ -22,9 +22,15 @@ import {ConferenceData} from '../../providers/conference-data';
  	responseData: any;
  	errMessage: any;
  	errresponse: any="200";
+<<<<<<< HEAD
  	name: string;
  	rate: string;
  	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
+=======
+ 	Firstname: string;
+ 	Lastname: string;
+ 	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
+>>>>>>> changes
  	}
 
 
@@ -89,8 +95,14 @@ import {ConferenceData} from '../../providers/conference-data';
  				.then(
  					(result) => {
  						this.responseData = result;
+<<<<<<< HEAD
  						this.name = this.responseData["firstName"];
  						this.rate = this.responseData["userRating"];
+=======
+ 						console.log(this.responseData);
+ 						this.Firstname = this.responseData["firstName"];
+ 						this.Lastname = this.responseData["lastName"];
+>>>>>>> changes
  					},
  					(err) => {
  						this.errresponse = err

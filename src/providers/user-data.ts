@@ -37,11 +37,11 @@ export class UserData {
     this.events.publish('user:login');
   };
 
-  signup(username: string): void {
-    this.storage.set(this.HAS_LOGGED_IN, true);
-    this.setUsername(username);
-    this.events.publish('user:signup');
-  };
+  // signup(username: string): void {
+  //   this.storage.set(this.HAS_LOGGED_IN, false);
+  //   // this.setUsername(username);
+  //   this.events.publish('user:signup');
+  // };
 
   logout(): void {
     this.storage.remove(this.HAS_LOGGED_IN);

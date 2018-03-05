@@ -9,8 +9,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
 
-// let apiURL = "http://localhost:8080/";
-let apiURL = "http://10.6.50.162:8080/";
+let apiURL = "http://localhost:8080/";
+// let apiURL = "http://10.6.50.162:8080/";
 
 @Injectable()
 export class ConferenceData {

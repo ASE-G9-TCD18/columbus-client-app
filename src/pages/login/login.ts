@@ -58,7 +58,6 @@ export class LoginPage {
             this.errMessage = this.errresponse.message;
             console.log("here is the error" + this.errresponse.message);
 
-
           });
     }
   }

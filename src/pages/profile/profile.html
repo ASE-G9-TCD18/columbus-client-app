@@ -15,6 +15,7 @@
 
 <ion-content padding class="outer-content">
   <div text-center>
+<<<<<<< HEAD
     <img src="assets/img/avatar.png" alt="avatar">
     <h2>{{name}}</h2>
 
@@ -56,3 +57,54 @@
     </ion-list>
   </div>
 </ion-content>
+=======
+    <img src="assets/img/avatar.png"><br>
+    <p ion-text color="danger" align="center">
+    {{Firstname +" "+Lastname}}
+    </p>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+    <button ion-button icon-only clear small>
+      <ion-icon name="star"></ion-icon>
+    </button>
+  </div>
+<div>
+	
+
+</div>
+<ion-card>
+  <ion-card-header>
+    <h3>User Info</h3>
+  </ion-card-header>
+
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="cafe" item-start ></ion-icon>
+      Cafe
+    </button>
+
+    <button ion-item (click)="goToTripDetail()">
+      <ion-icon name="paw" item-start></ion-icon>
+      My Trip
+    </button>
+
+    <button ion-item (click)="goToTripHistory()">
+      <ion-icon name="planet" item-start></ion-icon>
+      My Trip History
+    </button>
+
+  </ion-list>
+</ion-card>
+
+</ion-content>
+>>>>>>> changes
