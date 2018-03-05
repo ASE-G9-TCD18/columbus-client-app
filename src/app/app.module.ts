@@ -34,8 +34,6 @@ import { TripHistoryPage } from '../pages/trip-history/trip-history';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import { IonRating } from '../components/ionic2-rating/ion-rating/ion-rating';
-import { AppRate } from '@ionic-native/app-rate';
 import { Ionic2RatingModule } from 'ionic2-rating';
 @NgModule({
   declarations: [
@@ -57,8 +55,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     JourneyPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage,
-    IonRating
+    TripHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -116,7 +113,6 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
-    AppRate,
     Geolocation
   ]
 })
