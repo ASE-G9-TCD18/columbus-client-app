@@ -5,6 +5,6 @@ export interface UserOptionsSignup {
   emailId: string,
   contactNumber: string,
   age: string,
-  password: string
-
+  password: string,
+  userRating: number
 }

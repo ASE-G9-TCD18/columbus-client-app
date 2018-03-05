@@ -90,7 +90,7 @@ import {ConferenceData} from '../../providers/conference-data';
  					(result) => {
  						this.responseData = result;
  						this.name = this.responseData["firstName"];
- 						this.rate = this.responseData["rating"];
+ 						this.rate = this.responseData["userRating"];
  					},
  					(err) => {
  						this.errresponse = err
