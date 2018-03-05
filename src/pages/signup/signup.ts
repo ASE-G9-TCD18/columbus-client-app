@@ -31,7 +31,8 @@ export class SignupPage {
       lastName: "",
       age: "",
       emailId: "",
-      contactNumber: ""
+      contactNumber: "",
+      userRating: 5
     };
 // public toNum(event): number{return +event};
   submitted = false;
