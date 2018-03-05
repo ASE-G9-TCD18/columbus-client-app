@@ -5,7 +5,6 @@ import { TripHistoryPage } from '../trip-history/trip-history';
 import { IonicPage } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import {ConferenceData} from '../../providers/conference-data';
-import { AppRate } from '@ionic-native/app-rate';
 
 /**
  * Generated class for the ProfilePage page.
@@ -25,7 +24,7 @@ import { AppRate } from '@ionic-native/app-rate';
  	errresponse: any="200";
  	name: string;
  	rate: string;
- 	constructor(private appRate: AppRate, public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
+ 	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
  	}
 
 
