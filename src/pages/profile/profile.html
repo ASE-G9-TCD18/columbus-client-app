@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Profile</ion-title>
   </ion-navbar>
 
@@ -17,7 +20,7 @@
   <div text-center>
     <img src="assets/img/avatar.png"><br>
     <p ion-text color="danger" align="center">
-    {{name}}
+    {{Firstname +" "+Lastname}}
     </p>
     <button ion-button icon-only clear small>
       <ion-icon name="star"></ion-icon>
@@ -41,7 +44,7 @@
 </div>
 <ion-card>
   <ion-card-header>
-    User Info
+    <h3>User Info</h3>
   </ion-card-header>
 
   <ion-list>

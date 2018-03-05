@@ -22,7 +22,8 @@ import {ConferenceData} from '../../providers/conference-data';
  	responseData: any;
  	errMessage: any;
  	errresponse: any="200";
- 	name: string;
+ 	Firstname: string;
+ 	Lastname: string;
  	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
  	}
 
@@ -44,7 +45,9 @@ import {ConferenceData} from '../../providers/conference-data';
  				.then(
  					(result) => {
  						this.responseData = result;
- 						this.name = this.responseData["firstName"];
+ 						console.log(this.responseData);
+ 						this.Firstname = this.responseData["firstName"];
+ 						this.Lastname = this.responseData["lastName"];
  					},
  					(err) => {
  						this.errresponse = err
