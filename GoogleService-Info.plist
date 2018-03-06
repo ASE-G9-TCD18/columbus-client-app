@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>373987244454-o0v3crm2ng42c9c576hshiro4sip2hnc.apps.googleusercontent.com</string>
+	<string>57190328732-s5g64oscmjgnvnkh9942ot1rbhef5dgt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.373987244454-o0v3crm2ng42c9c576hshiro4sip2hnc</string>
+	<string>com.googleusercontent.apps.57190328732-s5g64oscmjgnvnkh9942ot1rbhef5dgt</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAQXBNt59ZlXGKC65P_XDvDWRO21vDUDeg</string>
+	<string>AIzaSyCp04bbaWhqw-qjnyHCFcbKdxZP2bRbnR4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>373987244454</string>
+	<string>57190328732</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>io.ionic.conferenceapp001993</string>
+	<string>io.ionic.columbus1997</string>
 	<key>PROJECT_ID</key>
-	<string>columbus-ios</string>
+	<string>columbus1997-7a315</string>
 	<key>STORAGE_BUCKET</key>
-	<string>columbus-ios.appspot.com</string>
+	<string>columbus1997-7a315.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:373987244454:ios:1d458543af659cd6</string>
+	<string>1:57190328732:ios:ab2f543ddc616f42</string>
 	<key>DATABASE_URL</key>
-	<string>https://columbus-ios.firebaseio.com</string>
+	<string>https://columbus1997-7a315.firebaseio.com</string>
 </dict>
 </plist>

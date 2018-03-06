@@ -34,7 +34,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { FCM } from '@ionic-native/fcm';
 
-
 @NgModule({
   declarations: [
     ConferenceApp,
