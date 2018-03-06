@@ -27,13 +27,24 @@ import { SupportPage } from '../pages/support/support';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
+import { NotificationPage } from '../pages/notification/notification';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { FCM } from '@ionic-native/fcm';
 
 
+// export const config = {
+//   apiKey: "AIzaSyCCl2A1mbhilyWE1QBfLstrA9E31auGZow",
+//   authDomain: "columbus-87cc7.firebaseapp.com",
+//   databaseURL: "https://columbus-87cc7.firebaseio.com",
+//   projectId: "columbus-87cc7",
+//   storageBucket: "",
+//   messagingSenderId: "937013633412"
+// };
+// firebase.initializeApp(config);
 
 @NgModule({
   declarations: [
@@ -53,7 +64,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SupportPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    NotificationPage
   ],
   imports: [
     BrowserModule,
@@ -76,6 +88,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: TripPage, name: 'TripPage', segment: 'trip' },
         { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' },
+        { component: NotificationPage, name: 'NotificationPage', segment: 'notification' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -98,7 +111,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SupportPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    NotificationPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -107,6 +121,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    FCM,
   ]
 })
 export class AppModule { }

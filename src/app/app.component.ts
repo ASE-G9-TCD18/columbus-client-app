@@ -18,6 +18,8 @@ import { ProfilePage } from '../pages/profile/profile';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { FCM } from '@ionic-native/fcm';
+// import * as firebase from 'firebase';
 
 
 export interface PageInterface {
@@ -72,6 +74,7 @@ export class ConferenceApp {
     public confData: ConferenceData,
     public storage: Storage,
     public splashScreen: SplashScreen,
+    public fcm: FCM,
   ) {
 
     // Check if the user has already seen the tutorial
