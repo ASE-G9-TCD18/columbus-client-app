@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "57190328732",
+    "firebase_url": "https://columbus1997-7a315.firebaseio.com",
+    "project_id": "columbus1997-7a315",
+    "storage_bucket": "columbus1997-7a315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57190328732:android:ab2f543ddc616f42",
+        "android_client_info": {
+          "package_name": "io.ionic.columbus1997"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57190328732-s8i8cbekqcukcu1nffqi7b1cibogn51v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuHevHUOEr2ZQUIrLwhDQRLaIJX4rScJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
