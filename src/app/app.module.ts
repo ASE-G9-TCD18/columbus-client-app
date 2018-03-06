@@ -32,7 +32,7 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
-
+import { FCM } from '@ionic-native/fcm';
 
 
 @NgModule({
@@ -107,6 +107,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    FCM
   ]
 })
 export class AppModule { }
