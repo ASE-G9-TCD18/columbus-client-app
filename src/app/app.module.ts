@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -21,7 +23,8 @@ import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+// import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+import { JourneyPage } from '../pages/journey/journey';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
@@ -30,6 +33,8 @@ import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+
+
 
 
 @NgModule({
@@ -45,11 +50,12 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
+    // SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
-    HomepagePage
+    HomepagePage,
+    JourneyPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: SchedulePage, name: 'Schedule', segment: 'schedule' },
         { component: SessionDetailPage, name: 'SessionDetail', segment: 'sessionDetail/:sessionId' },
         { component: ScheduleFilterPage, name: 'ScheduleFilter', segment: 'scheduleFilter' },
-        { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
+        // { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
         { component: SpeakerDetailPage, name: 'SpeakerDetail', segment: 'speakerDetail/:speakerId' },
         { component: MapPage, name: 'Map', segment: 'map' },
         { component: AboutPage, name: 'About', segment: 'about' },
@@ -69,7 +75,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
-        { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' }
+        { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
+        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' }
+
 
       ]
     }),
@@ -88,11 +96,13 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
+    // SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
-    HomepagePage
+    HomepagePage,
+    JourneyPage
+
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -101,6 +111,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    Geolocation
+
 
   ]
 })

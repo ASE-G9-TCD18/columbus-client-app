@@ -13,7 +13,9 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 //import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+// import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+import { JourneyPage } from '../pages/journey/journey';
+
 import { SupportPage } from '../pages/support/support';
 
 import { HomepagePage } from '../pages/homepage/homepage';
@@ -44,7 +46,7 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageInterface[] = [
     //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
+    { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'contacts' },
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
     { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'information-circle' }

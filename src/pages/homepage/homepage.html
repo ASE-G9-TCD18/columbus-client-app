@@ -1,0 +1,116 @@
+<!--
+Generated template for the HomepagePage page.
+
+See http://ionicframework.com/docs/components/#navigation for more info on
+Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Trip Plan</ion-title>
+
+    <button ion-button icon-only align-self-center (click)="presentFilter()">
+      <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-header>
+    <ion-navbar no-border-bottom>
+      <ion-row>
+        <ion-col col-6>
+          <ion-searchbar  placeholder="Start Location"></ion-searchbar>
+        </ion-col>
+        <ion-col col-6>
+          <ion-searchbar placeholder="Destination Location"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+
+        <ion-col col-6>
+          <ion-item>
+            <ion-label >Start Time</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button color="columbusGrey">Search for Trips</button>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="journey">
+        <ion-segment-button value="walk">
+          Walk
+        </ion-segment-button>
+        <ion-segment-button value="cab">
+          Cab
+        </ion-segment-button>
+        <ion-segment-button value="luas">
+          Luas
+        </ion-segment-button>
+        <ion-segment-button value="bus">
+          Dublin Bus
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+<ion-content class = "HomepagePage">
+
+</ion-content>
+<ion-content padding>
+
+  <div [ngSwitch]="journey">
+    <ion-list *ngSwitchCase="'walk'">
+      <ion-item>
+        <h2>Walking Start Location</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Walking Destination Location</h2>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'cab'">
+      <ion-item>
+
+        <h2>Hail cab From</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Cab Destination</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'luas'">
+      <ion-item>
+        <h2>From Luas Station</h2>
+      </ion-item>
+      <ion-item>
+        <h2>To Luas Station</h2>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'bus'">
+      <ion-item>
+
+        <h2>Start Bus Stop</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Destination Bus Stop</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>
