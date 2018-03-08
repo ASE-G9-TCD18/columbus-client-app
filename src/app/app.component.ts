@@ -85,9 +85,9 @@ export class ConferenceApp {
 
     this.fcm.onNotification().subscribe( data => {
       if(data.wasTapped){
-        console.log(data);
+        alert( JSON.stringify(data) );
       }else{
-        console.log(data);
+        alert( JSON.stringify(data) );
       }
     });
 
