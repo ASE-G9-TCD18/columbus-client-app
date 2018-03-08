@@ -10,7 +10,7 @@ import 'rxjs/add/observable/of';
 
 
 let apiURL = "http://localhost:8080/";
-// let apiURL1 = "http://10.6.50.162/";
+// let apiURL = "http://10.6.50.162:8080/";
 
 @Injectable()
 export class ConferenceData {
@@ -23,7 +23,7 @@ export class ConferenceData {
       return Observable.of(this.data);
     } else {
       return this.http.get('assets/data/data.json')
-        .map(this.processData, this);
+      .map(this.processData, this);
     }
   }
 
@@ -156,38 +156,42 @@ export class ConferenceData {
   }
 
   postData(credentials, type){
-   return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) =>{
       let headers = new Headers();
       this.http.post(apiURL+type, credentials, {headers}).subscribe(res =>{
         resolve(res.json());
 
       }, (err)=> {
 
-          reject(err.json());
+        reject(err.json());
       });
+    });
+  }
 
-   });
+  getData(type, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      this.http.get(apiURL+type, {headers}).subscribe(res =>{
+        resolve(res.json());
+      }, (err)=> {
+        reject(err.json());
+      });
+    });
 
+  }
 
-   }
-
-   postDataLogin(credentials, type){
-   return new Promise((resolve, reject) =>{
+  postDataLogin(credentials, type){
+    return new Promise((resolve, reject) =>{
       let headers = new Headers();
       this.http.post(apiURL+type, credentials, {headers})
-      // .map(res=>console.log("cookie: " + res.headers.get("Authorization")))
-
-      .subscribe(res =>{
-        resolve(res.headers.get("Authorization"));
-
-      }, (err)=> {
-
-          reject(err.json());
-      });
-
-   });
-
-
-   }
+    // .map(res=>console.log("cookie: " + res.headers.get("Authorization")))
+    .subscribe(res =>{
+      resolve(res.headers.get("Authorization"));
+    }, (err)=> {
+      reject(err.json());
+    });
+  });
+  }
 
 }

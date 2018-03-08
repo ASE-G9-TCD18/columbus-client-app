@@ -15,7 +15,6 @@ import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
-import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -28,11 +27,17 @@ import { JourneyPage } from '../pages/journey/journey';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+
 import { HomepagePage } from '../pages/homepage/homepage';
+import { ProfilePage } from '../pages/profile/profile';
+import { TripPage } from '../pages/trip/trip';
+import { TripHistoryPage } from '../pages/trip-history/trip-history';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { Ionic2RatingModule } from 'ionic2-rating';
+
 
 
 
@@ -41,7 +46,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   declarations: [
     ConferenceApp,
     AboutPage,
-    AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
@@ -54,12 +58,19 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     TabsPage,
     TutorialPage,
     SupportPage,
+
     HomepagePage,
-    JourneyPage
+    JourneyPage,
+
+    ProfilePage,
+    TripPage,
+    TripHistoryPage
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
@@ -73,12 +84,18 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
-        { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+
+
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
-        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' }
+        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
 
 
+=======
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
+        { component: TripPage, name: 'TripPage', segment: 'trip' },
+        { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' }
+>>>>>>> master
       ]
     }),
     IonicStorageModule.forRoot()
@@ -87,7 +104,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   entryComponents: [
     ConferenceApp,
     AboutPage,
-    AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
@@ -100,8 +116,14 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     TabsPage,
     TutorialPage,
     SupportPage,
+
     HomepagePage,
-    JourneyPage
+    JourneyPage,
+
+
+    ProfilePage,
+    TripPage,
+    TripHistoryPage
 
   ],
   providers: [
@@ -111,8 +133,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
-    Geolocation
 
+    Geolocation
 
   ]
 })

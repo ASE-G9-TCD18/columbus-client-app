@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
 import { AboutPage } from '../pages/about/about';
-import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
@@ -17,10 +16,12 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { JourneyPage } from '../pages/journey/journey';
 
 import { SupportPage } from '../pages/support/support';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+
 
 export interface PageInterface {
   title: string;
@@ -53,14 +54,16 @@ export class ConferenceApp {
 
   ];
   loggedInPages: PageInterface[] = [
-    { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
+    { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LogoutPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
+
     { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
+
   ];
   rootPage: any;
 
@@ -71,7 +74,7 @@ export class ConferenceApp {
     public platform: Platform,
     public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
   ) {
 
     // Check if the user has already seen the tutorial
@@ -134,9 +137,9 @@ export class ConferenceApp {
       this.enableMenu(true);
     });
 
-    this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
-    });
+    // this.events.subscribe('user:signup', () => {
+    //   this.enableMenu(true);
+    // });
 
     this.events.subscribe('user:logout', () => {
       this.enableMenu(false);

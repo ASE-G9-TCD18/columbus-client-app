@@ -37,15 +37,16 @@ export class UserData {
     this.events.publish('user:login');
   };
 
-  signup(username: string): void {
-    this.storage.set(this.HAS_LOGGED_IN, true);
-    this.setUsername(username);
-    this.events.publish('user:signup');
-  };
+  // signup(username: string): void {
+  //   this.storage.set(this.HAS_LOGGED_IN, false);
+  //   // this.setUsername(username);
+  //   this.events.publish('user:signup');
+  // };
 
   logout(): void {
     this.storage.remove(this.HAS_LOGGED_IN);
     this.storage.remove('username');
+    this.storage.remove('token');
     this.events.publish('user:logout');
   };
 
@@ -62,11 +63,14 @@ export class UserData {
       return value;
     });
   };
+
   getUsertoken(): Promise<string> {
     return this.storage.get('token').then((value) => {
       return value;
     });
   };
+
+  getUserInfo
 
   hasLoggedIn(): Promise<boolean> {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
