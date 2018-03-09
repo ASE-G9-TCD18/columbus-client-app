@@ -77,13 +77,6 @@ export class ConferenceApp {
     public fcm: FCM,
   ) {
 
-    this.fcm.getToken().then(token => {
-      console.log("The token for this app is " + token);
-      // Your best bet is to here store the token on the user's profile on the
-      // Firebase database, so that when you want to send notifications to this 
-      // specific user you can do it from Cloud Functions.
-    });
-
     this.fcm.onNotification().subscribe( data => {
       if(data.wasTapped){
         alert( JSON.stringify(data) );
