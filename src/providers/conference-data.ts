@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-
 // let apiURL = "http://52.212.149.132:8080/";
 let apiURL = "http://10.6.44.6:8080/";
 
