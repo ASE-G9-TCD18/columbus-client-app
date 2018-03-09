@@ -6,5 +6,6 @@ export interface UserOptionsSignup {
   contactNumber: string,
   age: string,
   password: string,
-  userRating: number
+  userRating: number,
+  deviceId: string
 }

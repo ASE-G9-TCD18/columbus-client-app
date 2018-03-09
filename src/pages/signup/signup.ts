@@ -11,6 +11,8 @@ import {LoginPage} from '../login/login';
 
 import {ConferenceData} from '../../providers/conference-data';
 
+import { FCM } from '@ionic-native/fcm';
+
 // import {Md5} from 'ts-md5/dist/md5';
 
 
@@ -32,12 +34,17 @@ export class SignupPage {
       age: "",
       emailId: "",
       contactNumber: "",
-      userRating: 5
+      userRating: 5,
+      deviceId: ""
     };
 // public toNum(event): number{return +event};
   submitted = false;
 
-  constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
+  constructor(public fcm: FCM, public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData) {
+      this.fcm.getToken().then(token => {
+        console.log( "The token for this app is " + token );
+        this.signupData.deviceId = token
+      });
   }
 
 
