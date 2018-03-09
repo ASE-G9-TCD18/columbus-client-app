@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -20,18 +22,25 @@ import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+// import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+import { JourneyPage } from '../pages/journey/journey';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+
 import { ProfilePage } from '../pages/profile/profile';
 import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
+
+import { HomepagePage } from '../pages/homepage/homepage';
+
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
+
+
 
 
 
@@ -47,13 +56,17 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
+    // SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
+
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+
+    HomepagePage,
+    JourneyPage
   ],
   imports: [
     BrowserModule,
@@ -65,17 +78,26 @@ import { Ionic2RatingModule } from 'ionic2-rating';
         { component: SchedulePage, name: 'Schedule', segment: 'schedule' },
         { component: SessionDetailPage, name: 'SessionDetail', segment: 'sessionDetail/:sessionId' },
         { component: ScheduleFilterPage, name: 'ScheduleFilter', segment: 'scheduleFilter' },
-        { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
+        // { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
         { component: SpeakerDetailPage, name: 'SpeakerDetail', segment: 'speakerDetail/:speakerId' },
         { component: MapPage, name: 'Map', segment: 'map' },
         { component: AboutPage, name: 'About', segment: 'about' },
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
+
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: TripPage, name: 'TripPage', segment: 'trip' },
         { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' },
+
+        // { component: AccountPage, name: 'AccountPage', segment: 'account' },
+
+        { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
+        { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' }
+
+
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -92,13 +114,16 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
+    // SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    HomepagePage,
+    JourneyPage
+
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -107,6 +132,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
+    Geolocation
+
   ]
 })
 export class AppModule { }
