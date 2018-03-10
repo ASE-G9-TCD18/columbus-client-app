@@ -33,15 +33,16 @@ import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
 
 import { HomepagePage } from '../pages/homepage/homepage';
-
+import {AutocompletePage} from "../pages/autocomplete/autocomplete";
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
 
+import { AgmCoreModule } from '@agm/core';
 
-
+// import {GoogleMap} from "@ionic-native/google-maps";
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     TabsPage,
     TutorialPage,
     SupportPage,
-
+    AutocompletePage,
     ProfilePage,
     TripPage,
     TripHistoryPage,
@@ -100,7 +101,12 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
       ]
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCnahpwY4LRTYlzEHnER3B_Y8NR1HzmrVE",
+      libraries: ["places"]
+    })
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -122,7 +128,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     TripPage,
     TripHistoryPage,
     HomepagePage,
-    JourneyPage
+    JourneyPage,
+    AutocompletePage
 
   ],
   providers: [
