@@ -33,7 +33,7 @@ import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
 
 import { HomepagePage } from '../pages/homepage/homepage';
-import {AutocompletePage} from "../pages/autocomplete/autocomplete";
+
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -61,7 +61,6 @@ import { AgmCoreModule } from '@agm/core';
     TabsPage,
     TutorialPage,
     SupportPage,
-    AutocompletePage,
     ProfilePage,
     TripPage,
     TripHistoryPage,
@@ -129,7 +128,6 @@ import { AgmCoreModule } from '@agm/core';
     TripHistoryPage,
     HomepagePage,
     JourneyPage,
-    AutocompletePage
 
   ],
   providers: [

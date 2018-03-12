@@ -2,17 +2,13 @@ import {Component, ViewChild, NgZone} from '@angular/core';
 import {IonicPage, NavParams, ModalController} from 'ionic-angular';
 import {LoadingController, NavController} from 'ionic-angular';
 import {Geolocation} from '../../../node_modules/@ionic-native/geolocation';
-// import {GoogleMapsEvent} from '../../../node_modules/@ionic-native/google-maps';
-// import {Observable} from 'rxjs/Observable';
+
 import {ScheduleFilterPage} from "../schedule-filter/schedule-filter";
-// import {AutocompletePage} from "../autocomplete/autocomplete";
-// import {UserOptionsSignin} from "../../interfaces/user-options-signin";
-// import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 
 import {FormControl} from "@angular/forms";
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
-
+import { UserData } from '../../providers/user-data';
 
 
 /**
@@ -35,14 +31,15 @@ export class HomepagePage {
   @ViewChild('map') mapElement;
   map: any;
 
-  // private search: any =
-  //   {
-  //     "location": ""
-  //
-  //   };
   address;
+  private gender: any;
+  private pref: any;
+  private minage: any;
+  private maxage: any;
+  private rating: any;
+  private gn: any;
 
-  constructor( private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
+  constructor( private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     this.address = {
       place: ''
     };
@@ -53,12 +50,16 @@ export class HomepagePage {
     //create search FormControl
     this.searchControl = new FormControl();
 
-    //set current position
     this.setCurrentPosition();
 
   }
 
   ionViewDidLoad() {
+
+    this.userData.getGender().then((value)=>{
+      console.log('here is the data -----'+value);
+    });
+
     //set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
@@ -93,6 +94,150 @@ export class HomepagePage {
         });
       });
     });
+    this.pref = {
+      'maxagevalue':
+        [
+          {'val':15, 'display': false},
+          {'val':16, 'display': false},
+          {'val':17, 'display': false},
+          {'val':18, 'display': false},
+          {'val':19, 'display': false},
+          {'val':20, 'display': false},
+          {'val':21, 'display': false},
+          {'val':22, 'display': false},
+          {'val':23, 'display': false},
+          {'val':24, 'display': false},
+          {'val':25, 'display': false},
+          {'val':26, 'display': false},
+          {'val':27, 'display': false},
+          {'val':28, 'display': false},
+          {'val':29, 'display': false},
+          {'val':30, 'display': false},
+        ],
+      'minagevalue':
+        [
+          {'val':15, 'display': false},
+          {'val':16, 'display': false},
+          {'val':17, 'display': false},
+          {'val':18, 'display': false},
+          {'val':19, 'display': false},
+          {'val':20, 'display': false},
+          {'val':21, 'display': false},
+          {'val':22, 'display': false},
+          {'val':23, 'display': false},
+          {'val':24, 'display': false},
+          {'val':25, 'display': false},
+          {'val':26, 'display': false},
+          {'val':27, 'display': false},
+          {'val':28, 'display': false},
+          {'val':29, 'display': false},
+          {'val':30, 'display': false},
+        ],
+      'starvalue':
+        [
+          {'val':1, 'display': false},
+          {'val':2, 'display': false},
+          {'val':3, 'display': false},
+          {'val':4, 'display': false},
+          {'val':5, 'display': false}
+        ],
+      'groupvalue':
+        [
+          {'val':1, 'display': false},
+          {'val':2, 'display': false},
+          {'val':3, 'display': false},
+          {'val':4, 'display': false},
+          {'val':5, 'display': false}
+        ],
+      'gendervalue':
+        [
+          {'val':'Male','display':false},
+          {'val':'Female','display':false},
+          {'val':'No-Preference','display':false}
+
+        ]
+    }
+    this.userData.getGender().then((value)=>{
+      this.gender = value
+      var i:number;
+      for(i=0; i<this.pref.gendervalue.length; i++)
+      {
+        console.log(this.pref.gendervalue[i].val+"------"+this.gender);
+        if(this.pref.gendervalue[i].val==this.gender)
+        {
+          this.pref.gendervalue[i].display=true;
+          console.log(this.pref.gendervalue[i].val+"-----"+this.pref.gendervalue[i].display)
+        }
+        else{
+          this.pref.gendervalue[i].display=false;
+          console.log(this.pref.gendervalue[i].val+"-----"+this.pref.gendervalue[i].display)
+        }
+      }
+      console.log('here is the data-----'+this.gender);
+    });
+
+    this.userData.getRating().then((value)=>{
+      this.rating = value
+      var i:number;
+      for(i=0; i<this.pref.starvalue.length; i++)
+      {
+        if(this.pref.starvalue[i].val==this.rating)
+        {
+          this.pref.starvalue[i].display=true;
+        }
+        else{
+          this.pref.starvalue[i].display=false;
+        }
+      }
+
+    });
+
+    this.userData.getMaxiage().then((value)=>{
+      this.maxage = value
+      var i:number;
+      for(i=0; i<this.pref.maxagevalue.length; i++)
+      {
+        if(this.pref.maxagevalue[i].val==this.maxage)
+        {
+          this.pref.maxagevalue[i].display=true;
+        }
+        else{
+          this.pref.maxagevalue[i].display=false;
+        }
+      }
+
+    });
+
+    this.userData.getMiniage().then((value)=>{
+      this.minage = value
+      var i:number;
+      for(i=0; i<this.pref.minagevalue.length; i++)
+      {
+        if(this.pref.minagevalue[i].val==this.minage)
+        {
+          this.pref.minagevalue[i].display=true;
+        }
+        else{
+          this.pref.minagevalue[i].display=false;
+        }
+      }
+    });
+
+    this.userData.getGroupNumber().then((value)=>{
+      this.gn = value
+      var i:number;
+      for(i=0; i<this.pref.groupvalue.length; i++)
+      {
+        if(this.pref.groupvalue[i].val==this.gn)
+        {
+          this.pref.groupvalue[i].display=true;
+        }
+        else{
+          this.pref.groupvalue[i].display=false;
+        }
+      }
+    });
+
   }
 
   private setCurrentPosition() {
@@ -106,140 +251,9 @@ export class HomepagePage {
   }
 
   presentFilters() {
-    let modal = this.modalCtrl.create(ScheduleFilterPage);
+    let modal = this.modalCtrl.create(ScheduleFilterPage, this.pref);
     modal.present();
 
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//   showAddressModal () {
-//     let modal = this.modalCtrl.create(AutocompletePage);
-//     // let me = this;
-//     modal.onDidDismiss(data => {
-//       this.address.place = data;
-//     });
-//     modal.present();
-//   }
-//
-//   ionViewDidLoad() {
-//     try {
-//       this.initMap();
-//       //this.map.triggerResize();
-//     }
-//     catch (e) {
-//       console.log(e);
-//     }
-//
-//     //console.log('ionViewDidLoad HomepagePage');
-//   }
-//
-//   presentFilters() {
-//     let modal = this.modalCtrl.create(ScheduleFilterPage);
-//     modal.present();
-//
-//   }
-//
-//   getCurrentLocation() {
-//
-//     // let loading = this.Loading.create({
-//     //   content: 'Locating your position...'
-//     //
-//     // });
-//     //
-//     // loading.present();
-//     //this.Loading.present(loading);
-//     let options = {timeout: 10000, enableHighAccuracy: true};
-//
-//     let locationObs = Observable.create(observable => {
-//
-//       this.geoloc.getCurrentPosition(options)
-//         .then(resp => {
-//
-//             let lat = resp.coords.latitude;
-//             let lng = resp.coords.longitude;
-//
-//             let location = new google.maps.LatLng(lat, lng);
-//             console.log(location);
-//
-//             observable.next(location);
-//             // loading.dismiss();
-//           },
-//           (err) => {
-//             console.log('Geolocation err: ' + err);
-//             // loading.dismiss();
-//
-//           })
-//
-//
-//     });
-//
-//     return locationObs;
-//
-//   }
-//
-//   // autocomplete(){
-//   //   var searchBox = new google.maps.places.SearchBox(input);
-//   // }
-//
-//   initMap() {
-//     // this.map = this.createMap();
-//
-//     this.getCurrentLocation().subscribe(location => {
-//       // this.map.panTo(location);
-//       console.log("Inside InitMap:", location)
-//       let mapOptions = {
-//         center: location,
-//         //{lat: 53.343793, lng: -6.254572}
-//         zoom: 16,
-//         mapTypeId: google.maps.MapTypeId.ROADMAP
-//       };
-//       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-//     })
-//
-//     //let latLng = new google.maps.LatLng(53.343793,-6.254572);
-//     // this.map.marker = new google.maps.Marker({
-//     //   position: location,
-//     //
-//     // })
-//     //   .then(marker => {
-//     //     marker.on(GoogleMapsEvent.MARKER_CLICK)
-//     //       .subscribe(() => {
-//     //         alert('clicked');
-//     //       });
-//     //   });
-//     //marker.addListener('click', google.maps.Animation.Bounce);
-//
-//     //marker.setMap();
-//     google.maps.event.addListenerOnce(this.map, 'idle', () => {
-//       this.mapElement.nativeElement.classList.add('show-map');
-//     });
-//
-//
-//   }
-//
-//
-// }

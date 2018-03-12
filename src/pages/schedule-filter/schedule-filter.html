@@ -5,7 +5,7 @@
     </ion-buttons>
 
     <ion-title>
-      Filter Sessions
+      Preference filter
     </ion-title>
 
     <ion-buttons end>
@@ -13,16 +13,59 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<ng-container *ngIf="pref">
 <ion-content class="outer-content">
 
   <ion-list>
-    <ion-list-header>Tracks</ion-list-header>
+    <ion-list-header>Preferences</ion-list-header>
 
-    <ion-item *ngFor="let track of tracks" [attr.track]="track.name | lowercase">
-      <span item-start class="dot"></span>
-      <ion-label>{{track.name}}</ion-label>
-      <ion-toggle [(ngModel)]="track.isChecked" color="secondary"></ion-toggle>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select [(ngModel)]="selectedpref.gender">
+        <ion-option *ngFor="let a of pref.gendervalue" value="{{a.val}}" [selected]="a.display">{{a.val}}</ion-option>
+        <!--<ion-option *ngFor="let a of pref.gendervalue" [value]="a" *ngIf="selectedpref.gender!=a" [selected]="false">{{a}}</ion-option>-->
+      </ion-select>
+    </ion-item>
+
+    <ion-row>
+
+      <ion-col col-2>
+        <ion-item>
+          <ion-label>Age</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-item>
+          <ion-label>Min Age</ion-label>
+          <ion-select [(ngModel)]="selectedpref.miniage">
+            <ion-option *ngFor="let a of pref.minagevalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-item>
+          <ion-label>Max Age</ion-label>
+          <ion-select [(ngModel)]="selectedpref.maxiage">
+            <ion-option *ngFor="let a of pref.maxagevalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>n>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label>Rating</ion-label>
+      <ion-select [(ngModel)]="selectedpref.star">
+        <ion-option *ngFor="let a of pref.starvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Group size</ion-label>
+      <ion-select [(ngModel)]="selectedpref.group">
+        <ion-option *ngFor="let a of pref.groupvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+      </ion-select>
     </ion-item>
 
   </ion-list>
@@ -34,3 +77,4 @@
   </ion-list>
 
 </ion-content>
+</ng-container>

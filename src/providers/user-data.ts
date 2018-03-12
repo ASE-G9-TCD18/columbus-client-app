@@ -37,6 +37,14 @@ export class UserData {
     this.events.publish('user:login');
   };
 
+  preference(miniage: number, maxiage: number, gender:string, groupNumber:number, rating:number): void {
+    this.setMiniage(miniage);
+    this.setMaxiage(maxiage);
+    this.setGender(gender);
+    this.setGroupNumber(groupNumber);
+    this.setRating(rating);
+  };
+
   // signup(username: string): void {
   //   this.storage.set(this.HAS_LOGGED_IN, false);
   //   // this.setUsername(username);
@@ -49,9 +57,60 @@ export class UserData {
     this.storage.remove('token');
     this.events.publish('user:logout');
   };
+  setMiniage(Miniage: any): void {
+    this.storage.set('Miniage', Miniage);
+  };
+
+  getMiniage(): Promise<any> {
+    return this.storage.get('Miniage').then((value) => {
+      return value;
+    });
+  };
+
+  setMaxiage(Maxiage: any): void {
+    this.storage.set('Maxiage', Maxiage);
+  };
+
+  getMaxiage(): Promise<any> {
+    return this.storage.get('Maxiage').then((value) => {
+      return value;
+    });
+  };
+
+  setGender(Gender: any): void {
+    this.storage.set('Gender', Gender);
+  };
+
+  getGender(): Promise<any> {
+    return this.storage.get('Gender').then((value) => {
+      return value;
+    });
+  };
 
   setUsername(username: string): void {
     this.storage.set('username', username);
+  };
+
+
+
+  setGroupNumber(GroupNumber: any): void {
+    this.storage.set('GroupNumber', GroupNumber);
+  };
+
+  getGroupNumber(): Promise<any> {
+    return this.storage.get('GroupNumber').then((value) => {
+      return value;
+    });
+  };
+
+  setRating(Rating: any): void {
+    this.storage.set('Rating', Rating);
+  };
+
+  getRating(): Promise<any> {
+    return this.storage.get('Rating').then((value) => {
+      return value;
+    });
   };
 
   setUsertoken(token: string): void {
