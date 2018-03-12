@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">Cancel</button>
+      <button ion-button (click)="closefilter()">Cancel</button>
     </ion-buttons>
 
     <ion-title>
@@ -22,7 +22,7 @@
     <ion-item>
       <ion-label>Gender</ion-label>
       <ion-select [(ngModel)]="selectedpref.gender">
-        <ion-option *ngFor="let a of pref.gendervalue" value="{{a.val}}" [selected]="a.display">{{a.val}}</ion-option>
+        <ion-option *ngFor="let a of pref.gendervalue; let i = index" value="{{a.val}}" [selected]="a.display">{{a.val}}</ion-option>
         <!--<ion-option *ngFor="let a of pref.gendervalue" [value]="a" *ngIf="selectedpref.gender!=a" [selected]="false">{{a}}</ion-option>-->
       </ion-select>
     </ion-item>
@@ -68,12 +68,6 @@
       </ion-select>
     </ion-item>
 
-  </ion-list>
-
-  <ion-list>
-    <button ion-item (click)="resetFilters()" detail-none class="reset-filters">
-      Reset All Filters
-    </button>
   </ion-list>
 
 </ion-content>

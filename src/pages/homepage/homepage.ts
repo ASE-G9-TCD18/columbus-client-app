@@ -38,6 +38,7 @@ export class HomepagePage {
   private maxage: any;
   private rating: any;
   private gn: any;
+  private selectedpref:any;
 
   constructor( private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     this.address = {
@@ -51,8 +52,9 @@ export class HomepagePage {
     this.searchControl = new FormControl();
 
     this.setCurrentPosition();
-
+    this.selectedpref={'miniage':this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'group':this.gn}
   }
+
 
   ionViewDidLoad() {
 
@@ -94,6 +96,21 @@ export class HomepagePage {
         });
       });
     });
+
+
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 16;
+      });
+    }
+  }
+
+  presentFilters() {
     this.pref = {
       'maxagevalue':
         [
@@ -238,20 +255,14 @@ export class HomepagePage {
       }
     });
 
-  }
 
-  private setCurrentPosition() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 16;
-      });
-    }
-  }
 
-  presentFilters() {
-    let modal = this.modalCtrl.create(ScheduleFilterPage, this.pref);
+    let modal = this.modalCtrl.create(ScheduleFilterPage, {'preference':this.pref, 'selectedpref':this.selectedpref});
+    modal.onDidDismiss(data => {
+
+      this.selectedpref=data;
+      console.log(data);
+    });
     modal.present();
 
   }
