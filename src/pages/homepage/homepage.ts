@@ -8,8 +8,9 @@ import {ScheduleFilterPage} from "../schedule-filter/schedule-filter";
 import {FormControl} from "@angular/forms";
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { TripPage } from '../trip/trip';
 import { UserData } from '../../providers/user-data';
-
+import {ConferenceData} from '../../providers/conference-data';
 
 /**
  * Generated class for the HomepagePage page.
@@ -39,8 +40,61 @@ export class HomepagePage {
   private rating: any;
   private gn: any;
   private selectedpref:any;
+  responseData: any;
+  errresponse: any="200";
+  errMessage: any;
 
-  constructor( private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
+  private tripData =
+  {
+    tripType: "SCHEDULED",
+    loginId: "testuser",
+    tripStops: [{
+      "sequenceNumber" : 1,
+          "coordinate" : {
+              "x":10,
+              "y":20
+            }
+       },
+      {
+        "sequenceNumber" : 2,
+        "coordinate" : {
+          "x":30,
+          "y":40
+        }
+      }
+    ],
+    "preferences":[{
+        "preferenceType":"AGE_RANGE",
+        "value" : "20-40"
+      },
+      {
+        "preferenceType":"GROUP_SIZE",
+        "value" : "5-7"
+      },
+      {
+        "preferenceType":"GENDER",
+        "value" : "M"
+      },
+      {
+        "preferenceType":"START_TIME",
+        "value" : "17:00:00"
+      },
+      {
+        "preferenceType":"START_DATE",
+        "value" : "2017-03-17"
+      },
+      {
+        "preferenceType":"END_DATE",
+        "value" : "2017-03-20"
+      },
+      {
+        "preferenceType":"REPEAT",
+        "value" : "WEEKDAY"
+      }
+    ]
+  };
+
+  constructor( public authservice: ConferenceData, private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     this.address = {
       place: ''
     };
@@ -96,8 +150,27 @@ export class HomepagePage {
         });
       });
     });
+  }
 
-
+  onCreateTrip() {    
+      console.log("creating a trip");
+      this.userData.getUsertoken().then((value)=>
+      {  
+        this.authservice
+          .postDataWithBearerToken("trip", this.tripData, value)
+          .then(
+            (result) => {
+              console.log(result);
+              this.navCtrl.push(TripPage);
+          },
+          (err) => {
+            this.errresponse = err
+            console.log(err);
+            // let errmsg = JSON.parse(this.errresponse)
+            this.errMessage = this.errresponse.errors[0].defaultMessage;
+            console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
+          });
+      })
   }
 
   private setCurrentPosition() {
