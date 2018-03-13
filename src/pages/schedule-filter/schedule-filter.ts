@@ -44,14 +44,15 @@ selectedpref:any;
         // 'maxagevalue': [this.maxage],
         // 'starvalue': [this.rating],
         // 'groupvalue':[this.gn]
-        'gendervalue': this.navParams.get('preference').gendervalue,
+        'mingendervalue': this.navParams.get('preference').mingendervalue,
+        'maxgendervalue': this.navParams.get('preference').maxgendervalue,
         'minagevalue': this.navParams.get('preference').minagevalue,
         'maxagevalue': this.navParams.get('preference').maxagevalue,
         'starvalue': this.navParams.get('preference').starvalue,
         'groupvalue':this.navParams.get('preference').groupvalue
       }
 
-    this.selectedpref= {'miniage':this.navParams.get('selectedpref').miniage, 'maxiage':this.navParams.get('selectedpref').maxiage, 'gender':this.navParams.get('selectedpref').gender, 'star':this.navParams.get('selectedpref').star, 'group':this.navParams.get('selectedpref').group};
+    this.selectedpref= {'miniage':this.navParams.get('selectedpref').miniage, 'maxiage':this.navParams.get('selectedpref').maxiage, 'gender':this.navParams.get('selectedpref').gender, 'star':this.navParams.get('selectedpref').star, 'minigroup':this.navParams.get('selectedpref').minigroup, 'maxigroup':this.navParams.get('selectedpref').maxigroup};
 
   }
 
@@ -67,7 +68,8 @@ selectedpref:any;
 
   applyFilters() {
     this.userData.setGender(this.selectedpref.gender);
-    this.userData.setGroupNumber(this.selectedpref.group);
+    this.userData.setMinGroupNumber(this.selectedpref.minigroup);
+    this.userData.setMinGroupNumber(this.selectedpref.maxigroup);
     this.userData.setMaxiage(this.selectedpref.maxiage);
     this.userData.setMiniage(this.selectedpref.miniage);
     this.userData.setRating(this.selectedpref.star);

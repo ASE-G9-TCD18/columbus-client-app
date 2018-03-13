@@ -28,14 +28,7 @@
     </ion-item>
 
     <ion-row>
-
-      <ion-col col-2>
-        <ion-item>
-          <ion-label>Age</ion-label>
-        </ion-item>
-      </ion-col>
-
-      <ion-col col-5>
+      <ion-col col-6>
         <ion-item>
           <ion-label>Min Age</ion-label>
           <ion-select [(ngModel)]="selectedpref.miniage">
@@ -44,11 +37,11 @@
         </ion-item>
       </ion-col>
 
-      <ion-col col-5>
+      <ion-col col-6>
         <ion-item>
           <ion-label>Max Age</ion-label>
           <ion-select [(ngModel)]="selectedpref.maxiage">
-            <ion-option *ngFor="let a of pref.maxagevalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>n>
+            <ion-option *ngFor="let a of pref.maxagevalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -61,10 +54,30 @@
       </ion-select>
     </ion-item>
 
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label>Min group</ion-label>
+          <ion-select [(ngModel)]="selectedpref.minigroup">
+            <ion-option *ngFor="let a of pref.mingroupvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-item>
+          <ion-label>Max group</ion-label>
+          <ion-select [(ngModel)]="selectedpref.maxigroup">
+            <ion-option *ngFor="let a of pref.maxgroupvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
     <ion-item>
       <ion-label>Group size</ion-label>
       <ion-select [(ngModel)]="selectedpref.group">
-        <ion-option *ngFor="let a of pref.groupvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
+        <ion-option *ngFor="let a of pref.mingroupvalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
       </ion-select>
     </ion-item>
 

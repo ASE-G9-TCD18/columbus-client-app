@@ -37,11 +37,12 @@ export class UserData {
     this.events.publish('user:login');
   };
 
-  preference(miniage: number, maxiage: number, gender:string, groupNumber:number, rating:number): void {
+  preference(miniage: number, maxiage: number, gender:string, mingroupNumber:number, maxgroupNumber:number, rating:number): void {
     this.setMiniage(miniage);
     this.setMaxiage(maxiage);
     this.setGender(gender);
-    this.setGroupNumber(groupNumber);
+    this.setMinGroupNumber(mingroupNumber);
+    this.setMaxGroupNumber(maxgroupNumber);
     this.setRating(rating);
   };
 
@@ -93,12 +94,22 @@ export class UserData {
 
 
 
-  setGroupNumber(GroupNumber: any): void {
-    this.storage.set('GroupNumber', GroupNumber);
+  setMinGroupNumber(GroupNumber: any): void {
+    this.storage.set('MinGroupNumber', GroupNumber);
   };
 
-  getGroupNumber(): Promise<any> {
-    return this.storage.get('GroupNumber').then((value) => {
+  getMinGroupNumber(): Promise<any> {
+    return this.storage.get('MinGroupNumber').then((value) => {
+      return value;
+    });
+  };
+
+  setMaxGroupNumber(GroupNumber: any): void {
+    this.storage.set('MaxGroupNumber', GroupNumber);
+  };
+
+  getMaxGroupNumber(): Promise<any> {
+    return this.storage.get('MaxGroupNumber').then((value) => {
       return value;
     });
   };

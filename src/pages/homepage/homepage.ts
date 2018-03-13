@@ -31,68 +31,21 @@ export class HomepagePage {
   public zoom: number;
   @ViewChild('map') mapElement;
   map: any;
-
+  private tripData: any;
   address;
   private gender: any;
   private pref: any;
   private minage: any;
   private maxage: any;
   private rating: any;
-  private gn: any;
+  private mingn: any;
+  private maxgn: any;
   private selectedpref:any;
   responseData: any;
   errresponse: any="200";
   errMessage: any;
 
-  private tripData =
-  {
-    tripType: "SCHEDULED",
-    loginId: "testuser",
-    tripStops: [{
-      "sequenceNumber" : 1,
-          "coordinate" : {
-              "x":10,
-              "y":20
-            }
-       },
-      {
-        "sequenceNumber" : 2,
-        "coordinate" : {
-          "x":30,
-          "y":40
-        }
-      }
-    ],
-    "preferences":[{
-        "preferenceType":"AGE_RANGE",
-        "value" : "20-40"
-      },
-      {
-        "preferenceType":"GROUP_SIZE",
-        "value" : "5-7"
-      },
-      {
-        "preferenceType":"GENDER",
-        "value" : "M"
-      },
-      {
-        "preferenceType":"START_TIME",
-        "value" : "17:00:00"
-      },
-      {
-        "preferenceType":"START_DATE",
-        "value" : "2017-03-17"
-      },
-      {
-        "preferenceType":"END_DATE",
-        "value" : "2017-03-20"
-      },
-      {
-        "preferenceType":"REPEAT",
-        "value" : "WEEKDAY"
-      }
-    ]
-  };
+
 
   constructor( public authservice: ConferenceData, private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     this.address = {
@@ -106,15 +59,11 @@ export class HomepagePage {
     this.searchControl = new FormControl();
 
     this.setCurrentPosition();
-    this.selectedpref={'miniage':this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'group':this.gn}
+    this.selectedpref={'miniage':this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'minigroup':this.mingn, 'maxigroup':this.maxgn}
   }
 
 
   ionViewDidLoad() {
-
-    this.userData.getGender().then((value)=>{
-      console.log('here is the data -----'+value);
-    });
 
     //set google maps defaults
     this.zoom = 4;
@@ -152,10 +101,78 @@ export class HomepagePage {
     });
   }
 
-  onCreateTrip() {    
+  onCreateTrip() {
+    let userName;
+    this.userData.getUsername().then((value)=>{
+      userName = value;
+
+    });
+  let currentLat;
+  let currentLon;
+  let GROUP_SIZE = this.mingn +"-"+this.maxgn;
+  let AGE_RANGE = this.minage +"-"+this.maxage;
+  let GENDER = this.gender;
+  let time = new Date().getTime();
+  let date = new Date().getDate();
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        currentLat = position.coords.latitude;
+        currentLon= position.coords.longitude;
+        this.zoom = 16;
+      });
+    }
+  this.tripData =
+      {
+        tripType: "SCHEDULED",
+        loginId: userName,
+        tripStops: [{
+          "sequenceNumber" : 1,
+          "coordinate" : {
+            "x":currentLat,
+            "y":currentLon
+          }
+        },
+          {
+            "sequenceNumber" : 2,
+            "coordinate" : {
+              "x":this.latitude,
+              "y":this.longitude
+            }
+          }
+        ],
+        "preferences":[{
+          "preferenceType":"AGE_RANGE",
+          "value" : AGE_RANGE
+        },
+          {
+            "preferenceType":"GROUP_SIZE",
+            "value" : GROUP_SIZE
+          },
+          {
+            "preferenceType":"GENDER",
+            "value" : GENDER
+          },
+          {
+            "preferenceType":"START_TIME",
+            "value" : time
+          },
+          {
+            "preferenceType":"START_DATE",
+            "value" : date
+          },
+          {
+            "preferenceType":"END_DATE",
+            "value" : "2017-03-20"
+          },
+          {
+            "preferenceType":"REPEAT",
+            "value" : "WEEKDAY"
+          }
+        ]
+      };
       console.log("creating a trip");
       this.userData.getUsertoken().then((value)=>
-      {  
+      {
         this.authservice
           .postDataWithBearerToken("trip", this.tripData, value)
           .then(
@@ -229,15 +246,34 @@ export class HomepagePage {
           {'val':2, 'display': false},
           {'val':3, 'display': false},
           {'val':4, 'display': false},
-          {'val':5, 'display': false}
+          {'val':5, 'display': false},
         ],
-      'groupvalue':
+      'mingroupvalue':
         [
           {'val':1, 'display': false},
           {'val':2, 'display': false},
           {'val':3, 'display': false},
           {'val':4, 'display': false},
-          {'val':5, 'display': false}
+          {'val':5, 'display': false},
+          {'val':6, 'display': false},
+          {'val':7, 'display': false},
+          {'val':8, 'display': false},
+          {'val':9, 'display': false},
+          {'val':10, 'display': false},
+
+        ],
+      'maxgroupvalue':
+        [
+          {'val':1, 'display': false},
+          {'val':2, 'display': false},
+          {'val':3, 'display': false},
+          {'val':4, 'display': false},
+          {'val':5, 'display': false},
+          {'val':6, 'display': false},
+          {'val':7, 'display': false},
+          {'val':8, 'display': false},
+          {'val':9, 'display': false},
+          {'val':10, 'display': false},
         ],
       'gendervalue':
         [
@@ -313,17 +349,32 @@ export class HomepagePage {
       }
     });
 
-    this.userData.getGroupNumber().then((value)=>{
-      this.gn = value
+    this.userData.getMinGroupNumber().then((value)=>{
+      this.mingn = value
       var i:number;
-      for(i=0; i<this.pref.groupvalue.length; i++)
+      for(i=0; i<this.pref.mingroupvalue.length; i++)
       {
-        if(this.pref.groupvalue[i].val==this.gn)
+        if(this.pref.mingroupvalue[i].val==this.mingn)
         {
-          this.pref.groupvalue[i].display=true;
+          this.pref.mingroupvalue[i].display=true;
         }
         else{
-          this.pref.groupvalue[i].display=false;
+          this.pref.mingroupvalue[i].display=false;
+        }
+      }
+    });
+
+    this.userData.getMaxGroupNumber().then((value)=>{
+      this.maxgn = value
+      var i:number;
+      for(i=0; i<this.pref.maxgroupvalue.length; i++)
+      {
+        if(this.pref.maxgroupvalue[i].val==this.maxgn)
+        {
+          this.pref.maxgroupvalue[i].display=true;
+        }
+        else{
+          this.pref.maxgroupvalue[i].display=false;
         }
       }
     });
