@@ -1,0 +1,61 @@
+[
+    {
+        "id": "5aaabb8937a82f429b2ea4c1",
+        "tripId": "1803150831",
+        "tripType": "SCHEDULED",
+        "preferences": [
+            {
+                "preferenceType": "AGE_RANGE",
+                "value": "17-19"
+            },
+            {
+                "preferenceType": "GROUP_SIZE",
+                "value": "2-4"
+            },
+            {
+                "preferenceType": "GENDER",
+                "value": "Male"
+            },
+            {
+                "preferenceType": "START_TIME",
+                "value": "18:29:41"
+            },
+            {
+                "preferenceType": "START_DATE",
+                "value": "2018-03-15"
+            },
+            {
+                "preferenceType": "END_DATE",
+                "value": "2017-03-20"
+            },
+            {
+                "preferenceType": "REPEAT",
+                "value": "WEEKDAY"
+            }
+        ],
+        "tripUsersLoginIds": [
+            "test1"
+        ],
+        "tripStops": [
+            {
+                "sequenceNumber": 1,
+                "coordinate": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            {
+                "sequenceNumber": 2,
+                "coordinate": {
+                    "x": 40.7077751,
+                    "y": -74.01294810000002
+                }
+            }
+        ],
+        "admin": "test1",
+        "conversation": {
+            "id": "5aaabb8937a82f429b2ea4c0",
+            "messages": null
+        }
+    }
+]

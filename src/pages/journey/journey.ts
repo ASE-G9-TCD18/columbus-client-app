@@ -21,6 +21,7 @@
 
  import { SessionDetailPage } from '../session-detail/session-detail';
  import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
+ import { TripdetailsProvider } from  '../../providers/tripdetails/tripdetails';
 
 
 
@@ -40,21 +41,31 @@ export interface ActionSheetButton {
 export class JourneyPage {
   actionSheet: ActionSheet;
   speakers: any[] = [];
-
+  tripdata: any[] = [];
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
     public confData: ConferenceData,
     public config: Config,
-    public inAppBrowser: InAppBrowser) {
+    public inAppBrowser: InAppBrowser,
+    public tripdetails: TripdetailsProvider) {
   }
 
   ionViewDidLoad() {
     this.confData.getSpeakers().subscribe((speakers: any[]) => {
       this.speakers = speakers;
     });
-    console.log('ionViewDidLoad JourneyPage');
+
+    this.tripdetails.loaddata().then((value: any[]) => {
+       this.tripdata =  value;
+
+    })
+    console.log(this.tripdetails.loaddata());
+
   }
+
+
+
   goToSessionDetail(session: any) {
     this.navCtrl.push(SessionDetailPage, { sessionId: session.id });
   }

@@ -45,6 +45,7 @@ import { AgmCoreModule } from '@agm/core';
 import { DatePipe } from '@angular/common'
 
 
+
 // import {GoogleMap} from "@ionic-native/google-maps";
 
 
@@ -137,7 +138,8 @@ import { DatePipe } from '@angular/common'
     TripHistoryPage,
 
     HomepagePage,
-    JourneyPage
+    JourneyPage,
+
 
 
   ],
