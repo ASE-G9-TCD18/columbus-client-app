@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-
-let apiURL = "http://localhost:8080/";
+let apiURL = "http://52.212.149.132:8081/"
+// let apiURL = "http://localhost:8080/";
 // let apiURL = "http://10.6.50.162:8080/";
 
 @Injectable()
@@ -152,6 +152,22 @@ export class ConferenceData {
   getMap() {
     return this.load().map((data: any) => {
       return data.map;
+    });
+  }
+
+  postDataWithBearerToken(type, data, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      console.log("type: "+ type)
+      console.log("data: "+ data)
+      console.log("token: "+ data)
+      this.http.post(apiURL+type, data, {headers}).subscribe(res =>{
+        resolve(res.json());
+      }, (err)=> {
+
+        reject(err.json());
+      });
     });
   }
 

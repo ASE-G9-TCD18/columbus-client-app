@@ -1,8 +1,29 @@
 page-homepage {
 
-  #map{
-    height: 80%;
-    width: 100%;
+  #floating-panel {
+    position: absolute;
+    top: 1px;
+    left:15%;
+    right:15%;
+    z-index: 5;
+    background-color: transparent;
+    //padding: 0px;
+    //border: 1px solid #999;
+    text-align: center;
+    line-height: 30px;
+    padding-left: 10px;
   }
+  .floatButton{
+    position: absolute;
+    z-index: 5;
+    bottom: 120px;
+    right: 0px;
 
+    //right: 20%;
+  }
+  agm-map {
+    height: 100%;
+  }
 }
+
+

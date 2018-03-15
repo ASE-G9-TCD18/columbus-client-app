@@ -33,13 +33,16 @@ import { ProfilePage } from '../pages/profile/profile';
 import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
 
+
+
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Ionic2RatingModule } from 'ionic2-rating';
 
+import { AgmCoreModule } from '@agm/core';
 
-
+// import {GoogleMap} from "@ionic-native/google-maps";
 
 
 @NgModule({
@@ -58,6 +61,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     TabsPage,
     TutorialPage,
     SupportPage,
+
 
     HomepagePage,
     JourneyPage,
@@ -85,20 +89,30 @@ import { Ionic2RatingModule } from 'ionic2-rating';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
 
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
+        { component: TripPage, name: 'TripPage', segment: 'trip' },
+        { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' },
+
+        // { component: AccountPage, name: 'AccountPage', segment: 'account' },
+
 
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
         { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
 
-
-=======
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: TripPage, name: 'TripPage', segment: 'trip' },
         { component: TripHistoryPage, name: 'TripHistoryPage', segment: 'trip-history' }
->>>>>>> master
+
       ]
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCnahpwY4LRTYlzEHnER3B_Y8NR1HzmrVE",
+      libraries: ["places"]
+    })
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -117,13 +131,14 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     TutorialPage,
     SupportPage,
 
-    HomepagePage,
-    JourneyPage,
-
 
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+
+    HomepagePage,
+    JourneyPage
+
 
   ],
   providers: [
@@ -135,6 +150,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     AuthServiceProvider,
 
     Geolocation
+
 
   ]
 })

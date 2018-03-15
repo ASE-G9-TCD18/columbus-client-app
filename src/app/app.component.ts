@@ -49,10 +49,11 @@ export class ConferenceApp {
     //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
     { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'contacts' },
     { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
+
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
     { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'information-circle' }
-
   ];
+
   loggedInPages: PageInterface[] = [
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
