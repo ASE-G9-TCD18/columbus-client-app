@@ -7,9 +7,10 @@ import {UserData} from '../../providers/user-data';
 
 import {UserOptionsSignin} from '../../interfaces/user-options-signin';
 
-import {MapPage} from '../map/map';
+
 import {SignupPage} from '../signup/signup';
 import {ConferenceData} from "../../providers/conference-data";
+import {HomepagePage} from "../homepage/homepage";
 
 // import {Md5} from 'ts-md5/dist/md5';
 
@@ -49,7 +50,7 @@ export class LoginPage {
             console.log(this.responseData);
             this.userData.login(this.login.loginId, this.responseData);
             loading.dismissAll();
-            this.navCtrl.push(MapPage);
+            this.navCtrl.push(HomepagePage);
           },
           (err) => {
             this.errresponse = err

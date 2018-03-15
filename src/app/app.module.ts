@@ -16,12 +16,12 @@ import { ConferenceApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
 import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
+import { TripdetailsProvider } from  '../providers/tripdetails/tripdetails';
 // import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { JourneyPage } from '../pages/journey/journey';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
@@ -53,7 +53,6 @@ import { DatePipe } from '@angular/common'
     ConferenceApp,
     AboutPage,
     LoginPage,
-    MapPage,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
@@ -86,7 +85,6 @@ import { DatePipe } from '@angular/common'
         { component: ScheduleFilterPage, name: 'ScheduleFilter', segment: 'scheduleFilter' },
         // { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
         { component: SpeakerDetailPage, name: 'SpeakerDetail', segment: 'speakerDetail/:speakerId' },
-        { component: MapPage, name: 'Map', segment: 'map' },
         { component: AboutPage, name: 'About', segment: 'about' },
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
@@ -122,7 +120,6 @@ import { DatePipe } from '@angular/common'
     ConferenceApp,
     AboutPage,
     LoginPage,
-    MapPage,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
@@ -152,7 +149,8 @@ import { DatePipe } from '@angular/common'
     SplashScreen,
     AuthServiceProvider,
     Geolocation,
-    DatePipe
+    DatePipe,
+    TripdetailsProvider
 
 
   ]
