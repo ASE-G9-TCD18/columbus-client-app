@@ -12,6 +12,7 @@ import { TripPage } from '../trip/trip';
 import { UserData } from '../../providers/user-data';
 import {ConferenceData} from '../../providers/conference-data';
 
+import { DatePipe } from '@angular/common'
 /**
  * Generated class for the HomepagePage page.
  *
@@ -44,10 +45,11 @@ export class HomepagePage {
   responseData: any;
   errresponse: any="200";
   errMessage: any;
+  private currentLat:any;
+  private currentLon:any;
 
 
-
-  constructor( public authservice: ConferenceData, private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private datePipe: DatePipe, public authservice: ConferenceData, private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     this.address = {
       place: ''
     };
@@ -107,17 +109,18 @@ export class HomepagePage {
       userName = value;
 
     });
-  let currentLat;
-  let currentLon;
-  let GROUP_SIZE = this.mingn +"-"+this.maxgn;
-  let AGE_RANGE = this.minage +"-"+this.maxage;
-  let GENDER = this.gender;
-  let time = new Date().getTime();
-  let date = new Date().getDate();
+
+  let GROUP_SIZE = this.selectedpref.minigroup +"-"+this.selectedpref.maxigroup;
+  let AGE_RANGE = this.selectedpref.miniage +"-"+this.selectedpref.maxiage;
+  let GENDER = this.selectedpref.gender;
+  let time = new Date().toTimeString();
+  let date =this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        currentLat = position.coords.latitude;
-        currentLon= position.coords.longitude;
+        this.currentLat = position.coords.latitude;
+        this.currentLon = position.coords.longitude;
+
+        console.log("here are the current coordinates--------" + this.currentLat+"-----"+this.currentLon);
         this.zoom = 16;
       });
     }
@@ -128,8 +131,8 @@ export class HomepagePage {
         tripStops: [{
           "sequenceNumber" : 1,
           "coordinate" : {
-            "x":currentLat,
-            "y":currentLon
+            "x":this.currentLat,
+            "y":this.currentLon
           }
         },
           {
@@ -154,7 +157,7 @@ export class HomepagePage {
           },
           {
             "preferenceType":"START_TIME",
-            "value" : time
+            "value" : time.substr(0,8)
           },
           {
             "preferenceType":"START_DATE",
@@ -170,6 +173,7 @@ export class HomepagePage {
           }
         ]
       };
+    console.log(this.tripData);
       console.log("creating a trip");
       this.userData.getUsertoken().then((value)=>
       {
@@ -389,6 +393,21 @@ export class HomepagePage {
     });
     modal.present();
 
+  }
+
+  searchTrip(){
+    // let date1 = new Date().toTimeString();
+    let date2 = new Date();
+    // let date3 = new Date().toLocaleTimeString();
+    // let date5 = new Date().getTime();
+
+    // let date4 = new Date().toDateString();
+
+    // console.log("date1"+date1);
+    let latest_date =this.datePipe.transform(date2, 'yyyy-MM-dd');
+    console.log("date2: "+latest_date);
+    // console.log("date3"+date3);
+    // console.log("date5"+date5);
   }
 
 }

@@ -42,6 +42,9 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { DatePipe } from '@angular/common'
+
+
 // import {GoogleMap} from "@ionic-native/google-maps";
 
 
@@ -148,8 +151,8 @@ import { AgmCoreModule } from '@agm/core';
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
-
-    Geolocation
+    Geolocation,
+    DatePipe
 
 
   ]
