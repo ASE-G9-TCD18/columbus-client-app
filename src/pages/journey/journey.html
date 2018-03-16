@@ -32,9 +32,14 @@
             </ion-card-header>
 
             <ion-card-content padding word-wrap class="outer-content">
-              <ion-list>
-                <ion-list-header>Trip Preferances</ion-list-header>
-                <ion-note>
+              <ion-list padding>
+
+
+                <ion-list-header>Trip Admin:</ion-list-header>
+                  <ion-note padding>{{trip.admin}}</ion-note>
+                <ion-list-header>Trip Preferences</ion-list-header>
+                <ion-note padding>
+
                 <ion-row>Group Size: {{trip.preferences[1].value}} </ion-row>
 
                 <ion-row>Gender: {{trip.preferences[2].value}}</ion-row>
@@ -46,6 +51,11 @@
                 <ion-row>Repeat: {{trip.preferences[6].value}}</ion-row>
                 <ion-row>Start Co-ordinates: {{trip.tripStops[0].coordinate.x}}, {{trip.tripStops[0].coordinate.y}}</ion-row>
                 <ion-row>Destination Co-ordinates: {{trip.tripStops[1].coordinate.x}}, {{trip.tripStops[1].coordinate.y}}</ion-row>
+                  <ion-list-header>Trip Members:</ion-list-header>
+
+                  <ion-row padding *ngFor="let users of trip.tripUsersLoginIds">
+                    {{users}}
+                  </ion-row>
                 </ion-note>
 
                 <ion-item align-self-center="2">
@@ -60,27 +70,6 @@
 
 
 
-            <ion-row no-padding>
-              <ion-col col-12 col-lg-auto text-center text-lg-left>
-                <button ion-button clear small color="primary" icon-start (click)="goToSpeakerTwitter(speaker)">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                  Tweet about Journey
-
-                </button>
-              </ion-col>
-              <ion-col col-12 col-lg-auto text-center>
-                <button ion-button clear small color="primary" icon-start (click)="openSpeakerShare(speaker)">
-                  <ion-icon name='share-alt'></ion-icon>
-                  Share journey with Friends
-                </button>
-              </ion-col>
-              <ion-col col-12 col-lg-auto text-center text-lg-right>
-                <button ion-button clear small color="primary" icon-start (click)="openContact(speaker)">
-                  <ion-icon name='chatboxes'></ion-icon>
-                  Contact Journey Creator
-                </button>
-              </ion-col>
-            </ion-row>
 
           </ion-card>
           </button>
