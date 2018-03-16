@@ -181,8 +181,8 @@ export class HomepagePage {
           .postDataWithBearerToken("trip", this.tripData, value)
           .then(
             (result) => {
-              console.log(result);
-              this.navCtrl.push(TripPage);
+              console.log("result is: ", result);
+              this.navCtrl.push(TripPage, result);
           },
           (err) => {
             this.errresponse = err

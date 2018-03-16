@@ -1,12 +1,12 @@
-
 /**
- * Generated class for the JourneyPage page.
+ * Generated class for the MatchedTripPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
- import { Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicPage, NavParams } from 'ionic-angular';
 
  import {
    ActionSheet,
@@ -15,17 +15,18 @@
    Config,
    NavController
  } from 'ionic-angular';
+
  import { InAppBrowser } from '@ionic-native/in-app-browser';
 
  import { ConferenceData } from '../../providers/conference-data';
 
  import { SessionDetailPage } from '../session-detail/session-detail';
- import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
+ // import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
  import { TripdetailsProvider } from  '../../providers/tripdetails/tripdetails';
 
 
 
-export interface ActionSheetButton {
+ export interface ActionSheetButton {
   text?: string;
   role?: string;
   icon?: string;
@@ -33,12 +34,12 @@ export interface ActionSheetButton {
   handler?: () => boolean|void;
 };
 
+@IonicPage()
 @Component({
-  selector: 'page-journey',
-  templateUrl: 'journey.html',
+  selector: 'page-matched-trip',
+  templateUrl: 'matched-trip.html',
 })
-
-export class JourneyPage {
+export class MatchedTripPage {
   actionSheet: ActionSheet;
   speakers: any[] = [];
   tripdata: any[] = [];
@@ -48,10 +49,11 @@ export class JourneyPage {
     public confData: ConferenceData,
     public config: Config,
     public inAppBrowser: InAppBrowser,
-    public tripdetails: TripdetailsProvider) {
+    public tripdetails: TripdetailsProvider, 
+    public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+    ionViewDidLoad() {
     this.confData.getSpeakers().subscribe((speakers: any[]) => {
       this.speakers = speakers;
     });
@@ -61,17 +63,11 @@ export class JourneyPage {
 
     })
     console.log(this.tripdetails.loaddata());
-    // console.log(this.tripdata[0].admin);
-
 
   }
 
   goToSessionDetail(session: any) {
     this.navCtrl.push(SessionDetailPage, { sessionId: session.id });
-  }
-
-  goToSpeakerDetail(speaker: any) {
-    this.navCtrl.push(SpeakerDetailPage, { speakerId: speaker.id });
   }
 
   goToSpeakerTwitter(speaker: any) {
@@ -132,5 +128,4 @@ export class JourneyPage {
 
     actionSheet.present();
   }
-
 }
