@@ -31,7 +31,17 @@ export class TripPage {
   ionViewDidLoad() {
   	this.tripType = this.navParams.get("tripType");
   	this.preferences = this.navParams.get("preferences");
+  	console.log("-----------"+this.preferences.length)
   	this.tripStops = this.navParams.get("tripStops");
+    let i: number;
+  	for(i=0; i<this.preferences.length; i++){
+
+  	  if (this.preferences[i].preferenceType=="GROUP_SIZE"){
+  	    this.groupSize = this.preferences[i].value;
+  	    console.log("this is set by a function-----"+ this.groupSize);
+      }
+
+    }
     // this.preferences.forEach(function(item){
   		// if(item.preferenceType == "GROUP_SIZE"){
   		// 	console.log(item)
@@ -43,7 +53,7 @@ export class TripPage {
   		// 		console.log(item.value)
   		// 		this.groupSize = item.value
   		// 	}
-  				
+
   		// }
 	// });
 	// this.tripStops.forEach(function(item){
