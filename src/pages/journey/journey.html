@@ -19,28 +19,42 @@
       <ion-row align-items-stretch>
 
         <ion-col col-12 col-md-6 align-self-stretch align-self-center *virtualItem="let speaker" approxItemHeight="457px">
-
+          <button ion-item *ngFor="let trip of tripdata" (click)="goToSessionDetail(session)">
           <ion-card class="speaker-card">
             <ion-card-header>
               <button ion-item detail-none (click)="goToSpeakerDetail(speaker)">
                 <ion-avatar item-start>
                   <img [src]="speaker.profilePic" alt="Speaker profile pic">
                 </ion-avatar>
-                {{speaker.name}}
+                <b>Trip Id: {{trip.tripId}}</b>
+
               </button>
             </ion-card-header>
 
-            <ion-card-content class="outer-content">
+            <ion-card-content padding word-wrap class="outer-content">
               <ion-list>
-                <button ion-item *ngFor="let session of speaker.sessions" (click)="goToSessionDetail(session)">
-                  <h3>{{session.name}}</h3>
-                </button>
+                <ion-list-header>Trip Preferances</ion-list-header>
+                <ion-note>
+                <ion-row>Group Size: {{trip.preferences[1].value}} </ion-row>
+
+                <ion-row>Gender: {{trip.preferences[2].value}}</ion-row>
+                <ion-row>Trip Type:{{trip.tripType}} </ion-row>
+
+                <ion-row>Age Range Seletion: {{trip.preferences[0].value}} </ion-row>
+                <ion-row>Start Time: {{trip.preferences[3].value}}</ion-row>
+                <ion-row>Start Date: {{trip.preferences[4].value}}</ion-row>
+                <ion-row>Repeat: {{trip.preferences[6].value}}</ion-row>
+                <ion-row>Start Co-ordinates: {{trip.tripStops[0].coordinate.x}}, {{trip.tripStops[0].coordinate.y}}</ion-row>
+                <ion-row>Destination Co-ordinates: {{trip.tripStops[1].coordinate.x}}, {{trip.tripStops[1].coordinate.y}}</ion-row>
+                </ion-note>
 
                 <button ion-item (click)="goToSpeakerDetail(speaker)">
-                  <h3>Journey ID {{speaker.name}}</h3>
+                  <h3></h3>
                 </button>
               </ion-list>
             </ion-card-content>
+
+
 
             <ion-row no-padding>
               <ion-col col-12 col-lg-auto text-center text-lg-left>
@@ -65,7 +79,7 @@
             </ion-row>
 
           </ion-card>
-
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>

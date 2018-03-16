@@ -61,6 +61,8 @@ export class JourneyPage {
 
     })
     console.log(this.tripdetails.loaddata());
+    // console.log(this.tripdata[0].admin);
+
 
   }
 
