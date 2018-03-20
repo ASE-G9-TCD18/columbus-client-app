@@ -7,16 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>trip</ion-title>
+    <ion-title>Trip</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
+
 <ion-content padding>
-	<div> Trip </div>
-	<div>{{tripType}}</div>
-	<div>{{tripStops}}</div>
+	<!-- <div>{{tripType}}</div>
 	<div>{{groupSize}}</div>
 	<div>{{startPoint}}</div>
+  <div>{{stopPoint}}</div> -->
+
+            <ion-card-content padding word-wrap class="outer-content">
+              <ion-list padding>
+                <ion-row>Trip Type: {{tripType}} </ion-row>
+                <ion-row>Group Size: {{groupSize}} </ion-row>
+                <ion-row>Start Point: {{startPoint}} </ion-row>
+                <ion-row>Stop Point: {{stopPoint}} </ion-row>
+              </ion-list>
+            </ion-card-content>
 </ion-content>
+ -->

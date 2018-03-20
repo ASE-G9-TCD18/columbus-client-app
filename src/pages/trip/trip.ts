@@ -21,6 +21,7 @@ export class TripPage {
   startPoint: any;
   stopPoint: any;
   preferences: any
+  tripdata: any
 
 
 
@@ -29,19 +30,31 @@ export class TripPage {
   }
 
   ionViewDidLoad() {
+    this.tripdata = this.navParams
   	this.tripType = this.navParams.get("tripType");
   	this.preferences = this.navParams.get("preferences");
-  	console.log("-----------"+this.preferences.length)
   	this.tripStops = this.navParams.get("tripStops");
     let i: number;
   	for(i=0; i<this.preferences.length; i++){
-
   	  if (this.preferences[i].preferenceType=="GROUP_SIZE"){
   	    this.groupSize = this.preferences[i].value;
+        if(this.preferences[i].value == "undefined-undefined"){
+          this.groupSize = "Group Size No Limit"
+        }
   	    console.log("this is set by a function-----"+ this.groupSize);
       }
-
     }
+
+    // for(i=0; i<this.tripStops.length; i++){
+      // if(i == 0){
+        this.startPoint = this.tripStops[0]["coordinate"]["x"].toString() + "  " + this.tripStops[0]["coordinate"]["y"].toString()
+        console.log("this is start Point-----"+ this.startPoint);
+      // }
+      // else {
+        this.stopPoint = this.tripStops[1]["coordinate"]["x"].toString() + "  " + this.tripStops[1]["coordinate"]["y"].toString()
+        console.log("this is start Point-----"+ this.stopPoint);
+      // }
+    // }
     // this.preferences.forEach(function(item){
   		// if(item.preferenceType == "GROUP_SIZE"){
   		// 	console.log(item)
