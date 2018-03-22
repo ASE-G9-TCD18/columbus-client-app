@@ -50,7 +50,7 @@ export class LoginPage {
             console.log(this.responseData);
             this.userData.login(this.login.loginId, this.responseData);
             loading.dismissAll();
-            this.navCtrl.push(HomepagePage);
+            this.navCtrl.setRoot(HomepagePage);
           },
           (err) => {
             this.errresponse = err
@@ -74,6 +74,6 @@ export class LoginPage {
   }
 
   onSignup() {
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.setRoot(SignupPage);
   }
 }
