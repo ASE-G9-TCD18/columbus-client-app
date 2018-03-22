@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
-import {UserData} from "../user-data";
 
 /*
   Generated class for the TripdetailsProvider provider.
@@ -15,22 +14,21 @@ import {UserData} from "../user-data";
 @Injectable()
 export class TripdetailsProvider {
 
-  constructor(public http: Http, private userData: UserData) {
+  constructor(public http: Http) {
 
   }
   token:any;
 
-  loaddata(){
+  loaddata(token: any){
 
     console.log("Inside Load Data");
-    this.userData.getUsertoken().then((value)=>{
-      this.token = value;
-    });
-
 
     return new Promise((resolve, reject) =>{
       let headers = new Headers()
-      headers.set('Authorization','Bearer '+ this.token)
+
+
+      console.log("-----------"+token);
+      headers.set('Authorization','Bearer '+ token)
       this.http.get("http://52.212.149.132:8081/trips", {headers}).subscribe(res =>{
         resolve(res.json());
       }, (err)=> {

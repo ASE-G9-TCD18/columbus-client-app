@@ -7,7 +7,7 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
-
+import {UserData} from "../../providers/user-data";
  import {
    ActionSheet,
    ActionSheetController,
@@ -43,14 +43,19 @@ export class MatchedTripPage {
   actionSheet: ActionSheet;
   speakers: any[] = [];
   tripdata: any[] = [];
+  token: any;
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
     public confData: ConferenceData,
     public config: Config,
     public inAppBrowser: InAppBrowser,
-    public tripdetails: TripdetailsProvider, 
-    public navParams: NavParams) {
+    public tripdetails: TripdetailsProvider,
+    public navParams: NavParams,
+    public userData: UserData) {
+    this.userData.getUsertoken().then((value)=>{
+      this.token = value;
+    });
   }
 
     ionViewDidLoad() {
@@ -58,11 +63,11 @@ export class MatchedTripPage {
       this.speakers = speakers;
     });
 
-    this.tripdetails.loaddata().then((value: any[]) => {
+    this.tripdetails.loaddata(this.token).then((value: any[]) => {
        this.tripdata =  value;
 
     })
-    console.log(this.tripdetails.loaddata());
+    console.log(this.tripdetails.loaddata(this.token));
 
   }
 
