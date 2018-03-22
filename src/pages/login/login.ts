@@ -28,8 +28,8 @@ export class LoginPage {
   private login: UserOptionsSignin =
     {
 
-      "loginId": "agraharrr",
-      "password": "agraharrr"
+      "loginId": "",
+      "password": ""
 
     };
   submitted = false;
