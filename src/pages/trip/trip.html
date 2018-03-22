@@ -20,13 +20,32 @@
 	<div>{{startPoint}}</div>
   <div>{{stopPoint}}</div> -->
 
-            <ion-card-content padding word-wrap class="outer-content">
-              <ion-list padding>
-                <ion-row>Trip Type: {{tripType}} </ion-row>
-                <ion-row>Group Size: {{groupSize}} </ion-row>
-                <ion-row>Start Point: {{startPoint}} </ion-row>
-                <ion-row>Stop Point: {{stopPoint}} </ion-row>
-              </ion-list>
-            </ion-card-content>
+  <ion-card >
+    <ion-card-title padding>Trip Details</ion-card-title>
+    <ion-card-header>
+      <b>New Trip Created for you: </b>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col><b>Trip Type: </b> {{tripType}}</ion-col>
+        <ion-col><b>Group Size: </b> {{groupSize}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><b>Start Point:</b> {{startPoint}}</ion-col>
+        <ion-col><b>Stop Point:</b> {{stopPoint}}</ion-col>
+      </ion-row>
+
+
+
+
+    </ion-card-content>
+
+
+
+
+  </ion-card>
+
+
 </ion-content>
  -->
