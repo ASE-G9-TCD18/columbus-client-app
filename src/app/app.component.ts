@@ -58,7 +58,7 @@ export class ConferenceApp {
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Logout', name: 'LogoutPage', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
