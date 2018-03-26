@@ -32,6 +32,7 @@ import { HomepagePage } from '../pages/homepage/homepage';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
+import { AlltripsPage } from "../pages/alltrips/alltrips";
 
 
 
@@ -71,7 +72,9 @@ import { DatePipe } from '@angular/common'
 
     ProfilePage,
     TripPage,
-    TripHistoryPage
+    TripHistoryPage,
+    AlltripsPage
+
 
   ],
   imports: [
@@ -100,8 +103,8 @@ import { DatePipe } from '@angular/common'
 
         // { component: AccountPage, name: 'AccountPage', segment: 'account' },
 
-
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
+        { component: AlltripsPage, name: 'AlltripsPage', segment: 'alltrips' },
         { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
 
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
@@ -141,6 +144,7 @@ import { DatePipe } from '@angular/common'
 
     HomepagePage,
     JourneyPage,
+    AlltripsPage
 
 
 
