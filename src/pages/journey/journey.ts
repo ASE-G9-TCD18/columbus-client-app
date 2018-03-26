@@ -57,8 +57,8 @@ export class JourneyPage {
       })
     });
   }
-
-  joinTrip(trip){
+   // The cancel trip api to be used here once the api is prepared
+  cancelTrip(trip){
     this.userData.getUsertoken().then((value)=>{
       this.confData
       .getData('trip/'+trip.tripId+'/join', value)
