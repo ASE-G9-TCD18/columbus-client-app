@@ -29,7 +29,7 @@ export class TripdetailsProvider {
 
       console.log("-----------"+token);
       headers.set('Authorization','Bearer '+ token)
-      this.http.get("http://52.212.149.132:8081/trips", {headers}).subscribe(res =>{
+      this.http.get("http://52.212.149.132:8080/trips", {headers}).subscribe(res =>{
         resolve(res.json());
       }, (err)=> {
         reject(err.json());
