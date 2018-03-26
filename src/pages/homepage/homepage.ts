@@ -107,10 +107,9 @@ export class HomepagePage {
     let userName;
     this.userData.getUsername().then((value)=>{
       userName = value;
-
     });
+    console.log("User Name Is: ", userName);
 
-  let GROUP_SIZE = this.selectedpref.minigroup +"-"+this.selectedpref.maxigroup;
   let AGE_RANGE = this.selectedpref.miniage +"-"+this.selectedpref.maxiage;
   let GENDER = this.selectedpref.gender;
   let time = new Date().toTimeString();
@@ -148,24 +147,24 @@ export class HomepagePage {
           "value" : AGE_RANGE
         },
           {
-            "preferenceType":"GROUP_SIZE",
-            "value" : GROUP_SIZE
+            "preferenceType":"GROUP_MIN_SIZE",
+            "value" : this.selectedpref.minigroup
+          },
+          {
+            "preferenceType":"GROUP_MAX_SIZE",
+            "value" : this.selectedpref.maxigroup
           },
           {
             "preferenceType":"GENDER",
             "value" : GENDER
           },
           {
-            "preferenceType":"START_TIME",
-            "value" : time.substr(0,8)
-          },
-          {
             "preferenceType":"START_DATE",
-            "value" : date
+            "value" : date + "_" + time.substr(0,8)
           },
           {
             "preferenceType":"END_DATE",
-            "value" : "2017-03-20"
+            "value" : "2017-03-20" + "_" + time.substr(0,8)
           },
           {
             "preferenceType":"REPEAT",
@@ -401,7 +400,6 @@ export class HomepagePage {
       userName = value;
     });
 
-    let GROUP_SIZE = this.selectedpref.minigroup +"-"+this.selectedpref.maxigroup;
     let AGE_RANGE = this.selectedpref.miniage +"-"+this.selectedpref.maxiage;
     let GENDER = this.selectedpref.gender;
     let time = new Date().toTimeString();
@@ -439,24 +437,24 @@ export class HomepagePage {
           "value" : AGE_RANGE
         },
           {
-            "preferenceType":"GROUP_SIZE",
-            "value" : GROUP_SIZE
+            "preferenceType":"GROUP_MIN_SIZE",
+            "value" : this.selectedpref.minigroup
+          },
+          {
+            "preferenceType":"GROUP_MAX_SIZE",
+            "value" : this.selectedpref.maxigroup
           },
           {
             "preferenceType":"GENDER",
             "value" : GENDER
           },
           {
-            "preferenceType":"START_TIME",
-            "value" : time.substr(0,8)
-          },
-          {
             "preferenceType":"START_DATE",
-            "value" : date
+            "value" : date + "_" + time.substr(0,8)
           },
           {
             "preferenceType":"END_DATE",
-            "value" : "2017-03-20"
+            "value" : "2017-03-20" + "_" + time.substr(0,8)
           },
           {
             "preferenceType":"REPEAT",
