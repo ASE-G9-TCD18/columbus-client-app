@@ -55,12 +55,17 @@
             <ion-col>
               <b>Trip Type:</b> {{trip.tripType}}
             </ion-col>
-          </ion-row>
+          </ion-row >
+          <ion-col>
 
-          <ion-item align-self-center="0">
           <button align-self-center="10" padding ion-button color="columbusRed" (click)="cancelTrip(trip)">Cancel Trip</button>
-          </ion-item>
 
+          </ion-col>
+          <ion-col>
+
+          <button align-self-center="10" padding ion-button color="columbusRed" (click)="cancelTrip(trip)">Finish Trip</button>
+
+            </ion-col>
         </ion-card-content>
 
         <ion-row>
