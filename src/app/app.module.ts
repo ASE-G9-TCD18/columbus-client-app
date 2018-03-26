@@ -34,6 +34,7 @@ import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
 import { AlltripsPage } from "../pages/alltrips/alltrips";
 import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
+import { MatchedTripsPage } from '../pages/matched-trips/matched-trips';
 
 
 
@@ -75,9 +76,8 @@ import { DatePipe } from '@angular/common'
     TripPage,
     TripHistoryPage,
     AlltripsPage,
-    JoinedtripsPage
-
-
+    JoinedtripsPage,
+    MatchedTripsPage
   ],
   imports: [
     BrowserModule,
@@ -146,6 +146,7 @@ import { DatePipe } from '@angular/common'
     TripPage,
     TripHistoryPage,
     JoinedtripsPage,
+    MatchedTripsPage,
 
     HomepagePage,
     JourneyPage,

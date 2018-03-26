@@ -40,7 +40,7 @@
       <ion-col col-6>
         <ion-item>
           <ion-label>Max Age</ion-label>
-          <ion-select [(ngModel)]="selectedpref.maxiage" (ionChange)="validate()">
+          <ion-select [(ngModel)]="selectedpref.maxiage">
             <ion-option *ngFor="let a of pref.maxagevalue" [value]="a.val" [selected]="a.display">{{a.val}}</ion-option>
           </ion-select>
         </ion-item>
@@ -67,7 +67,7 @@
       <ion-col col-6>
         <ion-item>
           <ion-label>Max group</ion-label>
-          <ion-select [(ngModel)]="selectedpref.maxigroup" (ionChange)="validate()">
+          <ion-select [(ngModel)]="selectedpref.maxigroup">
             <ion-option *ngFor="let a of pref.maxgroupvalue" [value]="a.val" [selected]="a.display" >{{a.val}}</ion-option>
           </ion-select>
         </ion-item>

@@ -9,6 +9,7 @@ import {FormControl} from "@angular/forms";
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { TripPage } from '../trip/trip';
+import { MatchedTripsPage } from '../matched-trips/matched-trips';
 import { UserData } from '../../providers/user-data';
 import {ConferenceData} from '../../providers/conference-data';
 
@@ -47,6 +48,7 @@ export class HomepagePage {
   errMessage: any;
   private currentLat:any;
   private currentLon:any;
+  userName: any;
 
 
   constructor(private datePipe: DatePipe, public authservice: ConferenceData, private userData:UserData,private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
@@ -62,6 +64,33 @@ export class HomepagePage {
 
     this.setCurrentPosition();
     this.selectedpref={'miniage': this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'minigroup':this.mingn, 'maxigroup':this.maxgn}
+    this.userData.getGender().then((value)=>{
+      this.selectedpref.gender = value
+    });
+
+    this.userData.getRating().then((value)=>{
+      this.selectedpref.star = value
+    });
+
+    this.userData.getMaxiage().then((value)=>{
+      this.selectedpref.maxiage = value
+    });
+
+    this.userData.getMiniage().then((value)=>{
+      this.selectedpref.miniage = value
+    });
+
+    this.userData.getMinGroupNumber().then((value)=>{
+      this.selectedpref.minigroup = value
+    });
+
+    this.userData.getMaxGroupNumber().then((value)=>{
+      this.selectedpref.maxigroup = value
+    });
+    this.userData.getUsername().then((value)=>{
+      this.userName = value;
+    });
+    console.log("this.selectedpref:  ", this.selectedpref)
   }
 
 
@@ -86,10 +115,7 @@ export class HomepagePage {
       });
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
-          //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
@@ -109,7 +135,6 @@ export class HomepagePage {
       userName = value;
     });
     console.log("User Name Is: ", userName);
-
   let AGE_RANGE = this.selectedpref.miniage +"-"+this.selectedpref.maxiage;
   let GENDER = this.selectedpref.gender;
   let time = new Date().toTimeString();
@@ -308,7 +333,6 @@ export class HomepagePage {
 
     this.userData.getRating().then((value)=>{
       this.rating = value
-      console.log("RRRRRRRating Value", value)
       this.selectedpref.star = this.rating
       var i:number;
       for(i=0; i<this.pref.starvalue.length; i++)
@@ -393,7 +417,6 @@ export class HomepagePage {
     console.log("THIS this.selectedpref: ", this.selectedpref)
     let modal = this.modalCtrl.create(ScheduleFilterPage, {'preference':this.pref, 'selectedpref': this.selectedpref});
     modal.onDidDismiss(data => {
-
       this.selectedpref=data;
       console.log(data);
     });
@@ -402,11 +425,7 @@ export class HomepagePage {
   }
 
   searchTrip(){
-    let userName;
-    this.userData.getUsername().then((value)=>{
-      userName = value;
-    });
-
+    console.log("2222222this.selectedpref:  ", this.selectedpref)
     let AGE_RANGE = this.selectedpref.miniage +"-"+this.selectedpref.maxiage;
     let GENDER = this.selectedpref.gender;
     let time = new Date().toTimeString();
@@ -423,7 +442,7 @@ export class HomepagePage {
     this.tripData =
       {
         tripType: "SCHEDULED",
-        loginId: userName,
+        loginId: this.userName,
         tripStops: [{
           "sequenceNumber" : 1,
           "coordinate" : {
@@ -469,15 +488,17 @@ export class HomepagePage {
           }
         ]
       };
+
       console.log("search a trip");
       this.userData.getUsertoken().then((value)=>
       {
+        console.log("The search tripData is : ", this.tripData);
         this.authservice
           .postDataWithBearerToken("search", this.tripData, value)
           .then(
             (result) => {
               console.log("result is: ", result);
-              this.navCtrl.push(TripPage, result);
+              this.navCtrl.push(MatchedTripsPage, {"result": result});
           },
           (err) => {
             this.errresponse = err
