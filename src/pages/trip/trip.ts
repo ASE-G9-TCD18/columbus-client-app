@@ -16,7 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TripPage {
   tripType: any;
   tripStops: any;
-  groupSize: any;
+  group_min_size: any;
+  group_max_size: any;
   // private rating: any;
   startPoint: any;
   stopPoint: any;
@@ -36,47 +37,17 @@ export class TripPage {
   	this.tripStops = this.navParams.get("tripStops");
     let i: number;
   	for(i=0; i<this.preferences.length; i++){
-  	  if (this.preferences[i].preferenceType=="GROUP_SIZE"){
-  	    this.groupSize = this.preferences[i].value;
-        if(this.preferences[i].value == "undefined-undefined"){
-          this.groupSize = "Group Size No Limit"
-        }
-  	    console.log("this is set by a function-----"+ this.groupSize);
+  	  if (this.preferences[i].preferenceType=="GROUP_MIN_SIZE"){
+  	    this.group_min_size = this.preferences[i].value;
+      }
+      if (this.preferences[i].preferenceType=="GROUP_MAX_SIZE"){
+        this.group_max_size = this.preferences[i].value;
       }
     }
-
-    // for(i=0; i<this.tripStops.length; i++){
-      // if(i == 0){
-        this.startPoint = this.tripStops[0]["coordinate"]["x"].toString() + "  " + this.tripStops[0]["coordinate"]["y"].toString()
-        console.log("this is start Point-----"+ this.startPoint);
-      // }
-      // else {
-        this.stopPoint = this.tripStops[1]["coordinate"]["x"].toString() + "  " + this.tripStops[1]["coordinate"]["y"].toString()
-        console.log("this is start Point-----"+ this.stopPoint);
-      // }
-    // }
-    // this.preferences.forEach(function(item){
-  		// if(item.preferenceType == "GROUP_SIZE"){
-  		// 	console.log(item)
-  		// 	console.log(item.value)
-  		// 	if(item.value == "undefined-undefined"){
-  		// 		this.groupSize = "No Limit"
-  		// 	}
-  		// 	else{
-  		// 		console.log(item.value)
-  		// 		this.groupSize = item.value
-  		// 	}
-
-  		// }
-	// });
-	// this.tripStops.forEach(function(item){
- //  		if(item.sequenceNumber == 1){
- //  			this.startPoint = item.coordinate
- //  		}
- //  		if(item.sequenceNumber == 2){
- //  			this.stopPoint = item.coordinate
- //  		}
-	// });
+    this.startPoint = this.tripStops[0]["coordinate"]["lat"].toString() + "  " + this.tripStops[0]["coordinate"]["lng"].toString()
+    console.log("this is start Point-----"+ this.startPoint);
+    this.stopPoint = this.tripStops[1]["coordinate"]["lat"].toString() + "  " + this.tripStops[1]["coordinate"]["lng"].toString()
+    console.log("this is start Point-----"+ this.stopPoint);
   }
 
 }

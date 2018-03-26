@@ -61,7 +61,7 @@ export class HomepagePage {
     this.searchControl = new FormControl();
 
     this.setCurrentPosition();
-    this.selectedpref={'miniage':this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'minigroup':this.mingn, 'maxigroup':this.maxgn}
+    this.selectedpref={'miniage': this.minage, 'maxiage':this.maxage, 'gender':this.gender, 'star':this.rating, 'minigroup':this.mingn, 'maxigroup':this.maxgn}
   }
 
 
@@ -288,6 +288,7 @@ export class HomepagePage {
     }
     this.userData.getGender().then((value)=>{
       this.gender = value
+      this.selectedpref.gender = this.gender
       var i:number;
       for(i=0; i<this.pref.gendervalue.length; i++)
       {
@@ -307,6 +308,8 @@ export class HomepagePage {
 
     this.userData.getRating().then((value)=>{
       this.rating = value
+      console.log("RRRRRRRating Value", value)
+      this.selectedpref.star = this.rating
       var i:number;
       for(i=0; i<this.pref.starvalue.length; i++)
       {
@@ -323,6 +326,7 @@ export class HomepagePage {
 
     this.userData.getMaxiage().then((value)=>{
       this.maxage = value
+      this.selectedpref.maxiage = this.maxage
       var i:number;
       for(i=0; i<this.pref.maxagevalue.length; i++)
       {
@@ -339,6 +343,7 @@ export class HomepagePage {
 
     this.userData.getMiniage().then((value)=>{
       this.minage = value
+      this.selectedpref.minage = this.minage
       var i:number;
       for(i=0; i<this.pref.minagevalue.length; i++)
       {
@@ -354,6 +359,7 @@ export class HomepagePage {
 
     this.userData.getMinGroupNumber().then((value)=>{
       this.mingn = value
+      this.selectedpref.minigroup = this.mingn
       var i:number;
       for(i=0; i<this.pref.mingroupvalue.length; i++)
       {
@@ -369,6 +375,7 @@ export class HomepagePage {
 
     this.userData.getMaxGroupNumber().then((value)=>{
       this.maxgn = value
+      this.selectedpref.maxigroup = this.maxgn
       var i:number;
       for(i=0; i<this.pref.maxgroupvalue.length; i++)
       {
@@ -383,8 +390,8 @@ export class HomepagePage {
     });
 
 
-
-    let modal = this.modalCtrl.create(ScheduleFilterPage, {'preference':this.pref, 'selectedpref':this.selectedpref});
+    console.log("THIS this.selectedpref: ", this.selectedpref)
+    let modal = this.modalCtrl.create(ScheduleFilterPage, {'preference':this.pref, 'selectedpref': this.selectedpref});
     modal.onDidDismiss(data => {
 
       this.selectedpref=data;

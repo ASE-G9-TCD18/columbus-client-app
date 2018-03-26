@@ -140,7 +140,7 @@ export class UserData {
     });
   };
 
-  getUserInfo
+  // getUserInfo
 
   hasLoggedIn(): Promise<boolean> {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
