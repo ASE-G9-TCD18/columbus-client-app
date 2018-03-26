@@ -67,7 +67,7 @@ alertMessage:any;
     });
 
     this.userData.getMiniage().then((value)=>{
-      this.selectedpref.minage = value
+      this.selectedpref.miniage = value
     });
 
     this.userData.getMinGroupNumber().then((value)=>{
