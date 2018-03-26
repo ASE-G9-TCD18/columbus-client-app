@@ -52,7 +52,7 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageInterface[] = [
     //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
+    { title: 'Go Somewhere', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
     /*{ title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },*/
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 2, icon: 'information-circle' }
 
