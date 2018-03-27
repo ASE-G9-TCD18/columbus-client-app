@@ -20,41 +20,64 @@ Ionic pages and navigation.
 
 </ion-header>
 
-  <ion-content no-padding>
-    <div id="floating-panel">
+<ion-content no-padding>
+  <div id="floating-panel">
+
+    <ion-item class="searchBars">
       <ion-row>
-        <ion-col col-md-12 no-padding>
-          <ion-item>
-            <ion-searchbar id="txtHome"  placeholder="Destination" no-border no-lines></ion-searchbar>
-            <!--<ion-input id="txtHome" type="text"></ion-input>-->
-          </ion-item>
+        <ion-col col-lg-11 col-md-11 col-sm-auto>
+          <ion-searchbar id="txtHome1" placeholder="Source"></ion-searchbar>
+
+
+        </ion-col>
+        <ion-col col-md-1 col-sm-auto>
+          <button ion-button icon-left clear (click)="setCurrentPositionforSrc()">
+            <ion-icon name="locate" style=" color: #fd7272"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 no-padding>
+
+          <ion-searchbar id="txtHome" placeholder="Destination"></ion-searchbar>
+          <!--<ion-input id="txtHome" type="text"></ion-input>-->
+
         </ion-col>
       </ion-row>
 
-      <ion-item>
-        <ion-label>Commute Type </ion-label>
-        <ion-select [(ngModel)]="end" id="end" (change)="calculateAndDisplayRoute()">
-          <ion-option value="bus">Bus</ion-option>
-          <ion-option value="walk">Walk</ion-option>
-          <ion-option value="taxi">Taxi</ion-option>
-          <ion-option value="Luas">Luas</ion-option>
-        </ion-select>
-      </ion-item>
-    </div>
-    <div class="floatButton">
-      <!-- this fab is placed at bottom right -->
-      <ion-fab bottom right>
-        <button ion-fab><ion-icon name="menu"></ion-icon></button>
-        <ion-fab-list side="top">
-          <button ion-fab color="columbusRed"><ion-icon name="search" (click)="searchTrip()"></ion-icon></button>
-          <button ion-fab color="columbusRed" (click)="onCreateTrip()"><ion-icon name="add"></ion-icon></button>
-        </ion-fab-list>
-      </ion-fab>
+    </ion-item>
 
-    </div>
-    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-    </agm-map>
 
-  </ion-content>
+    <ion-item>
+      <ion-label>Commute Type</ion-label>
+      <ion-select [(ngModel)]="end" id="end" (change)="calculateAndDisplayRoute()">
+        <ion-option value="bus">Bus</ion-option>
+        <ion-option value="walk">Walk</ion-option>
+        <ion-option value="taxi">Taxi</ion-option>
+        <ion-option value="Luas">Luas</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="floatButton">
+    <!-- this fab is placed at bottom right -->
+    <ion-fab bottom right>
+      <button ion-fab>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-fab-list side="top">
+        <button ion-fab color="columbusRed">
+          <ion-icon name="search" (click)="searchTrip()"></ion-icon>
+        </button>
+        <button ion-fab color="columbusRed" (click)="onCreateTrip()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab-list>
+    </ion-fab>
+
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+
+</ion-content>
 

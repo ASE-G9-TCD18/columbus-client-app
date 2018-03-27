@@ -26,14 +26,17 @@ import { DatePipe } from '@angular/common'
   templateUrl: 'homepage.html',
 })
 export class HomepagePage {
-  public latitude: number;
-  public longitude: number;
-  public searchControl: FormControl;
-  public zoom: number;
   @ViewChild('map') mapElement;
   map: any;
   private tripData: any;
   address;
+  public latitude: number;
+  public longitude: number;
+  public srclat:number;
+  public srclong:number;
+  public searchControl: FormControl;
+  public searchControl1: FormControl;
+  public zoom: number;
   private gender: any;
   private pref: any;
   private minage: any;
@@ -53,9 +56,7 @@ export class HomepagePage {
     this.address = {
       place: ''
     };
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+
 
     //create search FormControl
     this.searchControl = new FormControl();
@@ -77,10 +78,43 @@ export class HomepagePage {
 
     //set current position
     this.setCurrentPosition();
-
+    this.setCurrentPositionforSrc();
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
+      let nativeHomeInputBox1 = document.getElementById('txtHome').getElementsByTagName('input')[0];
+      let autocomplete1 = new google.maps.places.Autocomplete(nativeHomeInputBox1, {
+        types: ["address"]
+      });
+      autocomplete1.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete1.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 16;
+        });
+      });
+    });
+  }
+
+  ionViewWillEnter() {
+
+    //set google maps defaults
+
+    //create search FormControl
+    this.searchControl1 = new FormControl();
+
+    this.setCurrentPositionforSrc();
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let nativeHomeInputBox = document.getElementById('txtHome1').getElementsByTagName('input')[0];
       let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
         types: ["address"]
       });
@@ -95,12 +129,26 @@ export class HomepagePage {
           }
 
           //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
+          this.srclat = place.geometry.location.lat();
+          this.srclong = place.geometry.location.lng();
           this.zoom = 16;
         });
       });
     });
+  }
+
+   setCurrentPositionforSrc() {
+
+     if ("geolocation" in navigator) {
+       console.log("we are inside of setsrclocation");
+       navigator.geolocation.getCurrentPosition((position) => {
+         this.srclat = position.coords.latitude;
+         this.srclong = position.coords.longitude;
+
+       });
+
+       console.log("source location has been automatically set" + this.srclat + "  " + this.srclong)
+     }
   }
 
   onCreateTrip() {
@@ -120,7 +168,7 @@ export class HomepagePage {
         this.currentLat = position.coords.latitude;
         this.currentLon = position.coords.longitude;
 
-        console.log("here are the current coordinates--------" + this.currentLat+"-----"+this.currentLon);
+        // console.log("here are the current coordinates--------" + this.currentLat+"-----"+this.currentLon);
         this.zoom = 16;
       });
     }
@@ -203,6 +251,9 @@ export class HomepagePage {
       });
     }
   }
+
+
+
 
   presentFilters() {
     this.pref = {
@@ -397,15 +448,15 @@ export class HomepagePage {
 
   searchTrip(){
     // let date1 = new Date().toTimeString();
-    let date2 = new Date();
+    // let date2 = new Date();
     // let date3 = new Date().toLocaleTimeString();
     // let date5 = new Date().getTime();
 
     // let date4 = new Date().toDateString();
 
     // console.log("date1"+date1);
-    let latest_date =this.datePipe.transform(date2, 'yyyy-MM-dd');
-    console.log("date2: "+latest_date);
+    // let latest_date =this.datePipe.transform(date2, 'yyyy-MM-dd');
+    // console.log("date2: "+latest_date);
     // console.log("date3"+date3);
     // console.log("date5"+date5);
   }
