@@ -42,20 +42,26 @@ export class TripdetailsProvider {
   //This function will provide list of all trips from the backend
   alltriplist(token: any){
 
-    console.log("Inside Load Data");
+    console.log("Inside provider: loaddata");
 
-    return new Promise((resolve, reject) =>{
-      let headers = new Headers()
+    try {
+      return new Promise((resolve, reject) => {
+        let headers = new Headers()
 
 
-      console.log("-----------"+token);
-      headers.set('Authorization','Bearer '+ token)
-      this.http.get("http://52.212.149.132:8080/alltrips", {headers}).subscribe(res =>{
-        resolve(res.json());
-      }, (err)=> {
-        reject(err.json());
+        console.log("-----------" + token);
+        headers.set('Authorization', 'Bearer ' + token)
+        this.http.get("http://52.212.149.132:8080/trips", {headers}).subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err.json());
+        });
       });
-    });
+    }catch (error){
+      console.log("Error Loading data");
+      alert("Error Loading data. Please refresh");
+      throw new Error("Am here");
+    }
 
   }
 

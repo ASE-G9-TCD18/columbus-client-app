@@ -43,21 +43,28 @@ export class JoinedtripsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad JoinedtripsPage');
     this.isLoaded = true;
-    this.userData.getUsertoken().then((value)=>{
-      this.token = value;
-      console.log("------i am here-----"+value);
-      this.tripdetails.joinedtriplist(value).then((value: any[]) => {
-        this.tripdata = value;
-        // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
-        //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
-        //   .catch((error: any) => console.log(error));
-        console.log("==========="+this.tripdata[0].tripType);
+    try {
+      this.userData.getUsertoken().then((value) => {
+        this.token = value;
+        console.log("------i am here-----" + value);
+        this.tripdetails.joinedtriplist(value).then((value: any[]) => {
+          this.tripdata = value;
+          // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
+          //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
+          //   .catch((error: any) => console.log(error));
+          console.log("===========" + this.tripdata[0].tripType);
 
-      })
-    });
+        })
+      });
+    }catch(error){
+      console.log("Error Loading Data"); //Doesn't appear at all
+      alert("Error Loading data. Please refresh");
+      throw new Error("Am here");
+    }
   }
   // The leave trip api to be used here once the api is prepared
   leaveTrip(trip){
+    alert("You have now left this trip !");
     this.userData.getUsertoken().then((value)=>{
       this.confData
         .getData('trip/'+trip.tripId+'/join', value)

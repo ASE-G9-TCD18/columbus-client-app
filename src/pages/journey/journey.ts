@@ -44,21 +44,28 @@ export class JourneyPage {
   isLoaded: Boolean = false;
   ionViewDidLoad() {
     this.isLoaded = true;
-    this.userData.getUsertoken().then((value)=>{
-      this.token = value;
-      console.log("------i am here-----"+value);
-      this.tripdetails.loaddata(value).then((value: any[]) => {
-        this.tripdata = value;
-        // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
-        //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
-        //   .catch((error: any) => console.log(error));
-        console.log("==========="+this.tripdata[0].tripType);
+    try {
+      this.userData.getUsertoken().then((value) => {
+        this.token = value;
+        console.log("Security token" + value);
+        this.tripdetails.loaddata(value).then((value: any[]) => {
+          this.tripdata = value;
+          // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
+          //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
+          //   .catch((error: any) => console.log(error));
+          console.log("===========" + this.tripdata[0].tripType);
 
-      })
-    });
+        })
+      });
+    }catch (error){
+      console.log("Error Loading Data"); //Doesn't appear at all
+      alert("Error Loading data. Please refresh");
+      throw new Error("Am here");
+    }
   }
    // The cancel trip api to be used here once the api is prepared
   cancelTrip(trip){
+    alert("Trip has been Cancelled.");
     this.userData.getUsertoken().then((value)=>{
       this.confData
       .getData('trip/'+trip.tripId+'/join', value)
@@ -72,5 +79,26 @@ export class JourneyPage {
            });
       })
     }
+
+
+  finishTrip(trip){
+    alert("Trip has Ended. Please rate the trip now.");
+    this.hide = true;
+    this.userData.getUsertoken().then((value)=>{
+      this.confData
+        .getData('trip/'+trip.tripId+'/join', value)
+        .then(
+          (result) => {
+            console.log(result);
+            this.navCtrl.push(TripPage, trip);
+          },
+          (err) => {
+            console.log(err);
+          });
+    })
   }
+
+
+
+}
 

@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header margin-bottom="20px">
 
   <ion-navbar>
     <button ion-button menuToggle>
@@ -36,12 +36,12 @@
 
 
       <ion-card class = "searchList">
-        <ion-card-title>{{trip.tripId}}</ion-card-title>
-        <ion-card-header>
+        <ion-card-title padding-horizontal="2">{{trip.tripId}}</ion-card-title>
+        <ion-card-header padding-horizontal="2">
           <b>Preferences</b>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content padding>
           <ion-row>
             <ion-col><b>Start Time:</b> {{trip.preferences[4].value}}</ion-col>
           </ion-row>

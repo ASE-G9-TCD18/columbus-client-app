@@ -57,6 +57,7 @@ export class AlltripsPage {
   }
 
   joinTrip(trip){
+    alert("You have now joined this trip !")
     this.userData.getUsertoken().then((value)=>{
       this.confData
         .getData('trip/'+trip.tripId+'/join', value)

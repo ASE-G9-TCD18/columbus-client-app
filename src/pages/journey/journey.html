@@ -31,10 +31,10 @@
   </ion-row>
   <ion-list [virtualScroll]="tripdata" approxItemHeight="450px">
 
-    <ion-item *virtualItem="let trip">
+    <ion-item *virtualItem="let trip; let i = index;">
 
 
-      <ion-card class = "searchList">
+      <ion-card class = searchList>
         <ion-card-title>{{trip.tripId}}</ion-card-title>
         <ion-card-header>
           <b>Preferences</b>
@@ -63,7 +63,7 @@
           </ion-col>
           <ion-col>
 
-          <button align-self-center="10" padding ion-button color="columbusRed" (click)="cancelTrip(trip)">Finish Trip</button>
+          <button align-self-center="10" padding ion-button color="columbusRed" (click)="finishTrip(trip)">Finish Trip</button>
 
             </ion-col>
         </ion-card-content>
