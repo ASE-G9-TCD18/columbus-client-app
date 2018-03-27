@@ -32,6 +32,9 @@ import { HomepagePage } from '../pages/homepage/homepage';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripPage } from '../pages/trip/trip';
 import { TripHistoryPage } from '../pages/trip-history/trip-history';
+import { AlltripsPage } from "../pages/alltrips/alltrips";
+import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
+import { MatchedTripsPage } from '../pages/matched-trips/matched-trips';
 
 
 
@@ -71,8 +74,10 @@ import { DatePipe } from '@angular/common'
 
     ProfilePage,
     TripPage,
-    TripHistoryPage
-
+    TripHistoryPage,
+    AlltripsPage,
+    JoinedtripsPage,
+    MatchedTripsPage
   ],
   imports: [
     BrowserModule,
@@ -100,9 +105,11 @@ import { DatePipe } from '@angular/common'
 
         // { component: AccountPage, name: 'AccountPage', segment: 'account' },
 
-
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
+        { component: AlltripsPage, name: 'AlltripsPage', segment: 'alltrips' },
+        { component: JoinedtripsPage, name: 'JoinedtripsPage', segment: 'joinedtrips' },
         { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
+
 
         { component: SignupPage, name: 'SignupPage', segment: 'signup' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
@@ -138,9 +145,12 @@ import { DatePipe } from '@angular/common'
     ProfilePage,
     TripPage,
     TripHistoryPage,
+    JoinedtripsPage,
+    MatchedTripsPage,
 
     HomepagePage,
     JourneyPage,
+    AlltripsPage
 
 
 

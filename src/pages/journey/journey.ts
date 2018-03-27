@@ -15,7 +15,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ConferenceData} from '../../providers/conference-data';
 import {TripdetailsProvider} from '../../providers/tripdetails/tripdetails';
 import {UserData} from "../../providers/user-data";
-import {TripPage} from "../trip/trip";
+
 
 
 @Component({
@@ -55,21 +55,6 @@ export class JourneyPage {
 
       })
     });
-  }
-
-  joinTrip(trip) {
-    this.userData.getUsertoken().then((value) => {
-      this.confData
-        .getData('trip/' + trip.tripId + '/join', value)
-        .then(
-          (result) => {
-            console.log(result);
-            this.navCtrl.push(TripPage, trip);
-          },
-          (err) => {
-            console.log(err);
-          });
-    })
   }
 }
 

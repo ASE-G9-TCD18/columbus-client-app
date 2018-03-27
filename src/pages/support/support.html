@@ -12,13 +12,13 @@
 
 <ion-content>
 	<div class="logo">
-		<img src="assets/img/appicon.svg" alt="Ionic Logo">
+		<img src="assets/img/Columbus logo name.png" alt="Ionic Logo">
 	</div>
 
 	<form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
 		<ion-list no-lines>
 			<ion-item>
-				<ion-label stacked color="primary">Enter your support message below</ion-label>
+				<ion-label stacked color="danger">Enter your support message below</ion-label>
 				<ion-textarea [(ngModel)]="supportMessage" name="supportQuestion" #supportQuestion="ngModel" rows="6" required></ion-textarea>
 			</ion-item>
 		</ion-list>
@@ -28,7 +28,7 @@
 		</p>
 
 		<div padding>
-			<button ion-button block type="submit">Submit</button>
+			<button ion-button block type="submit" color="danger" >Submit</button>
 		</div>
 	</form>
 </ion-content>

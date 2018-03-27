@@ -21,7 +21,10 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-import {TripPage} from "../pages/trip/trip";
+// import { TripPage } from "../pages/trip/trip";
+import { AlltripsPage } from "../pages/alltrips/alltrips";
+import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
+
 
 
 
@@ -49,16 +52,20 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageInterface[] = [
     //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
+    { title: 'Go Somewhere', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
     /*{ title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },*/
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 2, icon: 'information-circle' }
 
   ];
 
   loggedInPages: PageInterface[] = [
-    { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
+    // { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
-    { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
+    { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
+    { title: 'My Created Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
+
+    { title: 'My Joined Trips', name: 'JoinedtripsPage', component: JoinedtripsPage, tabComponent: JoinedtripsPage, icon: 'checkmark-circle-outline' },
+
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
