@@ -91,7 +91,7 @@ import {ConferenceData} from '../../providers/conference-data';
  				.then(
  					(result) => {
  						this.responseData = result;
-
+ 						console.log(result);
  						this.name = this.responseData["firstName"];
  						this.rate = this.responseData["userRating"];
 

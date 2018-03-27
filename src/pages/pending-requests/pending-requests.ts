@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ManagetripPage page.
+ * Generated class for the PendingRequestsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-managetrip',
-  templateUrl: 'managetrip.html',
+  selector: 'page-pending-requests',
+  templateUrl: 'pending-requests.html',
 })
-export class ManagetripPage {
+export class PendingRequestsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ManagetripPage');
+    console.log('ionViewDidLoad PendingRequestsPage');
   }
 
 }
