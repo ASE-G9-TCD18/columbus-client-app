@@ -1,4 +1,3 @@
-
 /**
  * Generated class for the JourneyPage page.
  *
@@ -6,17 +5,18 @@
  * Ionic pages and navigation.
  */
 
- import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 // import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
- import {
-   Config,
-   NavController
- } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ConferenceData } from '../../providers/conference-data';
-import { TripdetailsProvider } from  '../../providers/tripdetails/tripdetails';
-import { UserData } from "../../providers/user-data";
-import { TripPage } from "../trip/trip";
+import {
+  Config,
+  NavController
+} from 'ionic-angular';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {ConferenceData} from '../../providers/conference-data';
+import {TripdetailsProvider} from '../../providers/tripdetails/tripdetails';
+import {UserData} from "../../providers/user-data";
+import {TripPage} from "../trip/trip";
+
 
 
 
@@ -26,24 +26,26 @@ import { TripPage } from "../trip/trip";
 })
 
 export class JourneyPage {
-  token:any;
-  constructor(
-    public navCtrl: NavController,
-    public confData: ConferenceData,
-    public config: Config,
-    public inAppBrowser: InAppBrowser,
-    public tripdetails: TripdetailsProvider,
-    private userData: UserData,
-    // private nativeGeocoder: NativeGeocoder
-    ) {
+  token: any;
 
+  constructor(public navCtrl: NavController,
+              public confData: ConferenceData,
+              public config: Config,
+              public inAppBrowser: InAppBrowser,
+              public tripdetails: TripdetailsProvider,
+              private userData: UserData,
+              // private nativeGeocoder: NativeGeocoder
+  ) {
 
 
   }
-  tripdata:any[] = [];
+
+  tripdata: any[] = [];
   isLoaded: Boolean = false;
+
   ionViewDidLoad() {
     this.isLoaded = true;
+
     try {
       this.userData.getUsertoken().then((value) => {
         this.token = value;
@@ -55,6 +57,7 @@ export class JourneyPage {
           //   .catch((error: any) => console.log(error));
           console.log("===========" + this.tripdata[0].tripType);
 
+
         })
       });
     }catch (error){
@@ -63,6 +66,7 @@ export class JourneyPage {
       throw new Error("Am here");
     }
   }
+
    // The cancel trip api to be used here once the api is prepared
   cancelTrip(trip){
     alert("Trip has been Cancelled.");
@@ -83,7 +87,7 @@ export class JourneyPage {
 
   finishTrip(trip){
     alert("Trip has Ended. Please rate the trip now.");
-    this.hide = true;
+    // this.hide = true;
     this.userData.getUsertoken().then((value)=>{
       this.confData
         .getData('trip/'+trip.tripId+'/join', value)
@@ -96,7 +100,9 @@ export class JourneyPage {
             console.log(err);
           });
     })
-  }
+
+}
+
 
 
 

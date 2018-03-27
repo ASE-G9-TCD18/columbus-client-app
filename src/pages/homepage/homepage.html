@@ -20,17 +20,27 @@ Ionic pages and navigation.
 
 </ion-header>
 
-  <ion-content no-padding>
-    <div id="floating-panel">
+<ion-content no-padding>
+  <div id="floating-panel">
+
+    <ion-item class="searchBars">
       <ion-row>
-        <ion-col col-md-12 no-padding>
-          <ion-item>
-            <ion-searchbar id="txtHome"  placeholder="Destination" no-border no-lines></ion-searchbar>
-            <!--<ion-input id="txtHome" type="text"></ion-input>-->
-          </ion-item>
+        <ion-col col-lg-11 col-md-11 col-sm-auto>
+          <ion-searchbar id="txtHome1" placeholder="Source"></ion-searchbar>
+        </ion-col>
+        <ion-col col-md-1 col-sm-auto>
+          <button ion-button icon-left clear (click)="setCurrentPositionforSrc()">
+            <ion-icon name="locate" style=" color: #fd7272"></ion-icon>
+          </button>
         </ion-col>
       </ion-row>
-
+      <ion-row>
+        <ion-col col-12 no-padding>
+          <ion-searchbar id="txtHome" placeholder="Destination"></ion-searchbar>
+          <!--<ion-input id="txtHome" type="text"></ion-input>-->
+        </ion-col>
+      </ion-row>
+    </ion-item>
       <ion-item>
         <ion-label>Commute Type </ion-label>
         <ion-select [(ngModel)]="end" id="end" (change)="calculateAndDisplayRoute()">

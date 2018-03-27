@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -162,9 +163,10 @@ import { DatePipe } from '@angular/common'
     InAppBrowser,
     SplashScreen,
     AuthServiceProvider,
-    Geolocation,
     DatePipe,
-    TripdetailsProvider
+    TripdetailsProvider,
+    Geolocation,
+    NativeGeocoder
 
 
   ]
