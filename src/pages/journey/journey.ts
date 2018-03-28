@@ -8,15 +8,23 @@
 import {Component} from '@angular/core';
 // import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 import {
-  Config,
+  AlertController,
+  Config, ModalController,
   NavController
 } from 'ionic-angular';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ConferenceData} from '../../providers/conference-data';
 import {TripdetailsProvider} from '../../providers/tripdetails/tripdetails';
 import {UserData} from "../../providers/user-data";
+
+// import {TripPage} from "../trip/trip";
+import {RatingPage} from "../rating/rating";
+
+
+
 // import {TripPage} from "../trip/trip";
 import {AlltripsPage} from "../alltrips/alltrips";
+
 
 
 @Component({
@@ -26,6 +34,7 @@ import {AlltripsPage} from "../alltrips/alltrips";
 
 export class JourneyPage {
   token: any;
+  public stars: any;
 
   constructor(public navCtrl: NavController,
               public confData: ConferenceData,
@@ -33,6 +42,8 @@ export class JourneyPage {
               public inAppBrowser: InAppBrowser,
               public tripdetails: TripdetailsProvider,
               private userData: UserData,
+              public alertCtrl: AlertController,
+              public modalCtrl: ModalController
               // private nativeGeocoder: NativeGeocoder
   ) {
 
@@ -41,7 +52,7 @@ export class JourneyPage {
   tripdata: any[] = [];
   isLoaded: Boolean = false;
 
-  admin:any = this.userData.getUsername()
+  admin: any = this.userData.getUsername()
 
   ionViewDidLoad() {
     this.isLoaded = true;
@@ -61,15 +72,27 @@ export class JourneyPage {
 
         })
       });
-    }catch (error){
+    } catch (error) {
       console.log("Error Loading Data"); //Doesn't appear at all
       alert("Error Loading data. Please refresh");
       throw new Error("Am here");
     }
   }
 
-   // The cancel trip api to be used here once the api is prepared
-  cancelTrip(trip){
+
+  // The cancel trip api to be used here once the api is prepared
+  cancelTrip(trip) {
+
+    if (this.stars == undefined) {
+      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating",});
+      modal.onDidDismiss(data => {
+        this.stars = data;
+        console.log(data);
+        alert("You Rated this trip " + this.stars + " stars. Click on Cancel button to cancel the trip");
+      });
+      modal.present();
+    }
+
     if (trip.admin != this.admin) {
 
       alert("Only trip Admin can Cancel the trip");
@@ -95,42 +118,40 @@ export class JourneyPage {
       }
       console.log("Delete trip api called here")
     }
-    }
+  }
 
 
-
-  leaveTrip(trip){
-
-    if (trip.admin == this.admin) {
-
-      alert("Admin Cannot Leave Trip. Try Cancelling the trip");
-    }
-    alert("Trip has been Cancelled. Please rate the trip now.");
-    // this.hide = true;
-    try {
-      this.userData.getUsertoken().then((value) => {
-        this.confData
-          .getData('trip/' + trip.tripId, value)
-          .then(
-            (result) => {
-              console.log(result);
-              this.navCtrl.setRoot(AlltripsPage, trip);
-            },
-            (err) => {
-              console.log(err);
-            });
-      })
-    }catch(error)
+    leaveTrip(trip)
     {
-      alert("Unable to Leave trip. Contact Trip Admin");
-      throw new Error("Trouble Leaving trip");
+
+      if (trip.admin == this.admin) {
+
+        alert("Admin Cannot Leave Trip. Try Cancelling the trip");
+      }
+      alert("Trip has been Cancelled. Please rate the trip now.");
+      // this.hide = true;
+      try {
+        this.userData.getUsertoken().then((value) => {
+          this.confData
+            .getData('trip/' + trip.tripId, value)
+            .then(
+              (result) => {
+                console.log(result);
+                this.navCtrl.setRoot(AlltripsPage, trip);
+              },
+              (err) => {
+                console.log(err);
+              });
+        })
+      } catch (error) {
+        alert("Unable to Leave trip. Contact Trip Admin");
+        throw new Error("Trouble Leaving trip");
+      }
+      console.log("Leave trip api called here");
+
     }
-    console.log("Leave trip api called here")
-
-}
+  }
 
 
 
-
-}
 
