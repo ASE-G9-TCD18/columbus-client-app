@@ -23,7 +23,7 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 // import { TripPage } from "../pages/trip/trip";
 import { AlltripsPage } from "../pages/alltrips/alltrips";
-import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
+// import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
 
 
 
@@ -62,8 +62,7 @@ export class ConferenceApp {
     // { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
-    { title: 'My Created Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
-    { title: 'My Joined Trips', name: 'JoinedtripsPage', component: JoinedtripsPage, tabComponent: JoinedtripsPage, icon: 'checkmark-circle-outline' },
+    { title: 'My Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
