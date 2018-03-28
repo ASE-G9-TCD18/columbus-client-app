@@ -72,7 +72,7 @@ export class JourneyPage {
     alert("Trip has been Cancelled.");
     this.userData.getUsertoken().then((value)=>{
       this.confData
-      .getData('trip/'+trip.tripId+'/join', value)
+      .getData('trip/'+trip.tripId, value)
       .then(
            (result) => {
              console.log(result);
