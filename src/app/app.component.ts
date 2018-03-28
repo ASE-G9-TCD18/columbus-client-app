@@ -63,9 +63,7 @@ export class ConferenceApp {
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
     { title: 'My Created Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
-
     { title: 'My Joined Trips', name: 'JoinedtripsPage', component: JoinedtripsPage, tabComponent: JoinedtripsPage, icon: 'checkmark-circle-outline' },
-
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
