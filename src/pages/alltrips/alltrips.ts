@@ -56,8 +56,15 @@ export class AlltripsPage {
           //   .catch((error: any) => console.log(error));
           console.log("===========" + this.tripdata[0].tripType);
 
+        }).catch((err) => {
+          console.log("Error in getting all list:")
+          console.log(err);
         })
-      });
+      })
+        .catch((err) => {
+          console.log("Error in getting all list:")
+          console.log(err);
+        });
     }catch(error)
     {
       console.log("Error Loading trip data");
@@ -89,10 +96,11 @@ export class AlltripsPage {
               (result) => {
                 console.log(result);
                 this.navCtrl.push(TripPage, trip);
-              },
-              (err) => {
-                console.log(err);
-              });
+              })
+            .catch((err) => {
+            console.log("Error in getting all list:")
+            console.log(err);
+          });
         })
       } catch (error) {
         console.log("Error Joining trip");

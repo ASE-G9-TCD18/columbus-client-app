@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, AlertController} from 'ionic-angular';
+import { NavController, LoadingController, AlertController} from 'ionic-angular';
 import { TripPage } from '../trip/trip';
 import { TripHistoryPage } from '../trip-history/trip-history';
 import { IonicPage } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
-import {ConferenceData} from '../../providers/conference-data';
+import { ConferenceData} from '../../providers/conference-data';
 
 /**
  * Generated class for the ProfilePage page.

@@ -108,7 +108,7 @@ import { DatePipe } from '@angular/common'
 
         { component: HomepagePage, name: 'HomepagePage', segment: 'homepage' },
         { component: AlltripsPage, name: 'AlltripsPage', segment: 'alltrips' },
-        { component: JoinedtripsPage, name: 'JoinedtripsPage', segment: 'joinedtrips' },
+        // { component: JoinedtripsPage, name: 'JoinedtripsPage', segment: 'joinedtrips' },
         { component: JourneyPage, name: 'JourneyPage', segment: 'journeyPage' },
 
 

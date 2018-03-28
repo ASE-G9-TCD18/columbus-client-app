@@ -23,7 +23,7 @@ import {RatingPage} from "../rating/rating";
 
 
 // import {TripPage} from "../trip/trip";
-import {AlltripsPage} from "../alltrips/alltrips";
+// import {AlltripsPage} from "../alltrips/alltrips";
 
 
 
@@ -51,11 +51,16 @@ export class JourneyPage {
 
   tripdata: any[] = [];
   isLoaded: Boolean = false;
+  userName: any;
 
-  admin: any = this.userData.getUsername()
+
 
   ionViewDidLoad() {
     this.isLoaded = true;
+    this.userData.getUsername().then((id)=> {
+      this.userName = id;
+
+    });
 
     try {
       this.userData.getUsertoken().then((value) => {
@@ -67,33 +72,34 @@ export class JourneyPage {
           // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
           //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
           //   .catch((error: any) => console.log(error));
-          console.log("===========" + this.tripdata[0].tripType);
+          // console.log("===========" + this.tripdata[0].tripType);
 
 
-        })
+        },
+          (err) => {
+            alert("You have not joined or created any trips !");
+            console.log(err);
+          });
+
+
       });
     } catch (error) {
       console.log("Error Loading Data"); //Doesn't appear at all
       alert("Error Loading data. Please refresh");
       throw new Error("Am here");
     }
+    if (this.tripdata == null)
+      alert("You have not joined or created any trips !");
   }
 
 
   // The cancel trip api to be used here once the api is prepared
   cancelTrip(trip) {
 
-    if (this.stars == undefined) {
-      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating",});
-      modal.onDidDismiss(data => {
-        this.stars = data;
-        console.log(data);
-        alert("You Rated this trip " + this.stars + " stars. Click on Cancel button to cancel the trip");
-      });
-      modal.present();
-    }
 
-    if (trip.admin != this.admin) {
+    console.log("Trip admin:", trip.admin);
+    console.log("User id:", this.userName);
+    if (trip.admin != this.userName) {
 
       alert("Only trip Admin can Cancel the trip");
     }
@@ -102,33 +108,47 @@ export class JourneyPage {
       try {
         this.userData.getUsertoken().then((value) => {
           this.confData
-            .getData('trip/' + trip.tripId, value)
+            .deleteData('trip/' + trip.tripId, value)
             .then(
               (result) => {
                 console.log(result);
-                this.navCtrl.setRoot(AlltripsPage, trip);
+                // this.navCtrl.setRoot(AlltripsPage, trip);
               },
               (err) => {
                 console.log(err);
               });
         })
+
       } catch (error) {
         alert("Unable to Cancel trip. Contact Trip Admin");
         throw new Error("Trouble Cancelling trip");
       }
+      this.navCtrl.setRoot(JourneyPage, trip);
       console.log("Delete trip api called here")
     }
   }
+    rateTrip(trip){
+    console.log("Rating trip:", trip.tripId)
+    if (this.stars == undefined) {
+      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating for "});
+      modal.onDidDismiss(data => {
+        this.stars = data;
+        console.log(data);
+        alert("You Rated this trip " + this.stars + " stars.");
+      });
+      modal.present();
+    }
 
+  }
 
-    leaveTrip(trip)
-    {
+    leaveTrip(trip) {
 
-      if (trip.admin == this.admin) {
+      if (trip.admin == this.userName) {
 
         alert("Admin Cannot Leave Trip. Try Cancelling the trip");
       }
-      alert("Trip has been Cancelled. Please rate the trip now.");
+      else{
+        alert("You have now left the trip. Please rate the trip now.");
       // this.hide = true;
       try {
         this.userData.getUsertoken().then((value) => {
@@ -137,16 +157,23 @@ export class JourneyPage {
             .then(
               (result) => {
                 console.log(result);
-                this.navCtrl.setRoot(AlltripsPage, trip);
-              },
-              (err) => {
-                console.log(err);
-              });
+                // this.navCtrl.setRoot(AlltripsPage, trip);
+              }
+              )
+            .catch((err) => {
+              console.log("Error in getting getting trip data:")
+              console.log(err);
+            });
         })
+          .catch((err) => {
+            console.log("Error in leaving group:")
+            console.log(err);
+          })
       } catch (error) {
         alert("Unable to Leave trip. Contact Trip Admin");
         throw new Error("Trouble Leaving trip");
       }
+    }
       console.log("Leave trip api called here");
 
     }

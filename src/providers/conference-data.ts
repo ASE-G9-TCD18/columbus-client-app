@@ -202,6 +202,19 @@ export class ConferenceData {
 
   }
 
+  deleteData(type, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      this.http.delete(apiURL+type, {headers}).subscribe(res =>{
+        resolve(res.json());
+      }, (err)=> {
+        reject(err.json());
+      });
+    });
+
+  }
+
   postDataLogin(credentials, type){
     return new Promise((resolve, reject) =>{
       let headers = new Headers();
