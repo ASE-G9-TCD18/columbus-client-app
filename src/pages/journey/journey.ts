@@ -70,36 +70,50 @@ export class JourneyPage {
    // The cancel trip api to be used here once the api is prepared
   cancelTrip(trip){
     alert("Trip has been Cancelled.");
-    this.userData.getUsertoken().then((value)=>{
-      this.confData
-      .getData('trip/'+trip.tripId, value)
-      .then(
-           (result) => {
-             console.log(result);
-             this.navCtrl.push(TripPage, trip);
-           },
-           (err) => {
-             console.log(err);
-           });
+    try {
+      this.userData.getUsertoken().then((value) => {
+        this.confData
+          .getData('trip/' + trip.tripId, value)
+          .then(
+            (result) => {
+              console.log(result);
+              this.navCtrl.push(TripPage, trip);
+            },
+            (err) => {
+              console.log(err);
+            });
       })
+    }catch(error)
+    {
+      alert("Unable to Cancel trip. Contact Trip Admin");
+      throw new Error("Trouble Cancelling trip");
+    }
+    console.log("Delete trip api called here")
     }
 
 
-  finishTrip(trip){
+  leaveTrip(trip){
     alert("Trip has Ended. Please rate the trip now.");
     // this.hide = true;
-    this.userData.getUsertoken().then((value)=>{
-      this.confData
-        .getData('trip/'+trip.tripId+'/join', value)
-        .then(
-          (result) => {
-            console.log(result);
-            this.navCtrl.push(TripPage, trip);
-          },
-          (err) => {
-            console.log(err);
-          });
-    })
+    try {
+      this.userData.getUsertoken().then((value) => {
+        this.confData
+          .getData('trip/' + trip.tripId, value)
+          .then(
+            (result) => {
+              console.log(result);
+              this.navCtrl.push(TripPage, trip);
+            },
+            (err) => {
+              console.log(err);
+            });
+      })
+    }catch(error)
+    {
+      alert("Unable to Leave trip. Contact Trip Admin");
+      throw new Error("Trouble Leaving trip");
+    }
+    console.log("Leave trip api called here")
 
 }
 

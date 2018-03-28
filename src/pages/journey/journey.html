@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My Created Trips</ion-title>
+    <ion-title>My Trips</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -45,8 +45,8 @@
             <ion-col><b>Start Time:</b> {{trip.preferences[4].value}}</ion-col>
           </ion-row>
           <ion-row>
-            <ion-col><b>Source:</b> {{trip.tripStops[0].coordinate.lat}}, {{trip.tripStops[0].coordinate.lng}}</ion-col>
-            <ion-col><b>Destination:</b> {{trip.tripStops[1].coordinate.lat}}, {{trip.tripStops[1].coordinate.lng}}</ion-col>
+            <ion-col><b>Source:</b> {{trip.tripStops[0].loaction}}, {{trip.tripStops[0].location}}</ion-col>
+            <ion-col><b>Destination:</b> {{trip.tripStops[1].location}}, {{trip.tripStops[1].location}}</ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
@@ -63,7 +63,7 @@
           </ion-col>
           <ion-col>
 
-          <button align-self-center="10" padding ion-button color="columbusRed" (click)="finishTrip(trip)">Finish Trip</button>
+          <button align-self-center="10" padding ion-button color="columbusRed" (click)="leaveTrip(trip)">Leave Trip</button>
 
             </ion-col>
         </ion-card-content>
