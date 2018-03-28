@@ -54,9 +54,9 @@ export class TripPage {
                   this.group_max_size = this.preferences[i].value;
                 }
               }
-              this.startPoint = this.tripStops[0]["coordinate"]["lat"].toString() + "  " + this.tripStops[0]["coordinate"]["lng"].toString()
+              this.startPoint = this.tripStops[0]["location"].toString()
               console.log("this is start Point-----"+ this.startPoint);
-              this.stopPoint = this.tripStops[1]["coordinate"]["lat"].toString() + "  " + this.tripStops[1]["coordinate"]["lng"].toString()
+              this.stopPoint = this.tripStops[1]["location"].toString()
               console.log("this is start Point-----"+ this.stopPoint);
             },
            (err) => {

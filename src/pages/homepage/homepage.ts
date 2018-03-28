@@ -225,7 +225,7 @@ export class HomepagePage {
             "lat": this.srclat,
             "lng": this.srclong
           },
-          "location":this.srclocation
+          "location":this.srclocation.formatted_address
         },
           {
             "sequenceNumber": 2,
@@ -233,7 +233,7 @@ export class HomepagePage {
               "lat": this.latitude,
               "lng": this.longitude
             },
-            "location":this.destlocation
+            "location":this.destlocation.formatted_address
           }
         ],
         "preferences": [{
@@ -506,15 +506,18 @@ export class HomepagePage {
           "coordinate": {
             "lat": this.srclat,
             "lng": this.srclong
-          }
+          },
+          "location":this.srclocation.formatted_address
         },
           {
             "sequenceNumber": 2,
             "coordinate": {
               "lat": this.latitude,
               "lng": this.longitude
-            }
-          }
+            },
+            "location":this.destlocation.formatted_address
+          },
+
         ],
         "preferences": [{
           "preferenceType": "AGE_RANGE",
