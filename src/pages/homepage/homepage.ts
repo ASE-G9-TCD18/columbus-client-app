@@ -54,6 +54,8 @@ export class HomepagePage {
   private currentLat: any;
   private currentLon: any;
   userName: any;
+  srclocation: any;
+  destlocation: any;
 
 
   constructor(public nativeGeocoder: NativeGeocoder, private datePipe: DatePipe, public authservice: ConferenceData, private userData: UserData, private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, public modalCtrl: ModalController, public Loading: LoadingController, public geoloc: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
@@ -132,7 +134,8 @@ export class HomepagePage {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
+          this.destlocation = place;
+          console.log("-------"+this.destlocation.formatted_address);
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -163,6 +166,8 @@ export class HomepagePage {
             return;
           }
 
+          this.srclocation = place;
+          console.log("-------"+this.srclocation.formatted_address);
           //set latitude, longitude and zoom
           this.srclat = place.geometry.location.lat();
           this.srclong = place.geometry.location.lng();
@@ -191,6 +196,7 @@ export class HomepagePage {
   }
 
   onCreateTrip() {
+    console.log("the location name is: " + this.srclocation +"and" + this.destlocation);
     let userName;
     this.userData.getUsername().then((value) => {
       userName = value;
@@ -218,14 +224,16 @@ export class HomepagePage {
           "coordinate": {
             "lat": this.srclat,
             "lng": this.srclong
-          }
+          },
+          "location":this.srclocation
         },
           {
             "sequenceNumber": 2,
             "coordinate": {
               "lat": this.latitude,
               "lng": this.longitude
-            }
+            },
+            "location":this.destlocation
           }
         ],
         "preferences": [{
@@ -496,8 +504,8 @@ export class HomepagePage {
         tripStops: [{
           "sequenceNumber": 1,
           "coordinate": {
-            "lat": this.currentLat,
-            "lng": this.currentLon
+            "lat": this.srclat,
+            "lng": this.srclong
           }
         },
           {
