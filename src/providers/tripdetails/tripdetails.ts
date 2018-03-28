@@ -60,7 +60,7 @@ export class TripdetailsProvider {
     }catch (error){
       console.log("Error Loading data");
       alert("Error Loading data. Please refresh");
-      throw new Error("Am here");
+      throw new Error("Check all trips api call");
     }
 
   }
@@ -70,9 +70,9 @@ export class TripdetailsProvider {
 
     console.log("Inside Load Data");
 
+
     return new Promise((resolve, reject) =>{
       let headers = new Headers()
-
 
       console.log("-----------"+token);
       headers.set('Authorization','Bearer '+ token)

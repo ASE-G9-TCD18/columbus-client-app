@@ -34,9 +34,9 @@ import {ConferenceData} from '../../providers/conference-data';
 		console.log("You rating for this trip is " + _event);
 	}
 
- 	goToTripDetail() { this.navCtrl.push(TripPage); }
+ 	goToTripDetail() { this.navCtrl.setRoot(TripPage); }
 
- 	goToTripHistory() { this.navCtrl.push(TripHistoryPage); }
+ 	goToTripHistory() { this.navCtrl.setRoot(TripHistoryPage); }
 
  	changeUsername() {
  		let alert = this.alertCtrl.create({
@@ -79,12 +79,14 @@ import {ConferenceData} from '../../providers/conference-data';
 	}
 
  	ionViewDidLoad() {
- 		let loading = this.loader.create({content: "Contacting Server ,please wait..."});
+    try{
+ 	  let loading = this.loader.create({content: "Contacting Server ,please wait..."});
+
  		this.userData.getUsername().then((id)=>
  		{
  			let user_id = id
  			this.userData.getUsertoken().then((value)=>
- 			{	
+ 			{
  				let token = value
  				this.authservice
  				.getData('user/'+user_id, token)
@@ -103,7 +105,11 @@ import {ConferenceData} from '../../providers/conference-data';
  						loading.dismissAll();
  					});
  			})
- 		})
+ 		})}catch (error){
+      console.log("Error Fetching User data");
+      alert("Error Fetching User data. Please refresh");
+      throw new Error("Check userdata api call");
+    }
  	}
 
  }
