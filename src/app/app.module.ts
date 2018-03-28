@@ -36,7 +36,7 @@ import { TripHistoryPage } from '../pages/trip-history/trip-history';
 import { AlltripsPage } from "../pages/alltrips/alltrips";
 import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
 import { MatchedTripsPage } from '../pages/matched-trips/matched-trips';
-
+import {RatingPage} from "../pages/rating/rating";
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -68,7 +68,7 @@ import { DatePipe } from '@angular/common'
     TabsPage,
     TutorialPage,
     SupportPage,
-
+    RatingPage,
 
     HomepagePage,
     JourneyPage,
@@ -141,7 +141,7 @@ import { DatePipe } from '@angular/common'
     TabsPage,
     TutorialPage,
     SupportPage,
-
+    RatingPage,
 
     ProfilePage,
     TripPage,
