@@ -16,9 +16,14 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ConferenceData} from '../../providers/conference-data';
 import {TripdetailsProvider} from '../../providers/tripdetails/tripdetails';
 import {UserData} from "../../providers/user-data";
-import {TripPage} from "../trip/trip";
+
+// import {TripPage} from "../trip/trip";
 import {RatingPage} from "../rating/rating";
 
+
+
+// import {TripPage} from "../trip/trip";
+import {AlltripsPage} from "../alltrips/alltrips";
 
 
 
@@ -42,11 +47,12 @@ export class JourneyPage {
               // private nativeGeocoder: NativeGeocoder
   ) {
 
-
   }
 
   tripdata: any[] = [];
   isLoaded: Boolean = false;
+
+  admin: any = this.userData.getUsername()
 
   ionViewDidLoad() {
     this.isLoaded = true;
@@ -57,6 +63,7 @@ export class JourneyPage {
         console.log("Security token" + value);
         this.tripdetails.loaddata(value).then((value: any[]) => {
           this.tripdata = value;
+
           // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
           //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
           //   .catch((error: any) => console.log(error));
@@ -72,10 +79,12 @@ export class JourneyPage {
     }
   }
 
+
   // The cancel trip api to be used here once the api is prepared
   cancelTrip(trip) {
+
     if (this.stars == undefined) {
-      let modal = this.modalCtrl.create(RatingPage, {"title":"Trip Rating", });
+      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating",});
       modal.onDidDismiss(data => {
         this.stars = data;
         console.log(data);
@@ -84,8 +93,12 @@ export class JourneyPage {
       modal.present();
     }
 
+    if (trip.admin != this.admin) {
+
+      alert("Only trip Admin can Cancel the trip");
+    }
     else {
-      alert("Trip has been Cancelled.");
+      alert("Trip has been Cancelled. Check other Trips now");
       try {
         this.userData.getUsertoken().then((value) => {
           this.confData
@@ -93,7 +106,7 @@ export class JourneyPage {
             .then(
               (result) => {
                 console.log(result);
-                this.navCtrl.push(TripPage, trip);
+                this.navCtrl.setRoot(AlltripsPage, trip);
               },
               (err) => {
                 console.log(err);
@@ -105,35 +118,40 @@ export class JourneyPage {
       }
       console.log("Delete trip api called here")
     }
-}
+  }
 
-  leaveTrip(trip){
-    alert("Trip has Ended. Please rate the trip now.");
-    // this.hide = true;
-    try {
-      this.userData.getUsertoken().then((value) => {
-        this.confData
-          .getData('trip/' + trip.tripId, value)
-          .then(
-            (result) => {
-              console.log(result);
-              this.navCtrl.push(TripPage, trip);
-            },
-            (err) => {
-              console.log(err);
-            });
-      })
-    }catch(error)
+
+    leaveTrip(trip)
     {
-      alert("Unable to Leave trip. Contact Trip Admin");
-      throw new Error("Trouble Leaving trip");
+
+      if (trip.admin == this.admin) {
+
+        alert("Admin Cannot Leave Trip. Try Cancelling the trip");
+      }
+      alert("Trip has been Cancelled. Please rate the trip now.");
+      // this.hide = true;
+      try {
+        this.userData.getUsertoken().then((value) => {
+          this.confData
+            .getData('trip/' + trip.tripId, value)
+            .then(
+              (result) => {
+                console.log(result);
+                this.navCtrl.setRoot(AlltripsPage, trip);
+              },
+              (err) => {
+                console.log(err);
+              });
+        })
+      } catch (error) {
+        alert("Unable to Leave trip. Contact Trip Admin");
+        throw new Error("Trouble Leaving trip");
+      }
+      console.log("Leave trip api called here");
+
     }
-    console.log("Leave trip api called here")
-
-}
+  }
 
 
 
-
-}
 
