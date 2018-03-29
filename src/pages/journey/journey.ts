@@ -35,6 +35,7 @@ import {RatingPage} from "../rating/rating";
 export class JourneyPage {
   token: any;
   public stars: any;
+  public userToken
 
   constructor(public navCtrl: NavController,
               public confData: ConferenceData,
@@ -46,6 +47,10 @@ export class JourneyPage {
               public modalCtrl: ModalController
               // private nativeGeocoder: NativeGeocoder
   ) {
+
+    this.userData.getUsertoken().then((value) => {
+      this.userToken = value;
+    })
 
   }
 
@@ -130,15 +135,23 @@ export class JourneyPage {
     rateTrip(trip){
     console.log("Rating trip:", trip.tripId)
     if (this.stars == undefined) {
-      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating for "});
+      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
       modal.onDidDismiss(data => {
         this.stars = data;
-        console.log(data);
         alert("You Rated this trip " + this.stars + " stars.");
       });
       modal.present();
     }
 
+  }
+
+  setRating(tripId){
+
+    this.confData.postDataWithBearerToken('rating',{"rating":this.stars, "tripId": tripId}, this.userToken).then(value => {
+      console.log(value)
+    },(err)=>{
+      console.log(err)
+    });
   }
 
     leaveTrip(trip) {
@@ -151,6 +164,7 @@ export class JourneyPage {
         alert("You have now left the trip. Please rate the trip now.");
       // this.hide = true;
       try {
+        this.setRating(trip.tripId)
         this.userData.getUsertoken().then((value) => {
           this.confData
             .getData('trip/' + trip.tripId, value)

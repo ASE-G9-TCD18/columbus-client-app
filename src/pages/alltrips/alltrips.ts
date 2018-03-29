@@ -26,6 +26,7 @@ import { TripPage } from "../trip/trip";
 export class AlltripsPage {
 
   token:any;
+  userToken:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public confData: ConferenceData,
@@ -33,6 +34,12 @@ export class AlltripsPage {
               public inAppBrowser: InAppBrowser,
               public tripdetails: TripdetailsProvider,
               private userData: UserData,) {
+    this.userData.getUsertoken().then((value) => {
+      this.userToken = value;
+    },(err)=>{
+        console.log(err)
+    });
+
   }
 
 
@@ -47,7 +54,6 @@ export class AlltripsPage {
     try {
       this.userData.getUsertoken().then((value) => {
         this.token = value;
-        console.log("------i am here-----" + value);
         this.tripdetails.alltriplist(value).then((value: any[]) => {
           this.tripdata = value;
 

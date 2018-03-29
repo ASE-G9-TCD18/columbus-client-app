@@ -226,4 +226,21 @@ export class ConferenceData {
   });
   }
 
+  getRating(type, tripId, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      console.log(apiURL+type)
+      this.http.get(apiURL+type+"/"+tripId, {headers}).subscribe(res =>{
+        resolve(res.json());
+        console.log(res.json())
+      }, (err)=> {
+        reject(err.json());
+        console.log(err.json())
+      });
+    });
+
+  }
+
+
 }
