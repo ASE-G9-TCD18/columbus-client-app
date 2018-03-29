@@ -40,9 +40,10 @@
         <ion-card-title>{{trip.tripId}}</ion-card-title>
         <ion-card-header>
           <b>Preferences</b>
+          <p>Trip Creator: {{trip.admin}} </p>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content text-wrap="2">
           <ion-row>
             <ion-col><b>Start Time:</b> {{trip.preferences[4].value}}</ion-col>
           </ion-row>
