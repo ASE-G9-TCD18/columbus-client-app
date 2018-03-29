@@ -30,13 +30,13 @@
     </rating>
 
     <ion-list inset>
-      <button ion-item (click)="goToTripDetail()">
+      <!-- <button ion-item (click)="goToTripDetail()">
         <ion-icon name="paw" item-start></ion-icon>
         My Trip
-      </button>
-      <button ion-item (click)="goToTripHistory()">
-        <ion-icon name="planet" item-start></ion-icon>
-        My Trip History
+      </button> -->
+      <button ion-item (click)="goToTripRequest()">
+        <ion-icon name="planet" item-start> </ion-icon>
+        {{awaitingConfirmation.length}} Requests to Me:
       </button>
       <button ion-item (click)="changeUsername()">
         <ion-icon name="paw" item-start></ion-icon>
