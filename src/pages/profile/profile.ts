@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController} from 'ionic-angular';
-import { TripPage } from '../trip/trip';
-import { TripHistoryPage } from '../trip-history/trip-history';
+import { PendingRequestsPage } from '../pending-requests/pending-requests';
 import { IonicPage } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 import { ConferenceData} from '../../providers/conference-data';
@@ -25,6 +24,8 @@ import { ConferenceData} from '../../providers/conference-data';
 
  	name: string;
  	rate: string;
+ 	awaitingConfirmation: any = [];
+
  	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
 
  	}
@@ -34,9 +35,11 @@ import { ConferenceData} from '../../providers/conference-data';
 		console.log("You rating for this trip is " + _event);
 	}
 
- 	goToTripDetail() { this.navCtrl.setRoot(TripPage); }
+ 	// goToTripDetail() { this.navCtrl.setRoot(TripPage); }
 
- 	goToTripHistory() { this.navCtrl.setRoot(TripHistoryPage); }
+ 	goToTripRequest() { 
+ 		this.navCtrl.push(PendingRequestsPage, { request: this.awaitingConfirmation } ); 
+ 	}
 
  	changeUsername() {
  		let alert = this.alertCtrl.create({
@@ -96,7 +99,8 @@ import { ConferenceData} from '../../providers/conference-data';
  						console.log(result);
  						this.name = this.responseData["firstName"];
  						this.rate = this.responseData["userRating"];
-
+ 						this.awaitingConfirmation = this.responseData["tripsRequestsAwaitingConfirmation"];
+ 						console.log("sdfdsfdsf ", this.awaitingConfirmation)
  					},
  					(err) => {
  						this.errresponse = err
