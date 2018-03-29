@@ -56,7 +56,7 @@ export class JourneyPage {
 
   tripdata: any[] = [];
   isLoaded: Boolean = false;
-  userName: any;
+  public userName: any;
 
 
 
@@ -133,15 +133,22 @@ export class JourneyPage {
     }
   }
     rateTrip(trip){
-    console.log("Rating trip:", trip.tripId)
-    if (this.stars == undefined) {
-      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
-      modal.onDidDismiss(data => {
-        this.stars = data;
-        alert("You Rated this trip " + this.stars + " stars.");
-      });
-      modal.present();
-    }
+      console.log("Rating trip:", trip.tripId)
+      if (trip.admin != this.userName) {
+
+        alert("Only trip Admin can Cancel the trip");
+      }
+      else {
+
+        if (this.stars == undefined) {
+          let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
+          modal.onDidDismiss(data => {
+            this.stars = data;
+            alert("You Rated this trip " + this.stars + " stars.");
+          });
+          modal.present();
+        }
+      }
 
   }
 
