@@ -112,7 +112,7 @@ export class JourneyPage {
             .then(
               (result) => {
                 console.log(result);
-                // this.navCtrl.setRoot(AlltripsPage, trip);
+                this.navCtrl.setRoot(JourneyPage, trip);
               },
               (err) => {
                 console.log(err);
