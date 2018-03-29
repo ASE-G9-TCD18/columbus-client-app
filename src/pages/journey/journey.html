@@ -38,9 +38,12 @@
         <ion-card-title>{{trip.tripId}}</ion-card-title>
         <ion-card-header>
           <b>Preferences</b>
+          <p>Trip Creator: {{trip.admin}} </p>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content text-wrap="2">
+
+
           <ion-row>
             <ion-col><b>Start Time:</b> {{trip.preferences[4].value}}</ion-col>
           </ion-row>
@@ -56,7 +59,16 @@
               <b>Trip Type:</b> {{trip.tripType}}
             </ion-col>
           </ion-row >
-          <ion-col>
+          <ion-row>
+            <ion-col>
+              <b>Already Joined Members: </b>
+              {{trip.tripUsersLoginIds}}
+            </ion-col>
+
+          </ion-row>
+
+
+          <ion-col padding>
 
           <button align-self-center="10" padding ion-button color="columbusRed" (click)="cancelTrip(trip)">Cancel Trip</button>
 
@@ -71,9 +83,14 @@
             <button align-self-center="10" padding ion-button color="columbusRed" (click)="rateTrip(trip)">Rate Trip</button>
 
           </ion-col>
+
+
         </ion-card-content>
 
-        <ion-row>
+
+
+
+        <ion-row padding>
         <ion-col>
         <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>

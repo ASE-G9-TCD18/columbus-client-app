@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
 let apiURL = "http://52.212.149.132:8080/"
+
 // let apiURL = "http://10.6.50.162:8080/"
 
 @Injectable()
@@ -224,5 +225,22 @@ export class ConferenceData {
     });
   });
   }
+
+  getRating(type, tripId, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      console.log(apiURL+type)
+      this.http.get(apiURL+type+"/"+tripId, {headers}).subscribe(res =>{
+        resolve(res.json());
+        console.log(res.json())
+      }, (err)=> {
+        reject(err.json());
+        console.log(err.json())
+      });
+    });
+
+  }
+
 
 }

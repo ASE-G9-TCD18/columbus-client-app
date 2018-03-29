@@ -26,6 +26,7 @@ import { TripPage } from "../trip/trip";
 export class AlltripsPage {
 
   token:any;
+  userToken:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public confData: ConferenceData,
@@ -33,21 +34,31 @@ export class AlltripsPage {
               public inAppBrowser: InAppBrowser,
               public tripdetails: TripdetailsProvider,
               private userData: UserData,) {
+    this.userData.getUsertoken().then((value) => {
+      this.userToken = value;
+    },(err)=>{
+        console.log(err)
+    });
+
   }
 
 
 
   tripdata:any[] = [];
   isLoaded: Boolean = false;
-  admin:any = this.userData.getUsername();
+  admin:any ;
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlltripsPage');
     this.isLoaded = true;
     try {
+      this.userData.getUsername().then((id)=> {
+        this.admin = id;
+
+      });
       this.userData.getUsertoken().then((value) => {
         this.token = value;
-        console.log("------i am here-----" + value);
         this.tripdetails.alltriplist(value).then((value: any[]) => {
           this.tripdata = value;
 
@@ -79,15 +90,21 @@ export class AlltripsPage {
       console.log(trip);
       let i: number;
       let memberalready: any = false;
+      // console.log("tttttttt", trip.admin,this.admin,memberalready)
+      console.log(trip);
       for(i=0; i<trip.tripUsersLoginIds; i++){
-        if(this.userData.getUsername()==trip.tripUsersLoginIds[i])
+        if(this.admin==trip.tripUsersLoginIds[i])
           memberalready = true;
       }
-     if (trip.admin == this.admin || memberalready) {
+
+    // console.log("Ttttttt", trip.admin,this.admin,memberalready)
+     if (trip.admin == this.admin || memberalready == true) {
        alert("You have already joined this trip");
+
+
      }
     else {
-
+       console.log("Not a member");
       try {
         this.userData.getUsertoken().then((value) => {
           this.confData
@@ -107,7 +124,7 @@ export class AlltripsPage {
         alert("Error Joining Trip. Please try after some time");
         throw new Error("Error Joining trip. Contact admin");
       }
-      alert("Your Join request has been sent to Admin! Please Check MyTrips page.");
+       alert("Your Join request has been sent to Admin! Please Check MyTrips page.");
     }
   }
 }
