@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
-
+let apiURL = "http://52.212.149.132:8080/"
 /*
   Generated class for the TripdetailsProvider provider.
 
@@ -23,14 +23,14 @@ export class TripdetailsProvider {
   loaddata(token: any){
 
     console.log("Inside Load Data");
-
+    let type: any = "/trips";
     return new Promise((resolve, reject) =>{
       let headers = new Headers()
 
 
       console.log("-----------"+token);
       headers.set('Authorization','Bearer '+ token)
-      this.http.get("http://10.6.50.162:8080/trips", {headers}).subscribe(res =>{
+      this.http.get(apiURL+type, {headers}).subscribe(res =>{
         resolve(res.json());
       }, (err)=> {
         reject(err.json());
@@ -48,10 +48,10 @@ export class TripdetailsProvider {
       return new Promise((resolve, reject) => {
         let headers = new Headers()
 
-
+        let type: any = "/trips/all";
         console.log("-----------" + token);
         headers.set('Authorization', 'Bearer ' + token)
-        this.http.get("http://10.6.50.162:8080/trips/all", {headers}).subscribe(res => {
+        this.http.get(apiURL+type, {headers}).subscribe(res => {
           resolve(res.json());
         }, (err) => {
           reject(err.json());
