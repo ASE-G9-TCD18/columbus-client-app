@@ -109,6 +109,7 @@ export class JourneyPage {
       alert("Only trip Admin can Cancel the trip");
     }
     else {
+      this.setRating(trip.tripId)
       alert("Trip has been Cancelled. Check other Trips now");
       try {
         this.userData.getUsertoken().then((value) => {

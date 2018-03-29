@@ -37,6 +37,7 @@ import { AlltripsPage } from "../pages/alltrips/alltrips";
 import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
 import { MatchedTripsPage } from '../pages/matched-trips/matched-trips';
 import {RatingPage} from "../pages/rating/rating";
+import {PendingRequestsPage} from "../pages/pending-requests/pending-requests"
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -78,7 +79,8 @@ import { DatePipe } from '@angular/common'
     TripHistoryPage,
     AlltripsPage,
     JoinedtripsPage,
-    MatchedTripsPage
+    MatchedTripsPage,
+    PendingRequestsPage
   ],
   imports: [
     BrowserModule,
@@ -142,19 +144,15 @@ import { DatePipe } from '@angular/common'
     TutorialPage,
     SupportPage,
     RatingPage,
-
     ProfilePage,
     TripPage,
     TripHistoryPage,
     JoinedtripsPage,
     MatchedTripsPage,
-
     HomepagePage,
     JourneyPage,
-    AlltripsPage
-
-
-
+    AlltripsPage,
+    PendingRequestsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
