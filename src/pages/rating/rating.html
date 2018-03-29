@@ -14,16 +14,24 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-row>
+    <ion-col col-md-6 col-sm-6 offset-md-3 offset-sm-3>
+      <ion-item no-lines no-border class="starsContent">
+        <rating [(ngModel)]="rating"
+                readOnly="false"
+                max="5"
+                emptyStarIconName="star-outline"
+                halfStarIconName="star-half"
+                starIconName="star"
+                nullable="false">
+        </rating>
+      </ion-item>
 
-  <rating [(ngModel)]="rating"
-          readOnly="false"
-          max="5"
-          emptyStarIconName="star-outline"
-          halfStarIconName="star-half"
-          starIconName="star"
-          nullable="false">
-  </rating>
+    </ion-col>
+  </ion-row>
+
+
 
 <ion-item>
   <button ion-button color="columbusRed" full (click)="closeModal()">submit</button>
