@@ -137,7 +137,6 @@ export class JourneyPage {
       console.log("Rating trip:", trip.tripId)
       if (trip.admin != this.userName) {
 
-        alert("Only trip Admin can Cancel the trip");
       }
       else {
 
@@ -172,10 +171,10 @@ export class JourneyPage {
         alert("You have now left the trip. Please rate the trip now.");
       // this.hide = true;
       try {
-        this.setRating(trip.tripId)
+        // this.setRating(trip.tripId)
         this.userData.getUsertoken().then((value) => {
           this.confData
-            .getData('trip/' + trip.tripId, value)
+            .deleteData('trip/' + trip.tripId + '/leavetrip', value)
             .then(
               (result) => {
                 console.log(result);
@@ -183,7 +182,7 @@ export class JourneyPage {
               }
               )
             .catch((err) => {
-              console.log("Error in getting getting trip data:")
+              console.log("Error in leaving trip")
               console.log(err);
             });
         })
