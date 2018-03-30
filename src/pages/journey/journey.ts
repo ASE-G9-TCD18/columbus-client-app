@@ -56,7 +56,7 @@ export class JourneyPage {
 
   tripdata: any[] = [];
   isLoaded: Boolean = false;
-  userName: any;
+  public userName: any;
 
 
 
@@ -134,15 +134,21 @@ export class JourneyPage {
     }
   }
     rateTrip(trip){
-    console.log("Rating trip:", trip.tripId)
-    if (this.stars == undefined) {
-      let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
-      modal.onDidDismiss(data => {
-        this.stars = data;
-        alert("You Rated this trip " + this.stars + " stars.");
-      });
-      modal.present();
-    }
+      console.log("Rating trip:", trip.tripId)
+      if (trip.admin != this.userName) {
+
+      }
+      else {
+
+        if (this.stars == undefined) {
+          let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
+          modal.onDidDismiss(data => {
+            this.stars = data;
+            alert("You Rated this trip " + this.stars + " stars.");
+          });
+          modal.present();
+        }
+      }
 
   }
 
@@ -165,10 +171,10 @@ export class JourneyPage {
         alert("You have now left the trip. Please rate the trip now.");
       // this.hide = true;
       try {
-        this.setRating(trip.tripId)
+        // this.setRating(trip.tripId)
         this.userData.getUsertoken().then((value) => {
           this.confData
-            .getData('trip/' + trip.tripId, value)
+            .deleteData('trip/' + trip.tripId + '/leavetrip', value)
             .then(
               (result) => {
                 console.log(result);
@@ -176,7 +182,7 @@ export class JourneyPage {
               }
               )
             .catch((err) => {
-              console.log("Error in getting getting trip data:")
+              console.log("Error in leaving trip")
               console.log(err);
             });
         })

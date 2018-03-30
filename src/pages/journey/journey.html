@@ -53,7 +53,7 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <b>Gender:</b> {{trip.preferences[3].value}}
+              <b>Preferred Gender:</b> {{trip.preferences[3].value}}
             </ion-col>
             <ion-col>
               <b>Trip Type:</b> {{trip.tripType}}
@@ -63,6 +63,29 @@
             <ion-col>
               <b>Already Joined Members: </b>
               {{trip.tripUsersLoginIds}}
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <b>Group Age Range: </b>
+              {{trip.preferences[0].value}}
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <b>Group Size Range: </b>
+              {{trip.preferences[1].value}}-{{trip.preferences[2].value}}
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <b>Schedule Repetition </b>
+              {{trip.preferences[6].value}}
             </ion-col>
 
           </ion-row>
@@ -78,7 +101,7 @@
           <button align-self-center="10" padding ion-button color="columbusRed" (click)="leaveTrip(trip)">Leave Trip</button>
 
             </ion-col>
-          <ion-col>
+          <ion-col padding>
 
             <button align-self-center="10" padding ion-button color="columbusRed" (click)="rateTrip(trip)">Rate Trip</button>
 
