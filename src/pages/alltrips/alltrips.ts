@@ -51,7 +51,7 @@ export class AlltripsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlltripsPage');
-    this.isLoaded = true;
+
     try {
       this.userData.getUsername().then((id)=> {
         this.admin = id;
@@ -61,11 +61,7 @@ export class AlltripsPage {
         this.token = value;
         this.tripdetails.alltriplist(value).then((value: any[]) => {
           this.tripdata = value;
-
-          // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
-          //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
-          //   .catch((error: any) => console.log(error));
-          console.log("===========" + this.tripdata[0].tripType);
+          this.isLoaded = true;
 
         }).catch((err) => {
           console.log("Error in getting all list:")

@@ -62,7 +62,7 @@ export class ConferenceApp {
     // { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
-    { title: 'My Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
+    { title: 'My Trips', name: 'JourneyPage', component: JourneyPage, icon: 'megaphone' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
     { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];

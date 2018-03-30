@@ -51,8 +51,6 @@ export class HomepagePage {
   responseData: any;
   errresponse: any = "200";
   errMessage: any;
-  private currentLat: any;
-  private currentLon: any;
   userName: any;
   srclocation: any;
   destlocation: any;
@@ -135,7 +133,7 @@ export class HomepagePage {
             return;
           }
           this.destlocation = place;
-          console.log("-------"+this.destlocation.formatted_address);
+          console.log("-------" + this.destlocation.formatted_address);
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -167,7 +165,7 @@ export class HomepagePage {
           }
 
           this.srclocation = place;
-          console.log("-------"+this.srclocation.formatted_address);
+          console.log("-------" + this.srclocation.formatted_address);
           //set latitude, longitude and zoom
           this.srclat = place.geometry.location.lat();
           this.srclong = place.geometry.location.lng();
@@ -186,104 +184,113 @@ export class HomepagePage {
         this.srclong = position.coords.longitude;
 
       });
-
-      this.nativeGeocoder.reverseGeocode(this.srclat, this.srclong)
-        .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
-        .catch((error: any) => console.log(error));
-
     }
-    console.log("here is the location from this function"+ this.srclat, this.srclong);
+
+  }
+
+  displayCurrentLocation() {
+    let nativeHomeInputBox1 = document.getElementById('txtHome1').getElementsByTagName('input')[0];
+    nativeHomeInputBox1.value = this.srclat + "";
+    this.nativeGeocoder.reverseGeocode(this.srclat, this.srclong)
+      .then((result: NativeGeocoderReverseResult) =>
+
+        nativeHomeInputBox1.value = JSON.stringify(result))
+      .catch((error: any) => console.log(error));
+
+
+
   }
 
   onCreateTrip() {
-    console.log("the location name is: " + this.srclocation +"and" + this.destlocation);
-    let userName;
-    this.userData.getUsername().then((value) => {
-      userName = value;
-    });
-    console.log("User Name Is: ", userName);
-    let AGE_RANGE = this.selectedpref.miniage + "-" + this.selectedpref.maxiage;
-    let GENDER = this.selectedpref.gender;
-    let time = new Date().toTimeString();
-    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.currentLat = position.coords.latitude;
-        this.currentLon = position.coords.longitude;
-
-        // console.log("here are the current coordinates--------" + this.currentLat+"-----"+this.currentLon);
-        this.zoom = 16;
-      });
+    let nativeHomeInputBox1 = document.getElementById('txtHome').getElementsByTagName('input')[0];
+    let nativeHomeInputBox = document.getElementById('txtHome1').getElementsByTagName('input')[0];
+    //
+    if (nativeHomeInputBox1.value == undefined || nativeHomeInputBox.value == undefined || this.srclocation == undefined || this.destlocation == undefined) {
+      alert("You have not selected the location !!");
     }
-    this.tripData =
-      {
-        tripType: "SCHEDULED",
-        loginId: userName,
-        tripStops: [{
-          "sequenceNumber": 1,
-          "coordinate": {
-            "lat": this.srclat,
-            "lng": this.srclong
-          },
-          "location":this.srclocation.formatted_address
-        },
-          {
-            "sequenceNumber": 2,
+
+    else{
+      let userName;
+      this.userData.getUsername().then((value) => {
+        userName = value;
+      });
+      console.log("User Name Is: ", userName);
+      let AGE_RANGE = this.selectedpref.miniage + "-" + this.selectedpref.maxiage;
+      let GENDER = this.selectedpref.gender;
+      let time = new Date().toTimeString();
+      let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.tripData =
+        {
+          tripType: "SCHEDULED",
+          loginId: userName,
+          tripStops: [{
+            "sequenceNumber": 1,
             "coordinate": {
-              "lat": this.latitude,
-              "lng": this.longitude
+              "lat": this.srclat,
+              "lng": this.srclong
             },
-            "location":this.destlocation.formatted_address
-          }
-        ],
-        "preferences": [{
-          "preferenceType": "AGE_RANGE",
-          "value": AGE_RANGE
-        },
-          {
-            "preferenceType": "GROUP_MIN_SIZE",
-            "value": this.selectedpref.minigroup
+            "location": this.srclocation.formatted_address
           },
-          {
-            "preferenceType": "GROUP_MAX_SIZE",
-            "value": this.selectedpref.maxigroup
+            {
+              "sequenceNumber": 2,
+              "coordinate": {
+                "lat": this.latitude,
+                "lng": this.longitude
+              },
+              "location": this.destlocation.formatted_address
+            }
+          ],
+          "preferences": [{
+            "preferenceType": "AGE_RANGE",
+            "value": AGE_RANGE
           },
-          {
-            "preferenceType": "GENDER",
-            "value": GENDER
-          },
-          {
-            "preferenceType": "START_DATE",
-            "value": date + "_" + time.substr(0, 8)
-          },
-          {
-            "preferenceType": "END_DATE",
-            "value": "2017-03-20" + "_" + time.substr(0, 8)
-          },
-          {
-            "preferenceType": "REPEAT",
-            "value": "WEEKDAY"
-          }
-        ]
-      };
-    console.log(this.tripData);
-    console.log("creating a trip");
-    this.userData.getUsertoken().then((value) => {
-      this.authservice
-        .postDataWithBearerToken("trip", this.tripData, value)
-        .then(
-          (result) => {
-            console.log("result is: ", result);
-            this.navCtrl.push(TripPage, result);
-          },
-          (err) => {
-            this.errresponse = err
-            console.log(err);
-            // let errmsg = JSON.parse(this.errresponse)
-            this.errMessage = this.errresponse.errors[0].defaultMessage;
-            console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
-          });
-    })
+            {
+              "preferenceType": "GROUP_MIN_SIZE",
+              "value": this.selectedpref.minigroup
+            },
+            {
+              "preferenceType": "GROUP_MAX_SIZE",
+              "value": this.selectedpref.maxigroup
+            },
+            {
+              "preferenceType": "GENDER",
+              "value": GENDER
+            },
+            {
+              "preferenceType": "START_DATE",
+              "value": date + "_" + time.substr(0, 8)
+            },
+            {
+              "preferenceType": "END_DATE",
+              "value": "2017-03-20" + "_" + time.substr(0, 8)
+            },
+            {
+              "preferenceType": "REPEAT",
+              "value": "WEEKDAY"
+            }
+          ]
+        };
+      console.log(this.tripData);
+      console.log("creating a trip");
+      this.userData.getUsertoken().then((value) => {
+        this.authservice
+          .postDataWithBearerToken("trip", this.tripData, value)
+          .then(
+            (result) => {
+              console.log("result is: ", result);
+              this.navCtrl.push(TripPage, result);
+            },
+            (err) => {
+              this.errresponse = err
+              console.log(err);
+              // let errmsg = JSON.parse(this.errresponse)
+              this.errMessage = this.errresponse.errors[0].defaultMessage;
+              console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
+            });
+      })
+    }
+
+
   }
 
   private setCurrentPosition() {
@@ -482,91 +489,89 @@ export class HomepagePage {
   }
 
   searchTrip() {
-
-    console.log("2222222this.selectedpref:  ", this.selectedpref)
-    let AGE_RANGE = this.selectedpref.miniage + "-" + this.selectedpref.maxiage;
-    let GENDER = this.selectedpref.gender;
-    let time = new Date().toTimeString();
-    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.currentLat = position.coords.latitude;
-        this.currentLon = position.coords.longitude;
-
-        console.log("here are the current coordinates--------" + this.currentLat + "-----" + this.currentLon);
-        this.zoom = 16;
-      });
+    let nativeHomeInputBox1 = document.getElementById('txtHome').getElementsByTagName('input')[0];
+    let nativeHomeInputBox = document.getElementById('txtHome1').getElementsByTagName('input')[0];
+    //
+    if (nativeHomeInputBox1.value == undefined || nativeHomeInputBox.value == undefined || this.srclocation == undefined || this.destlocation == undefined) {
+      alert("You have not selected the location !!");
     }
-    this.tripData =
-      {
-        tripType: "SCHEDULED",
-        loginId: this.userName,
-        tripStops: [{
-          "sequenceNumber": 1,
-          "coordinate": {
-            "lat": this.srclat,
-            "lng": this.srclong
-          },
-          "location":this.srclocation.formatted_address
-        },
-          {
-            "sequenceNumber": 2,
+    else {
+
+      let AGE_RANGE = this.selectedpref.miniage + "-" + this.selectedpref.maxiage;
+      let GENDER = this.selectedpref.gender;
+      let time = new Date().toTimeString();
+      let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.tripData =
+        {
+          tripType: "SCHEDULED",
+          loginId: this.userName,
+          tripStops: [{
+            "sequenceNumber": 1,
             "coordinate": {
-              "lat": this.latitude,
-              "lng": this.longitude
+              "lat": this.srclat,
+              "lng": this.srclong
             },
-            "location":this.destlocation.formatted_address
+            "location": this.srclocation.formatted_address
           },
+            {
+              "sequenceNumber": 2,
+              "coordinate": {
+                "lat": this.latitude,
+                "lng": this.longitude
+              },
+              "location": this.destlocation.formatted_address
+            },
 
-        ],
-        "preferences": [{
-          "preferenceType": "AGE_RANGE",
-          "value": AGE_RANGE
-        },
-          {
-            "preferenceType": "GROUP_MIN_SIZE",
-            "value": this.selectedpref.minigroup
+          ],
+          "preferences": [{
+            "preferenceType": "AGE_RANGE",
+            "value": AGE_RANGE
           },
-          {
-            "preferenceType": "GROUP_MAX_SIZE",
-            "value": this.selectedpref.maxigroup
-          },
-          {
-            "preferenceType": "GENDER",
-            "value": GENDER
-          },
-          {
-            "preferenceType": "START_DATE",
-            "value": date + "_" + time.substr(0, 8)
-          },
-          {
-            "preferenceType": "END_DATE",
-            "value": "2017-03-20" + "_" + time.substr(0, 8)
-          },
-          {
-            "preferenceType": "REPEAT",
-            "value": "WEEKDAY"
-          }
-        ]
-      };
+            {
+              "preferenceType": "GROUP_MIN_SIZE",
+              "value": this.selectedpref.minigroup
+            },
+            {
+              "preferenceType": "GROUP_MAX_SIZE",
+              "value": this.selectedpref.maxigroup
+            },
+            {
+              "preferenceType": "GENDER",
+              "value": GENDER
+            },
+            {
+              "preferenceType": "START_DATE",
+              "value": date + "_" + time.substr(0, 8)
+            },
+            {
+              "preferenceType": "END_DATE",
+              "value": "2017-03-20" + "_" + time.substr(0, 8)
+            },
+            {
+              "preferenceType": "REPEAT",
+              "value": "WEEKDAY"
+            }
+          ]
+        };
 
-    console.log("search a trip");
-    this.userData.getUsertoken().then((value) => {
-      console.log("The search tripData is : ", this.tripData);
-      this.authservice
-        .postDataWithBearerToken("search", this.tripData, value)
-        .then(
-          (result) => {
-            console.log("result is: ", result);
-            this.navCtrl.push(MatchedTripsPage, {"result": result});
-          },
-          (err) => {
-            this.errresponse = err
-            console.log(err);
-            this.errMessage = this.errresponse.errors[0].defaultMessage;
-            console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
-          });
-    })
+      console.log("search a trip");
+      this.userData.getUsertoken().then((value) => {
+        console.log("The search tripData is : ", this.tripData);
+        this.authservice
+          .postDataWithBearerToken("search", this.tripData, value)
+          .then(
+            (result) => {
+              console.log("result is: ", result);
+              this.navCtrl.push(MatchedTripsPage, {"result": result});
+            },
+            (err) => {
+              this.errresponse = err
+              console.log(err);
+              this.errMessage = this.errresponse.errors[0].defaultMessage;
+              console.log("here is the error" + this.errresponse.errors[0].defaultMessage);
+            });
+      })
+    }
   }
 
 }
