@@ -6,10 +6,10 @@ import {NavController, LoadingController} from 'ionic-angular';
 import {UserData} from '../../providers/user-data';
 
 import {UserOptionsSignup} from '../../interfaces/user-options-signup';
-
-import {LoginPage} from '../login/login';
+import {UserOptionsSignin} from '../../interfaces/user-options-signin';
 
 import {ConferenceData} from '../../providers/conference-data';
+import {HomepagePage} from "../homepage/homepage";
 
 import { FCM } from '@ionic-native/fcm';
 
@@ -25,6 +25,13 @@ export class SignupPage {
   responseData: any;
   errresponse: any="200";
   errMessage: any;
+  private login: UserOptionsSignin =
+    {
+
+      "loginId": "",
+      "password": ""
+
+    };
   private signupData: UserOptionsSignup =
     {
       loginId: "",
@@ -60,10 +67,26 @@ export class SignupPage {
           (result) => {
           this.responseData = result;
           console.log(this.responseData);
-          //this.userData.signup(this.signupData.loginId);
           loading.dismissAll();
-          this.navCtrl.push(LoginPage);
-        },
+          this.navCtrl.setRoot(HomepagePage);
+          this.login.loginId = this.signupData.loginId;
+          this.login.password = this.signupData.password;
+          this.authservice.postDataLogin(JSON.stringify(this.login), "login")
+            .then(
+              (result) => {
+                this.responseData = result;
+                console.log(this.responseData);
+                this.userData.login(this.login.loginId, this.responseData);
+              },
+              (err) => {
+                this.errresponse = err
+                console.log(err);
+                loading.dismissAll();
+                this.errMessage = this.errresponse.message;
+                console.log("here is the error" + this.errresponse.message);
+              });
+
+          },
           (err) => {
           this.errresponse = err
           console.log(err);

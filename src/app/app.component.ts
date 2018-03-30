@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
+
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -22,6 +22,8 @@ import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { FCM } from '@ionic-native/fcm';
+import { AlltripsPage } from "../pages/alltrips/alltrips";
+
 
 
 export interface PageInterface {
@@ -47,17 +49,17 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-    //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'contacts' },
-    { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' },
-    { title: 'Trip Plan', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'information-circle' },
-    { title: 'Profile', name: 'TabsPage', component: TabsPage, tabComponent: ProfilePage, index: 4, icon: 'information-circle'  }
+    { title: 'Go Somewhere', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
+    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 2, icon: 'information-circle' }
+
   ];
   loggedInPages: PageInterface[] = [
+    // { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
+    { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
+    { title: 'My Trips', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Logout', name: 'LogoutPage', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', name: 'LoginPage', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },

@@ -1,0 +1,36 @@
+<ion-header>
+
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pending Requests</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content *ngIf="isLoaded" padding>
+  <ion-list [virtualScroll]="pendingRequests" approxItemHeight="450px">
+    <ion-item *virtualItem="let request">
+      <ion-card class = "searchList">
+        <ion-card-title>{{request.requestFrom}}</ion-card-title>
+        <ion-card-header>
+          <b>Details</b>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col><b>requestFrom:</b> {{request.requestFrom}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>tripId:</b> {{request.tripId}} </ion-col>
+          </ion-row>
+          <ion-item align-self-center="0">
+            <button align-self-center="10" padding ion-button color="columbusRed" (click)="confirmRequest(request)">Confirm</button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

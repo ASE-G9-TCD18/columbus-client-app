@@ -10,43 +10,64 @@ Ionic pages and navigation.
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Trip Plan</ion-title>
-
-    <button ion-button icon-only align-self-center (click)="presentFilter()">
-      <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
-    </button>
+    <ion-buttons end>
+      <button ion-button icon-only align-self-center (click)="presentFilters()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
+<ion-content no-padding>
+  <div id="floating-panel">
 
-
-<ion-content padding>
-
-  <ion-header>
-    <ion-navbar no-border-bottom>
+    <ion-item class="searchBars" no-lines>
       <ion-row>
-        <ion-col col-6>
-          <ion-searchbar  placeholder="Start Location"></ion-searchbar>
+        <ion-col col-11>
+          <ion-searchbar id="txtHome1" placeholder="Source"></ion-searchbar>
         </ion-col>
-        <ion-col col-6>
-          <ion-searchbar placeholder="Destination Location"></ion-searchbar>
+        <ion-col>
+          <div class="searchBtn">
+            <button ion-button icon-left clear (click)="setCurrentPositionforSrc()">
+              <ion-icon name="locate" style=" color: #fd7272"></ion-icon>
+            </button>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row>
-
-        <ion-col col-6>
-          <ion-item>
-            <ion-label >Start Time</ion-label>
-            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <button ion-button color="columbusGrey">Search for Trips</button>
+        <ion-col col-11 no-padding>
+          <ion-searchbar id="txtHome" placeholder="Destination"></ion-searchbar>
+          <!--<ion-input id="txtHome" type="text"></ion-input>-->
         </ion-col>
       </ion-row>
-
-
-    </ion-navbar>
-
-
-  </ion-header>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label>Commute Type</ion-label>
+      <ion-select [(ngModel)]="end" id="end" (change)="calculateAndDisplayRoute()">
+        <ion-option value="bus">Bus</ion-option>
+        <ion-option value="walk">Walk</ion-option>
+        <ion-option value="taxi">Taxi</ion-option>
+        <ion-option value="Luas">Luas</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="floatButton">
+    <!-- this fab is placed at bottom right -->
+    <ion-fab bottom right>
+      <button ion-fab>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-fab-list side="top">
+        <button ion-fab color="columbusRed" (click)="searchTrip()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+        <button ion-fab color="columbusRed" (click)="onCreateTrip()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
 </ion-content>
+

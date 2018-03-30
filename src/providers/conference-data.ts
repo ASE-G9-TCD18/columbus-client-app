@@ -8,8 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-let apiURL = "http://52.212.149.132:8081/";
-// let apiURL = "http://10.6.44.6:8080/";
+
+let apiURL = "http://52.212.149.132:8080/"
+// let apiURL = "http://10.6.50.162:8080/"
 
 @Injectable()
 export class ConferenceData {
@@ -154,6 +155,22 @@ export class ConferenceData {
     });
   }
 
+  postDataWithBearerToken(type, data, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      console.log("type: "+ type)
+      console.log("data: "+ data)
+      console.log("token: "+ data)
+      this.http.post(apiURL+type, data, {headers}).subscribe(res =>{
+        resolve(res.json());
+      }, (err)=> {
+
+        reject(err.json());
+      });
+    });
+  }
+
   postData(credentials, type){
     return new Promise((resolve, reject) =>{
       let headers = new Headers();
@@ -171,7 +188,23 @@ export class ConferenceData {
     return new Promise((resolve, reject) =>{
       let headers = new Headers()
       headers.set('Authorization','Bearer '+ token)
+      console.log(apiURL+type)
       this.http.get(apiURL+type, {headers}).subscribe(res =>{
+        resolve(res.json());
+        console.log(res.json())
+      }, (err)=> {
+        reject(err.json());
+        console.log(err.json())
+      });
+    });
+
+  }
+
+  deleteData(type, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      this.http.delete(apiURL+type, {headers}).subscribe(res =>{
         resolve(res.json());
       }, (err)=> {
         reject(err.json());
@@ -192,5 +225,22 @@ export class ConferenceData {
     });
   });
   }
+
+  getRating(type, tripId, token){
+    return new Promise((resolve, reject) =>{
+      let headers = new Headers()
+      headers.set('Authorization','Bearer '+ token)
+      console.log(apiURL+type)
+      this.http.get(apiURL+type+"/"+tripId, {headers}).subscribe(res =>{
+        resolve(res.json());
+        console.log(res.json())
+      }, (err)=> {
+        reject(err.json());
+        console.log(err.json())
+      });
+    });
+
+  }
+
 
 }

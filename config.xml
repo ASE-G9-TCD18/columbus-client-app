@@ -89,5 +89,7 @@
     <plugin name="cordova-plugin-whitelist" spec="https://github.com/apache/cordova-plugin-whitelist.git" />
     <plugin name="cordova-plugin-fcm" spec="~2.1.2" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="^3.1.1" />
     <engine name="ios" spec="^4.5.2" />
 </widget>

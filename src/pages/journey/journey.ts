@@ -1,4 +1,3 @@
-
 /**
  * Generated class for the JourneyPage page.
  *
@@ -6,31 +5,27 @@
  * Ionic pages and navigation.
  */
 
- import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+// import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
+import {
+  AlertController,
+  Config, ModalController,
+  NavController
+} from 'ionic-angular';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {ConferenceData} from '../../providers/conference-data';
+import {TripdetailsProvider} from '../../providers/tripdetails/tripdetails';
+import {UserData} from "../../providers/user-data";
 
- import {
-   ActionSheet,
-   ActionSheetController,
-   ActionSheetOptions,
-   Config,
-   NavController
- } from 'ionic-angular';
- import { InAppBrowser } from '@ionic-native/in-app-browser';
-
- import { ConferenceData } from '../../providers/conference-data';
-
- import { SessionDetailPage } from '../session-detail/session-detail';
- import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
-
+// import {TripPage} from "../trip/trip";
+import {RatingPage} from "../rating/rating";
 
 
-export interface ActionSheetButton {
-  text?: string;
-  role?: string;
-  icon?: string;
-  cssClass?: string;
-  handler?: () => boolean|void;
-};
+
+// import {TripPage} from "../trip/trip";
+// import {AlltripsPage} from "../alltrips/alltrips";
+
+
 
 @Component({
   selector: 'page-journey',
@@ -38,88 +33,173 @@ export interface ActionSheetButton {
 })
 
 export class JourneyPage {
-  actionSheet: ActionSheet;
-  speakers: any[] = [];
+  token: any;
+  public stars: any;
+  public userToken
 
-  constructor(
-    public actionSheetCtrl: ActionSheetController,
-    public navCtrl: NavController,
-    public confData: ConferenceData,
-    public config: Config,
-    public inAppBrowser: InAppBrowser) {
+  constructor(public navCtrl: NavController,
+              public confData: ConferenceData,
+              public config: Config,
+              public inAppBrowser: InAppBrowser,
+              public tripdetails: TripdetailsProvider,
+              private userData: UserData,
+              public alertCtrl: AlertController,
+              public modalCtrl: ModalController
+              // private nativeGeocoder: NativeGeocoder
+  ) {
+
+    this.userData.getUsertoken().then((value) => {
+      this.userToken = value;
+    })
+
   }
+
+  tripdata: any[] = [];
+  isLoaded: Boolean = false;
+  public userName: any;
+
+
 
   ionViewDidLoad() {
-    this.confData.getSpeakers().subscribe((speakers: any[]) => {
-      this.speakers = speakers;
+    this.isLoaded = true;
+    this.userData.getUsername().then((id)=> {
+      this.userName = id;
+
     });
-    console.log('ionViewDidLoad JourneyPage');
-  }
-  goToSessionDetail(session: any) {
-    this.navCtrl.push(SessionDetailPage, { sessionId: session.id });
-  }
 
-  goToSpeakerDetail(speaker: any) {
-    this.navCtrl.push(SpeakerDetailPage, { speakerId: speaker.id });
-  }
+    try {
+      this.userData.getUsertoken().then((value) => {
+        this.token = value;
+        console.log("Security token" + value);
+        this.tripdetails.loaddata(value).then((value: any[]) => {
+          this.tripdata = value;
 
-  goToSpeakerTwitter(speaker: any) {
-    this.inAppBrowser.create(
-      `https://twitter.com/${speaker.twitter}`,
-      '_blank'
-    );
-  }
-  openSpeakerShare(speaker: any) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Share ' + speaker.name,
-      buttons: [
-        {
-          text: 'Copy Link',
-          handler: () => {
-            console.log('Copy link clicked on https://twitter.com/' + speaker.twitter);
-            if ( (window as any)['cordova'] && (window as any)['cordova'].plugins.clipboard) {
-              (window as any)['cordova'].plugins.clipboard.copy(
-                'https://twitter.com/' + speaker.twitter
-              );
-            }
-          }
-        } as ActionSheetButton,
-        {
-          text: 'Share via ...'
-        } as ActionSheetButton,
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        } as ActionSheetButton
-      ]
-    } as ActionSheetOptions);
+          // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818)
+          //   .then((result: NativeGeocoderReverseResult) => console.log(JSON.stringify(result)))
+          //   .catch((error: any) => console.log(error));
+          // console.log("===========" + this.tripdata[0].tripType);
 
-    actionSheet.present();
-  }
-  openContact(speaker: any) {
-    let mode = this.config.get('mode');
 
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Contact ' + speaker.name,
-      buttons: [
-        {
-          text: `Email ( ${speaker.email} )`,
-          icon: mode !== 'ios' ? 'mail' : null,
-          handler: () => {
-            window.open('mailto:' + speaker.email);
-          }
-        } as ActionSheetButton,
-        {
-          text: `Call ( ${speaker.phone} )`,
-          icon: mode !== 'ios' ? 'call' : null,
-          handler: () => {
-            window.open('tel:' + speaker.phone);
-          }
-        } as ActionSheetButton
-      ]
-    } as ActionSheetOptions);
+        },
+          (err) => {
+            alert("You have not joined or created any trips !");
+            console.log(err);
+          });
 
-    actionSheet.present();
+
+      });
+    } catch (error) {
+      console.log("Error Loading Data"); //Doesn't appear at all
+      alert("Error Loading data. Please refresh");
+      throw new Error("Am here");
+    }
+    if (this.tripdata == null)
+      alert("You have not joined or created any trips !");
   }
 
-}
+
+  // The cancel trip api to be used here once the api is prepared
+  cancelTrip(trip) {
+
+
+    console.log("Trip admin:", trip.admin);
+    console.log("User id:", this.userName);
+    if (trip.admin != this.userName) {
+
+      alert("Only trip Admin can Cancel the trip");
+    }
+    else {
+      this.setRating(trip.tripId)
+      alert("Trip has been Cancelled. Check other Trips now");
+      try {
+        this.userData.getUsertoken().then((value) => {
+          this.confData
+            .deleteData('trip/' + trip.tripId, value)
+            .then(
+              (result) => {
+                console.log(result);
+                this.navCtrl.setRoot(JourneyPage, trip);
+              },
+              (err) => {
+                console.log(err);
+              });
+        })
+
+      } catch (error) {
+        alert("Unable to Cancel trip. Contact Trip Admin");
+        throw new Error("Trouble Cancelling trip");
+      }
+      this.navCtrl.setRoot(JourneyPage, trip);
+      console.log("Delete trip api called here")
+    }
+  }
+    rateTrip(trip){
+      console.log("Rating trip:", trip.tripId)
+      if (trip.admin != this.userName) {
+
+      }
+      else {
+
+        if (this.stars == undefined) {
+          let modal = this.modalCtrl.create(RatingPage, {"title": "Trip Rating"});
+          modal.onDidDismiss(data => {
+            this.stars = data;
+            alert("You Rated this trip " + this.stars + " stars.");
+          });
+          modal.present();
+        }
+      }
+
+  }
+
+  setRating(tripId){
+
+    this.confData.postDataWithBearerToken('rating',{"rating":this.stars, "tripId": tripId}, this.userToken).then(value => {
+      console.log(value)
+    },(err)=>{
+      console.log(err)
+    });
+  }
+
+    leaveTrip(trip) {
+
+      if (trip.admin == this.userName) {
+
+        alert("Admin Cannot Leave Trip. Try Cancelling the trip");
+      }
+      else{
+        alert("You have now left the trip. Please rate the trip now.");
+      // this.hide = true;
+      try {
+        // this.setRating(trip.tripId)
+        this.userData.getUsertoken().then((value) => {
+          this.confData
+            .deleteData('trip/' + trip.tripId + '/leavetrip', value)
+            .then(
+              (result) => {
+                console.log(result);
+                // this.navCtrl.setRoot(AlltripsPage, trip);
+              }
+              )
+            .catch((err) => {
+              console.log("Error in leaving trip")
+              console.log(err);
+            });
+        })
+          .catch((err) => {
+            console.log("Error in leaving group:")
+            console.log(err);
+          })
+      } catch (error) {
+        alert("Unable to Leave trip. Contact Trip Admin");
+        throw new Error("Trouble Leaving trip");
+      }
+    }
+      console.log("Leave trip api called here");
+
+    }
+  }
+
+
+
+

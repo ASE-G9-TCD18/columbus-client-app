@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, AlertController} from 'ionic-angular';
-import { TripPage } from '../trip/trip';
-import { TripHistoryPage } from '../trip-history/trip-history';
+import { NavController, LoadingController, AlertController} from 'ionic-angular';
+import { PendingRequestsPage } from '../pending-requests/pending-requests';
 import { IonicPage } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
-import {ConferenceData} from '../../providers/conference-data';
+import { ConferenceData} from '../../providers/conference-data';
 
 /**
  * Generated class for the ProfilePage page.
@@ -24,6 +23,8 @@ import {ConferenceData} from '../../providers/conference-data';
  	errresponse: any="200";
  	name: string;
  	rate: string;
+ 	awaitingConfirmation: any = [];
+
  	constructor(public loader: LoadingController, public navCtrl: NavController, public userData: UserData, public authservice: ConferenceData, public alertCtrl: AlertController) {
  	}
 
@@ -32,9 +33,11 @@ import {ConferenceData} from '../../providers/conference-data';
 		console.log("You rating for this trip is " + _event);
 	}
 
- 	goToTripDetail() { this.navCtrl.push(TripPage); }
+ 	// goToTripDetail() { this.navCtrl.setRoot(TripPage); }
 
- 	goToTripHistory() { this.navCtrl.push(TripHistoryPage); }
+ 	goToTripRequest() { 
+ 		this.navCtrl.push(PendingRequestsPage, { request: this.awaitingConfirmation } ); 
+ 	}
 
  	changeUsername() {
  		let alert = this.alertCtrl.create({
@@ -77,20 +80,25 @@ import {ConferenceData} from '../../providers/conference-data';
 	}
 
  	ionViewDidLoad() {
- 		let loading = this.loader.create({content: "Contacting Server ,please wait..."});
+    try{
+ 	  let loading = this.loader.create({content: "Contacting Server ,please wait..."});
+
  		this.userData.getUsername().then((id)=>
  		{
  			let user_id = id
  			this.userData.getUsertoken().then((value)=>
- 			{	
+ 			{
  				let token = value
  				this.authservice
  				.getData('user/'+user_id, token)
  				.then(
  					(result) => {
  						this.responseData = result;
+ 						console.log(result);
  						this.name = this.responseData["firstName"];
  						this.rate = this.responseData["userRating"];
+ 						this.awaitingConfirmation = this.responseData["tripsRequestsAwaitingConfirmation"];
+ 						
  					},
  					(err) => {
  						this.errresponse = err
@@ -99,7 +107,11 @@ import {ConferenceData} from '../../providers/conference-data';
  						loading.dismissAll();
  					});
  			})
- 		})
+ 		})}catch (error){
+      console.log("Error Fetching User data");
+      alert("Error Fetching User data. Please refresh");
+      throw new Error("Check userdata api call");
+    }
  	}
 
  }
