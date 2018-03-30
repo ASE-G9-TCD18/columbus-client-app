@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Events, MenuController, Nav, Platform, NavController} from 'ionic-angular';
+import { Events, MenuController, Nav, Platform} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
@@ -69,7 +69,7 @@ export class ConferenceApp {
   rootPage: any;
 
   constructor(
-    public navCtrl: NavController,
+    // public navCtrl: NavController,
     public events: Events,
     public userData: UserData,
     public menu: MenuController,
@@ -82,7 +82,8 @@ export class ConferenceApp {
 
     this.fcm.onNotification().subscribe( data => {
       if(data.wasTapped){
-        this.navCtrl.push(ProfilePage);
+        // this.navCtrl.push(ProfilePage);
+        this.rootPage = ProfilePage;
         alert( "You got a new join request" );
       }else{
         alert( "You got a new join request" );
