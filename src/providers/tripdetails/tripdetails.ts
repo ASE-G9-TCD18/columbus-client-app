@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
-let apiURL = "http://52.212.149.132:8080/"
+let apiURL = "http://35.187.162.55:8080/"
 /*
   Generated class for the TripdetailsProvider provider.
 
@@ -79,7 +79,7 @@ export class TripdetailsProvider {
 
       console.log("-----------"+token);
       headers.set('Authorization','Bearer '+ token)
-      this.http.get("http://52.212.149.132:8080/joinedtrips", {headers}).subscribe(res =>{
+      this.http.get("http://35.187.162.55:8080/joinedtrips", {headers}).subscribe(res =>{
         resolve(res.json());
       }, (err)=> {
         reject(err.json());
