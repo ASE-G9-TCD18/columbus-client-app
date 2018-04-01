@@ -21,11 +21,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HomepagePage } from '../pages/homepage/homepage';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-// import { TripPage } from "../pages/trip/trip";
 import { AlltripsPage } from "../pages/alltrips/alltrips";
-// import { JoinedtripsPage } from "../pages/joinedtrips/joinedtrips";
-
-
 
 
 export interface PageInterface {
@@ -51,15 +47,12 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-    //{ title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
     { title: 'Go Somewhere', name: 'TabsPage', component: TabsPage, tabComponent: HomepagePage, index: 0, icon: 'jet' },
-    /*{ title: 'Journey', name: 'TabsPage', component: TabsPage, tabComponent: JourneyPage, index: 1, icon: 'megaphone' },*/
     { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 2, icon: 'information-circle' }
 
   ];
 
   loggedInPages: PageInterface[] = [
-    // { title: 'My Trips', name: 'TripPage', component: TripPage, icon: 'logo-freebsd-devil' },
     { title: 'Profile', name: 'ProfilePage', component: ProfilePage, icon: 'person' },
     { title: 'All Trips', name: 'AlltripsPage', component: AlltripsPage, tabComponent: AlltripsPage, icon: 'car' },
     { title: 'My Trips', name: 'JourneyPage', component: JourneyPage, icon: 'megaphone' },
@@ -69,7 +62,6 @@ export class ConferenceApp {
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-
     { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
 
   ];
@@ -96,7 +88,6 @@ export class ConferenceApp {
         this.platformReady()
       });
 
-    // load the conference data
     confData.load();
 
     // decide which menu items should be hidden by current login status stored in local storage
@@ -104,7 +95,6 @@ export class ConferenceApp {
       this.enableMenu(hasLoggedIn === true);
     });
     this.enableMenu(true);
-
     this.listenToLoginEvents();
   }
 
@@ -169,7 +159,6 @@ export class ConferenceApp {
   isActive(page: PageInterface) {
     let childNav = this.nav.getActiveChildNavs()[0];
 
-    // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
         return 'columbusRed';
