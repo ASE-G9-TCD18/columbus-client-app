@@ -9,21 +9,24 @@
 <ion-content no-bounce>
   <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
 
+
+
     <ion-slide>
       <img src="assets/img/Columbus logo name.png" class="slide-image"/>
       <h2 class="slide-title">
         Welcome to <b>Columbus</b>
       </h2>
-      <p>
-        The <b>Columbus app</b> helps you custom tailor your commutes with fellow travellers you like.
-      </p>
+      <p><b>You</b> can join groups and create groups with nearby friends for daily commute or an instant journey plans. You can co-ordinate, manage and plan your route, making the journey worth remembering. </p>
     </ion-slide>
 
 
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-3.png" class="slide-image"/>
-      <h2 class="slide-title">Ready to Commute?</h2>
-      <p><b>You</b> can join groups and create groups with nearby friends for daily commute or an instant journey plans. You can co-ordinate, manage and plan your route, making the journey worth remembering. </p>
+      <h2 class="slide-title">Ready to Commute? </h2>
+      <h3>Setting up Tips </h3>
+      <p><b> Step 1 </b> Select Source & Destination from the text boxes</p>
+      <p><b> Step 2 </b> Select preferences from top right button</p>
+      <p><b> Step 3 </b> Search trip or create new trip from bottom right round button</p>
       <button ion-button icon-end large clear (click)="startApp()">
         Continue
         <ion-icon name="arrow-forward"></ion-icon>
