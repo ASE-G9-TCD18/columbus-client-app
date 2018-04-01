@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.columbus1997" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Ionic Conference</name>
-    <description>An Ionic Framework application for the Ionic Conference.</description>
+    <description>A Travel Companion App.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -94,5 +94,5 @@
         <variable name="ANDROID_SUPPORT_VERSION" value="24.+" />
     </plugin>
     <engine name="ios" spec="^4.5.2" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>
