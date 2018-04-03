@@ -51,7 +51,7 @@ export class AlltripsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlltripsPage');
-
+    this.isLoaded = true;
     try {
       this.userData.getUsername().then((id)=> {
         this.admin = id;
@@ -61,7 +61,7 @@ export class AlltripsPage {
         this.token = value;
         this.tripdetails.alltriplist(value).then((value: any[]) => {
           this.tripdata = value;
-          this.isLoaded = true;
+
 
         }).catch((err) => {
           console.log("Error in getting all list:")
