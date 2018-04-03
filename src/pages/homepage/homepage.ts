@@ -194,7 +194,7 @@ export class HomepagePage {
     this.nativeGeocoder.reverseGeocode(this.srclat, this.srclong)
       .then((result: NativeGeocoderReverseResult) =>
 
-        nativeHomeInputBox1.value = JSON.stringify(result)['street_address'])
+        nativeHomeInputBox1.value = JSON.stringify(result)['results'][0]['formatted_address'])
       .catch((error: any) => console.log(error));
 
 
