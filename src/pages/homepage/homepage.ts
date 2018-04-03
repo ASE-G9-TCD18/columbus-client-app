@@ -133,12 +133,12 @@ export class HomepagePage {
             return;
           }
           this.destlocation = place;
-          console.log("-------" + this.destlocation.formatted_address);
+          // console.log("-------" + this.destlocation.formatted_address);
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
-          console.log(this.latitude)
+          // console.log(this.latitude)
           this.longitude = place.geometry.location.lng();
-          console.log(this.longitude)
+          // console.log(this.longitude)
           this.zoom = 16;
         });
       });
