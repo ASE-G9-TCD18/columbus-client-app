@@ -108,7 +108,7 @@ export class HomepagePage {
 
     //set google maps defaults
     this.zoom = 14;
-    this.latitude = 53.3438;
+    this.latitude = 57.3438;
     this.longitude = -6.2546;
 
     //create search FormControl
@@ -136,7 +136,9 @@ export class HomepagePage {
           console.log("-------" + this.destlocation.formatted_address);
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
+          console.log(this.latitude)
           this.longitude = place.geometry.location.lng();
+          console.log(this.longitude)
           this.zoom = 16;
         });
       });
