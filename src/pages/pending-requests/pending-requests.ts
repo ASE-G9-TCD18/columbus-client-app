@@ -40,6 +40,7 @@ export class PendingRequestsPage {
         	(result) => {
             this.responseData = result;
             console.log(this.responseData);
+            this.navCtrl.setRoot(PendingRequestsPage);
             },
             (err) => {
               this.errresponse = err
