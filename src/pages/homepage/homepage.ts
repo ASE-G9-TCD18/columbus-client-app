@@ -190,11 +190,11 @@ export class HomepagePage {
 
   displayCurrentLocation() {
     let nativeHomeInputBox1 = document.getElementById('txtHome1').getElementsByTagName('input')[0];
-    nativeHomeInputBox1.value = this.srclat + "";
+
     this.nativeGeocoder.reverseGeocode(this.srclat, this.srclong)
       .then((result: NativeGeocoderReverseResult) =>
 
-        nativeHomeInputBox1.value = JSON.stringify(result))
+        nativeHomeInputBox1.value = JSON.stringify(result)['SubAdministrativeArea'])
       .catch((error: any) => console.log(error));
 
 
