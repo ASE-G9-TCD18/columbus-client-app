@@ -119,7 +119,7 @@ export class HomepagePage {
     this.setCurrentPositionforSrc();
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let nativeHomeInputBox1 = document.getElementById('txtHome').getElementsByTagName('input')[0];
+      let nativeHomeInputBox1 = document.getElementById('txtHome1').getElementsByTagName('input')[0];
       let autocomplete1 = new google.maps.places.Autocomplete(nativeHomeInputBox1, {
         types: ["address"]
       });
@@ -155,7 +155,7 @@ export class HomepagePage {
     this.setCurrentPositionforSrc();
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let nativeHomeInputBox = document.getElementById('txtHome1').getElementsByTagName('input')[0];
+      let nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
       let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
         types: ["address"]
       });
